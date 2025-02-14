@@ -12,7 +12,7 @@ const FlashcardPage: React.FC = () => {
   const [currentQuestionIndex, setCQI] = useState(0);
   const [currentQuestionText, setCQT] = useState("");
   const [currentQuestionChoices, setCQC] = useState([""]);
-
+  const [correctedAnswer, setCorrectedAnswer] = useState("");
 
   const [toastOpen, setToastOpen] = useState(false);
 
@@ -72,6 +72,7 @@ const FlashcardPage: React.FC = () => {
     const newScore = correctAnswers + (choice === questions[currentQuestionIndex].correct ? 1 : 0);
 
     if (choice !== questions[currentQuestionIndex].correct) {
+      setCorrectedAnswer(questions[currentQuestionIndex].correct);
       setToastOpen(true);
     }
     if (currentQuestionIndex + 1 < questions.length) {
@@ -81,16 +82,19 @@ const FlashcardPage: React.FC = () => {
       setCA(newScore);
       const resultsURL = `/results/${newScore}/${questions.length}/${topicName}`;
       router.push(resultsURL);
-      setCA(0);
-      setCQI(0);
+      cleanUp();
     }
   };
+  const cleanUp = () => {
+    setCA(0);
+    setCQI(0);
+  }
   return (
     <IonPage>
       <IonHeader id="header">
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton routerLink="/mainTab" shape="round">
+            <IonButton onClick={() => cleanUp()} routerLink="/mainTab" shape="round">
               <IonIcon slot="icon-only" icon={arrowBack}></IonIcon>
             </IonButton>
           </IonButtons>
@@ -120,7 +124,7 @@ const FlashcardPage: React.FC = () => {
         <Flashcard text={currentQuestionText} index={currentQuestionIndex + 1} choices={currentQuestionChoices} handleAnswerClick={handleAnswerClick} />
         <IonToast
           isOpen={toastOpen}
-          message={"Wrong! Answer is " + questions[currentQuestionIndex].correct}
+          message={"Wrong! Answer is " + correctedAnswer}
           onDidDismiss={() => setToastOpen(false)}
           duration={2000}
           position="top"
