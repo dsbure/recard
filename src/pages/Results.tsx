@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import './Results.css';
 import { useParams } from 'react-router';
 
@@ -10,7 +10,7 @@ interface RouteParams {
 
 const Results: React.FC = () => {
   const { score, total, topicName } = useParams<RouteParams>();
-  
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonHeader>
@@ -26,7 +26,7 @@ const Results: React.FC = () => {
             </IonCardTitle>
             <IonCardSubtitle>{topicName}</IonCardSubtitle>
           </IonCardHeader>
-          <IonButton expand="block" routerLink="/mainTab">Return to Home</IonButton>
+          <IonButton expand="block" routerLink="/mainTab" routerDirection="back">Return to Home</IonButton>
         </IonCard>
       </IonContent>
     </IonPage>

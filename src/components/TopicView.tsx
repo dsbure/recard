@@ -1,19 +1,15 @@
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle } from '@ionic/react';
 import { StorySnake } from '../components/StorySnake';
+import { IFlashcardCategory } from "./IFlashcardCategory";
 
-export interface ITopicViewProps {
-  name: string
-  desc: string
-}
-
-export function TopicView({ name, desc }: ITopicViewProps) {
+export function TopicView(category: IFlashcardCategory) {
   return <>
     <IonCard className="topicHeader">
       <IonCardHeader>
-        <IonCardTitle>{name}</IonCardTitle>
-        <IonCardSubtitle>{desc}</IonCardSubtitle>
+        <IonCardTitle>{category.categoryName}</IonCardTitle>
+        <IonCardSubtitle>{category.categoryDesc}</IonCardSubtitle>
       </IonCardHeader>
     </IonCard>
-    <StorySnake />
+    <StorySnake {...category} />
   </>;
 }
