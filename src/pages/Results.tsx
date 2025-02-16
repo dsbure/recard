@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import './Results.css';
 import { useParams } from 'react-router';
 
@@ -26,7 +26,9 @@ const Results: React.FC = () => {
             </IonCardTitle>
             <IonCardSubtitle>{topicName}</IonCardSubtitle>
           </IonCardHeader>
-          <IonButton expand="block" routerLink="/mainTab" routerDirection="back">Return to Home</IonButton>
+          <IonCardContent>
+            <IonButton expand="block" routerLink="/mainTab" routerDirection="back">Return to Home</IonButton>
+          </IonCardContent>
         </IonCard>
       </IonContent>
     </IonPage>

@@ -1,0 +1,20 @@
+#question-modal {
+	--height: auto;
+}
+.non-scroll {
+	height: fit-content;
+}
+#flashcards {
+	display: flex;
+	flex-direction: row;
+	width: 200%;
+}
+#flashcards.lonely {
+	width: 100%;
+}
+#flashcards > div {
+	width: 100%;
+}
+.hidden {
+	display: none;
+}
