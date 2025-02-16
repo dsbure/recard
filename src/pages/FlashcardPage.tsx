@@ -106,7 +106,7 @@ const FlashcardPage: React.FC = () => {
           </div>
           {(currentQuestionIndex + 1 < flashcardData.flashcards.length ?
             <div id="next">
-              <Flashcard key={currentQuestionIndex + 1} text={flashcardData.flashcards[currentQuestionIndex + 1].question} index={currentQuestionIndex + 2} choices={flashcardData.flashcards[currentQuestionIndex + 1].multipleChoices} handleAnswerClick={handleAnswerClick} />
+              <Flashcard key={currentQuestionIndex + 1} text={flashcardData.flashcards[currentQuestionIndex + 1].question} index={currentQuestionIndex + 2} choices={flashcardData.flashcards[currentQuestionIndex + 1].multipleChoices} handleAnswerClick={() => {}} />
             </div>
             : <></>)}
         </div>
