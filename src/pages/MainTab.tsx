@@ -52,7 +52,7 @@ const MainTab: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>baby, pauwi na 'ko (ako'y pauwi na)</IonTitle>
+          <IonTitle>Flashcards para kay sir raplh</IonTitle>
         </IonToolbar>
       </IonHeader>
 
