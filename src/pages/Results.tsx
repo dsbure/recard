@@ -10,7 +10,6 @@ interface RouteParams {
 
 const Results: React.FC = () => {
   const { score, total, topicName } = useParams<RouteParams>();
-  const router = useIonRouter();
   return (
     <IonPage>
       <IonHeader>

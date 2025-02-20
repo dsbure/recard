@@ -5,6 +5,8 @@
       "categoryDesc": "desc. 1",
       "topics": [
         {
+          "id": 0,
+          "categoryName": "Category 1",
           "topicName": "Subtopic 1",
           "flashcards": [
             {
@@ -39,87 +41,159 @@
             },
             {
               "question": "what is 1+1",
-              "multipleChoices": ["0", "1", "2", "3"],
+              "multipleChoices": [
+                "0",
+                "1",
+                "2",
+                "3"
+              ],
               "correct": "2"
             }
           ]
         },
         {
+          "id": 1,
+          "categoryName": "Category 1",
           "topicName": "Subtopic 2",
           "flashcards": [
             {
               "question": "when was 1999",
-              "multipleChoices": ["1999", "1995", "1994", "2025"],
+              "multipleChoices": [
+                "1999",
+                "1995",
+                "1994",
+                "2025"
+              ],
               "correct": "1999"
             },
             {
               "question": "spell jeep",
-              "multipleChoices": ["jeep", "jip", "geep", "dhjieap"],
+              "multipleChoices": [
+                "jeep",
+                "jip",
+                "geep",
+                "dhjieap"
+              ],
               "correct": "jeep"
             },
             {
               "question": "pick the largest number",
-              "multipleChoices": ["0.000000000001", "-1", "epsilon", "10"],
+              "multipleChoices": [
+                "0.000000000001",
+                "-1",
+                "epsilon",
+                "10"
+              ],
               "correct": "10"
             },
             {
               "question": "what is 1+2",
-              "multipleChoices": ["0", "1", "2", "3"],
+              "multipleChoices": [
+                "0",
+                "1",
+                "2",
+                "3"
+              ],
               "correct": "3"
             },
             {
               "question": "is the sun hot",
-              "multipleChoices": ["yes", "no", "maybe"],
+              "multipleChoices": [
+                "yes",
+                "no",
+                "maybe"
+              ],
               "correct": "yes"
             }
           ]
         },
         {
+          "id": 2,
+          "categoryName": "Category 1",
           "topicName": "Subtopic 3",
           "flashcards": [
             {
               "question": "which animal is a bird?",
-              "multipleChoices": ["dog", "cat", "pigeon", "car"],
+              "multipleChoices": [
+                "dog",
+                "cat",
+                "pigeon",
+                "car"
+              ],
               "correct": "pigeon"
             },
             {
               "question": "how many legs does a fish have?",
-              "multipleChoices": ["0", "2", "4", "8"],
+              "multipleChoices": [
+                "0",
+                "2",
+                "4",
+                "8"
+              ],
               "correct": "0"
             },
             {
               "question": "which shape has 3 sides?",
-              "multipleChoices": ["triangle", "square", "circle", "pentagon"],
+              "multipleChoices": [
+                "triangle",
+                "square",
+                "circle",
+                "pentagon"
+              ],
               "correct": "triangle"
             }
           ]
         },
         {
+          "id": 3,
+          "categoryName": "Category 1",
           "topicName": "Subtopic 4",
           "flashcards": [
             {
               "question": "what color is an orange?",
-              "multipleChoices": ["orange", "blue", "green", "purple"],
+              "multipleChoices": [
+                "orange",
+                "blue",
+                "green",
+                "purple"
+              ],
               "correct": "orange"
             },
             {
               "question": "how many minutes are in an hour?",
-              "multipleChoices": ["60", "30", "90", "15"],
+              "multipleChoices": [
+                "60",
+                "30",
+                "90",
+                "15"
+              ],
               "correct": "60"
             },
             {
               "question": "what is the opposite of hot?",
-              "multipleChoices": ["cold", "warm", "fire", "ice"],
+              "multipleChoices": [
+                "cold",
+                "warm",
+                "fire",
+                "ice"
+              ],
               "correct": "cold"
             }
           ]
         },
         {
+          "id": 4,
+          "categoryName": "Category 1",
           "topicName": "Subtopic 5",
           "flashcards": [
             {
               "question": "which planet is known for its rings?",
-              "multipleChoices": ["Saturn", "Mars", "Earth", "Venus"],
+              "multipleChoices": [
+                "Saturn",
+                "Mars",
+                "Earth",
+                "Venus"
+              ],
               "correct": "Saturn"
             },
             {
@@ -134,12 +208,19 @@
             },
             {
               "question": "how many days are in a week?",
-              "multipleChoices": ["7", "5", "10", "12"],
+              "multipleChoices": [
+                "7",
+                "5",
+                "10",
+                "12"
+              ],
               "correct": "7"
             }
           ]
         },
         {
+          "id": 5,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 6",
           "flashcards": [
             {
@@ -155,6 +236,8 @@
           ]
         },
         {
+          "id": 6,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 7",
           "flashcards": [
             {
@@ -170,6 +253,8 @@
           ]
         },
         {
+          "id": 7,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 8",
           "flashcards": [
             {
@@ -185,6 +270,8 @@
           ]
         },
         {
+          "id": 8,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 9",
           "flashcards": [
             {
@@ -200,6 +287,8 @@
           ]
         },
         {
+          "id": 9,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 10",
           "flashcards": [
             {
@@ -215,6 +304,8 @@
           ]
         },
         {
+          "id": 10,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 11",
           "flashcards": [
             {
@@ -230,6 +321,8 @@
           ]
         },
         {
+          "id": 11,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 12",
           "flashcards": [
             {
@@ -245,6 +338,8 @@
           ]
         },
         {
+          "id": 12,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 13",
           "flashcards": [
             {
@@ -260,6 +355,8 @@
           ]
         },
         {
+          "id": 13,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 14",
           "flashcards": [
             {
@@ -275,6 +372,8 @@
           ]
         },
         {
+          "id": 14,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 15",
           "flashcards": [
             {
@@ -290,6 +389,8 @@
           ]
         },
         {
+          "id": 15,
+          "categoryName": "Category 1",
           "topicName": "Category 1 - Sample Subtopic 16",
           "flashcards": [
             {
@@ -311,106 +412,193 @@
       "categoryDesc": "desc. 2",
       "topics": [
         {
+          "id": 0,
+          "categoryName": "Category 2",
           "topicName": "Subtopic 6",
           "flashcards": [
             {
               "question": "how many letters are in the alphabet?",
-              "multipleChoices": ["26", "30", "24", "32"],
+              "multipleChoices": [
+                "26",
+                "30",
+                "24",
+                "32"
+              ],
               "correct": "26"
             },
             {
               "question": "what is the capital of France?",
-              "multipleChoices": ["Paris", "London", "Rome", "Berlin"],
+              "multipleChoices": [
+                "Paris",
+                "London",
+                "Rome",
+                "Berlin"
+              ],
               "correct": "Paris"
             },
             {
               "question": "which fruit is yellow?",
-              "multipleChoices": ["banana", "apple", "cherry", "kiwi"],
+              "multipleChoices": [
+                "banana",
+                "apple",
+                "cherry",
+                "kiwi"
+              ],
               "correct": "banana"
             }
           ]
         },
         {
+          "id": 1,
+          "categoryName": "Category 2",
           "topicName": "Subtopic 7",
           "flashcards": [
             {
               "question": "what is 2+2?",
-              "multipleChoices": ["3", "4", "5", "6"],
+              "multipleChoices": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
               "correct": "4"
             },
             {
               "question": "what is 5-3?",
-              "multipleChoices": ["1", "2", "3", "4"],
+              "multipleChoices": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
               "correct": "2"
             },
             {
               "question": "what is 3+3?",
-              "multipleChoices": ["5", "6", "7", "8"],
+              "multipleChoices": [
+                "5",
+                "6",
+                "7",
+                "8"
+              ],
               "correct": "6"
             }
           ]
         },
         {
+          "id": 2,
+          "categoryName": "Category 2",
           "topicName": "Subtopic 8",
           "flashcards": [
             {
               "question": "how many wheels does a unicycle have?",
-              "multipleChoices": ["1", "2", "3", "4"],
+              "multipleChoices": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
               "correct": "1"
             },
             {
               "question": "what does a cow say?",
-              "multipleChoices": ["moo", "woof", "meow", "oink"],
+              "multipleChoices": [
+                "moo",
+                "woof",
+                "meow",
+                "oink"
+              ],
               "correct": "moo"
             },
             {
               "question": "what color are most bananas?",
-              "multipleChoices": ["blue", "yellow", "green", "red"],
+              "multipleChoices": [
+                "blue",
+                "yellow",
+                "green",
+                "red"
+              ],
               "correct": "yellow"
             }
           ]
         },
         {
+          "id": 3,
+          "categoryName": "Category 2",
           "topicName": "Subtopic 9",
           "flashcards": [
             {
               "question": "what color is the sky on a clear day?",
-              "multipleChoices": ["blue", "red", "green", "purple"],
+              "multipleChoices": [
+                "blue",
+                "red",
+                "green",
+                "purple"
+              ],
               "correct": "blue"
             },
             {
               "question": "how many eyes do spiders have?",
-              "multipleChoices": ["8", "2", "6", "4"],
+              "multipleChoices": [
+                "8",
+                "2",
+                "6",
+                "4"
+              ],
               "correct": "8"
             },
             {
               "question": "what do clouds look like?",
-              "multipleChoices": ["fluffy", "sharp", "liquid", "square"],
+              "multipleChoices": [
+                "fluffy",
+                "sharp",
+                "liquid",
+                "square"
+              ],
               "correct": "fluffy"
             }
           ]
         },
         {
+          "id": 4,
+          "categoryName": "Category 2",
           "topicName": "Subtopic 10",
           "flashcards": [
             {
               "question": "what do you call a baby dog?",
-              "multipleChoices": ["puppy", "kitten", "cub", "foal"],
+              "multipleChoices": [
+                "puppy",
+                "kitten",
+                "cub",
+                "foal"
+              ],
               "correct": "puppy"
             },
             {
               "question": "what is the largest planet in our solar system?",
-              "multipleChoices": ["Jupiter", "Mars", "Earth", "Venus"],
+              "multipleChoices": [
+                "Jupiter",
+                "Mars",
+                "Earth",
+                "Venus"
+              ],
               "correct": "Jupiter"
             },
             {
               "question": "what do bees produce?",
-              "multipleChoices": ["honey", "milk", "sugar", "juice"],
+              "multipleChoices": [
+                "honey",
+                "milk",
+                "sugar",
+                "juice"
+              ],
               "correct": "honey"
             }
           ]
         },
         {
+          "id": 5,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 11",
           "flashcards": [
             {
@@ -426,6 +614,8 @@
           ]
         },
         {
+          "id": 6,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 12",
           "flashcards": [
             {
@@ -441,6 +631,8 @@
           ]
         },
         {
+          "id": 7,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 13",
           "flashcards": [
             {
@@ -456,6 +648,8 @@
           ]
         },
         {
+          "id": 8,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 14",
           "flashcards": [
             {
@@ -471,6 +665,8 @@
           ]
         },
         {
+          "id": 9,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 15",
           "flashcards": [
             {
@@ -486,6 +682,8 @@
           ]
         },
         {
+          "id": 10,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 16",
           "flashcards": [
             {
@@ -501,6 +699,8 @@
           ]
         },
         {
+          "id": 11,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 17",
           "flashcards": [
             {
@@ -516,6 +716,8 @@
           ]
         },
         {
+          "id": 12,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 18",
           "flashcards": [
             {
@@ -531,6 +733,8 @@
           ]
         },
         {
+          "id": 13,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 19",
           "flashcards": [
             {
@@ -546,6 +750,8 @@
           ]
         },
         {
+          "id": 14,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 20",
           "flashcards": [
             {
@@ -561,6 +767,8 @@
           ]
         },
         {
+          "id": 15,
+          "categoryName": "Category 2",
           "topicName": "Category 2 - Sample Subtopic 21",
           "flashcards": [
             {
@@ -582,56 +790,102 @@
       "categoryDesc": "desc. 3",
       "topics": [
         {
+          "id": 0,
+          "categoryName": "Category 3",
           "topicName": "Subtopic 11",
           "flashcards": [
             {
               "question": "what is the boiling point of water in Celsius?",
-              "multipleChoices": ["100", "0", "50", "200"],
+              "multipleChoices": [
+                "100",
+                "0",
+                "50",
+                "200"
+              ],
               "correct": "100"
             },
             {
               "question": "what is the freezing point of water in Celsius?",
-              "multipleChoices": ["0", "100", "32", "50"],
+              "multipleChoices": [
+                "0",
+                "100",
+                "32",
+                "50"
+              ],
               "correct": "0"
             },
             {
               "question": "is water essential for life?",
-              "multipleChoices": ["yes", "no", "maybe", "sometimes"],
+              "multipleChoices": [
+                "yes",
+                "no",
+                "maybe",
+                "sometimes"
+              ],
               "correct": "yes"
             }
           ]
         },
         {
+          "id": 1,
+          "categoryName": "Category 3",
           "topicName": "Subtopic 12",
           "flashcards": [
             {
               "question": "what is the square root of 16?",
-              "multipleChoices": ["4", "2", "8", "16"],
+              "multipleChoices": [
+                "4",
+                "2",
+                "8",
+                "16"
+              ],
               "correct": "4"
             },
             {
               "question": "what is 10 divided by 2?",
-              "multipleChoices": ["5", "2", "10", "20"],
+              "multipleChoices": [
+                "5",
+                "2",
+                "10",
+                "20"
+              ],
               "correct": "5"
             },
             {
               "question": "what is 9 minus 3?",
-              "multipleChoices": ["6", "3", "5", "4"],
+              "multipleChoices": [
+                "6",
+                "3",
+                "5",
+                "4"
+              ],
               "correct": "6"
             },
             {
               "question": "what is 7 plus 2?",
-              "multipleChoices": ["9", "8", "10", "7"],
+              "multipleChoices": [
+                "9",
+                "8",
+                "10",
+                "7"
+              ],
               "correct": "9"
             }
           ]
         },
         {
+          "id": 2,
+          "categoryName": "Category 3",
           "topicName": "Subtopic 13",
           "flashcards": [
             {
               "question": "what is the chemical symbol for water?",
-              "multipleChoices": ["H2O", "O2", "CO2", "NaCl"],
+              "multipleChoices": [
+                "H2O",
+                "O2",
+                "CO2",
+                "NaCl"
+              ],
               "correct": "H2O"
             },
             {
@@ -646,67 +900,123 @@
             },
             {
               "question": "do plants need sunlight to grow?",
-              "multipleChoices": ["yes", "no", "sometimes", "only at night"],
+              "multipleChoices": [
+                "yes",
+                "no",
+                "sometimes",
+                "only at night"
+              ],
               "correct": "yes"
             }
           ]
         },
         {
+          "id": 3,
+          "categoryName": "Category 3",
           "topicName": "Subtopic 14",
           "flashcards": [
             {
               "question": "which day comes after Monday?",
-              "multipleChoices": ["Tuesday", "Wednesday", "Sunday", "Friday"],
+              "multipleChoices": [
+                "Tuesday",
+                "Wednesday",
+                "Sunday",
+                "Friday"
+              ],
               "correct": "Tuesday"
             },
             {
               "question": "what color is a ripe banana?",
-              "multipleChoices": ["yellow", "red", "green", "blue"],
+              "multipleChoices": [
+                "yellow",
+                "red",
+                "green",
+                "blue"
+              ],
               "correct": "yellow"
             },
             {
               "question": "what is the opposite of up?",
-              "multipleChoices": ["down", "left", "right", "up"],
+              "multipleChoices": [
+                "down",
+                "left",
+                "right",
+                "up"
+              ],
               "correct": "down"
             },
             {
               "question": "what sound does a bell make?",
-              "multipleChoices": ["ding", "moo", "quack", "bark"],
+              "multipleChoices": [
+                "ding",
+                "moo",
+                "quack",
+                "bark"
+              ],
               "correct": "ding"
             }
           ]
         },
         {
+          "id": 4,
+          "categoryName": "Category 3",
           "topicName": "Subtopic 15",
           "flashcards": [
             {
               "question": "what is the fastest land animal?",
-              "multipleChoices": ["cheetah", "turtle", "elephant", "sloth"],
+              "multipleChoices": [
+                "cheetah",
+                "turtle",
+                "elephant",
+                "sloth"
+              ],
               "correct": "cheetah"
             },
             {
               "question": "how many continents are there?",
-              "multipleChoices": ["7", "5", "6", "8"],
+              "multipleChoices": [
+                "7",
+                "5",
+                "6",
+                "8"
+              ],
               "correct": "7"
             },
             {
               "question": "what is the largest ocean?",
-              "multipleChoices": ["Pacific", "Atlantic", "Indian", "Arctic"],
+              "multipleChoices": [
+                "Pacific",
+                "Atlantic",
+                "Indian",
+                "Arctic"
+              ],
               "correct": "Pacific"
             },
             {
               "question": "is the Earth flat?",
-              "multipleChoices": ["no", "yes", "maybe", "sometimes"],
+              "multipleChoices": [
+                "no",
+                "yes",
+                "maybe",
+                "sometimes"
+              ],
               "correct": "no"
             },
             {
               "question": "what is the boiling point of water in Fahrenheit?",
-              "multipleChoices": ["212", "32", "100", "200"],
+              "multipleChoices": [
+                "212",
+                "32",
+                "100",
+                "200"
+              ],
               "correct": "212"
             }
           ]
         },
         {
+          "id": 5,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 16",
           "flashcards": [
             {
@@ -722,6 +1032,8 @@
           ]
         },
         {
+          "id": 6,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 17",
           "flashcards": [
             {
@@ -737,6 +1049,8 @@
           ]
         },
         {
+          "id": 7,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 18",
           "flashcards": [
             {
@@ -752,6 +1066,8 @@
           ]
         },
         {
+          "id": 8,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 19",
           "flashcards": [
             {
@@ -767,6 +1083,8 @@
           ]
         },
         {
+          "id": 9,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 20",
           "flashcards": [
             {
@@ -782,6 +1100,8 @@
           ]
         },
         {
+          "id": 10,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 21",
           "flashcards": [
             {
@@ -797,6 +1117,8 @@
           ]
         },
         {
+          "id": 11,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 22",
           "flashcards": [
             {
@@ -812,6 +1134,8 @@
           ]
         },
         {
+          "id": 12,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 23",
           "flashcards": [
             {
@@ -827,6 +1151,8 @@
           ]
         },
         {
+          "id": 13,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 24",
           "flashcards": [
             {
@@ -842,6 +1168,8 @@
           ]
         },
         {
+          "id": 14,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 25",
           "flashcards": [
             {
@@ -857,6 +1185,8 @@
           ]
         },
         {
+          "id": 15,
+          "categoryName": "Category 3",
           "topicName": "Category 3 - Sample Subtopic 26",
           "flashcards": [
             {

@@ -13,11 +13,11 @@ const StorageService = {
 		await storage.set(key, value);
 	},
 
-	async getItem (key: string) {
+	async getItem(key: string) {
 		return await storage.get(key);
 	},
 
-	async removeItem (key: string) {
+	async removeItem(key: string) {
 		await storage.remove(key);
 	}
 };
