@@ -9,7 +9,7 @@ export function TopicView(category: IFlashcardCategory) {
   
   flashcardStorageService.getCategoryData(category.categoryName).then((e) => {
     setCategoryData(e);
-});
+  });
   return <>
     <IonCard className="topicHeader">
       <IonCardHeader>

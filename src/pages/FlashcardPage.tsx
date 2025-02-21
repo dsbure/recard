@@ -15,6 +15,7 @@ const FlashcardPage: React.FC = () => {
   const [mistakes, setMistakes] = useState(0);
   const [totalLives, setTotalLives] = useState(3);
   const [currentQuestionIndex, setCQI] = useState(0);
+  const [currentQuestionOrder, setCQO] = useState<number[]>([0, 0]);
   const [correctedAnswer, setCorrectedAnswer] = useState("");
   const [currentAnswer, setCurrentAnswer] = useState("");
 
@@ -30,15 +31,26 @@ const FlashcardPage: React.FC = () => {
 
   const [flashcardData, setFlashcardData] = useState<IFlashcardTopic>(JSON.parse(localStorage.getItem("currentFlashcard")!));
 
+  const shuffleOrder = (items: number) => {
+    const order = [];
+    for (let i = 0; i < items; i++) {
+      order.push(i);
+    }
+    const shuffledOrder = order.map(e => ({ e, sort: Math.random() })) 
+      .sort((a, b) => a.sort - b.sort) 
+      .map(({ e }) => e);
+    return shuffledOrder;
+  };
+
   useIonViewWillEnter(() => {
     setMistakes(0);
     setCA(0);
     setCQI(0);
     const data = JSON.parse(localStorage.getItem("currentFlashcard")!);
+    setCQO(shuffleOrder(data.flashcards.length));
     setFlashcardData(data);
     setTimeout(() => setProgress((currentQuestionIndex + 1) / (data.flashcards.length + 1)), 0);
   });
-
   useEffect(() => {
     if (!cardAnim.current) {
       cardAnim.current = createAnimation()
@@ -61,11 +73,17 @@ const FlashcardPage: React.FC = () => {
       });
     } else {
       const currentCategoryData: IFlashcardStorageCategory = await flashcardStorageService.getCategoryData(flashcardData.categoryName);
+      let starProgress = flashcardData.id === currentCategoryData?.currentId || 0 ?
+        (currentCategoryData?.starProgress || 0) + 1 === 3 ? 0 :
+          (currentCategoryData?.starProgress || 0) + 1 :
+        currentCategoryData?.starProgress || 1;
+      console.log(starProgress);
+      
       await flashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
-        currentId: Math.max(flashcardData.id + 1, currentCategoryData?.currentId || 0),
-        starProgress: 0,
-        starTotal: 0,
+        currentId: (currentCategoryData?.starProgress || 0) + 1 === 3 ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId || 0) : currentCategoryData?.currentId || 0,
+        starProgress: starProgress,
+        starTotal: 3,
       });
       setMistakes(0);
       const resultsURL = `/results/${newScore}/${flashcardData.flashcards.length}/${flashcardData.topicName}`;
@@ -74,10 +92,10 @@ const FlashcardPage: React.FC = () => {
   }
   const handleAnswerClick = (choice: string) => {
     setCurrentAnswer(choice);
-    const newScore = correctAnswers + (choice === flashcardData.flashcards[currentQuestionIndex].correct ? 1 : 0);
+    const newScore = correctAnswers + (choice === flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].correct ? 1 : 0);
     setCA(newScore);
-    if (choice !== flashcardData.flashcards[currentQuestionIndex].correct) {
-      setCorrectedAnswer(flashcardData.flashcards[currentQuestionIndex].correct);
+    if (choice !== flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].correct) {
+      setCorrectedAnswer(flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].correct);
       setToastOpen(true);
       setMistakes((prevMistakes) => prevMistakes + 1);
       return;
@@ -113,13 +131,13 @@ const FlashcardPage: React.FC = () => {
             <IonIcon icon={heart} />
           </IonChip>
         </span>
-        <div ref={card} id="flashcards" className={"non-scroll" + (currentQuestionIndex + 1 < flashcardData.flashcards.length ? "" : " lonely")}>
+        <div ref={card} id="flashcards" className={"non-scroll" + (currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ? "" : " lonely")}>
           <div id="curr">
-            <Flashcard key={currentQuestionIndex} text={flashcardData.flashcards[currentQuestionIndex].question} index={currentQuestionIndex + 1} choices={flashcardData.flashcards[currentQuestionIndex].multipleChoices} handleAnswerClick={handleAnswerClick} skeletonChoices={false} />
+            <Flashcard key={currentQuestionIndex} flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]} index={currentQuestionIndex + 1} handleAnswerClick={handleAnswerClick} skeletonChoices={false} />
           </div>
-          {(currentQuestionIndex + 1 < flashcardData.flashcards.length ?
+          {(currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ?
             <div id="next">
-              <Flashcard key={currentQuestionIndex + 1} text={flashcardData.flashcards[currentQuestionIndex + 1].question} index={currentQuestionIndex + 2} choices={flashcardData.flashcards[currentQuestionIndex + 1].multipleChoices} handleAnswerClick={() => { }} skeletonChoices={true} />
+              <Flashcard key={currentQuestionIndex + 1} flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]]} index={currentQuestionIndex + 2} handleAnswerClick={() => { }} skeletonChoices={true} />
             </div>
             : <></>)}
         </div>

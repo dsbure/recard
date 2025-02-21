@@ -19,7 +19,7 @@ export function StorySnake({ category, categoryData }: IStorySnakeProps) {
     {storyFlashcards.map((fc, index) => {
       return <IonRow key={index}>
         <IonCol>
-          <StoryFlashcard offset={fc.offset} topic={fc.flashcard} locked={(categoryData?.currentId || 0) < index}/>
+          <StoryFlashcard offset={fc.offset} topic={fc.flashcard} locked={(categoryData?.currentId || 0) < index} progress={(categoryData?.currentId || 0) == index ? ((categoryData?.starProgress || 0) / (categoryData?.starTotal || 3)) * 100 : 0}/>
         </IonCol>
       </IonRow>
     }

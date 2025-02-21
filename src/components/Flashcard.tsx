@@ -1,30 +1,30 @@
 import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonLabel, IonSkeletonText } from '@ionic/react';
 import { useEffect, useState } from 'react';
+import { IFlashcardTopic } from './IFlashcardTopic';
 
 export interface IFlashcardProps {
-  text: string
+  flashcard: IFlashcardTopic["flashcards"]["0"]
   index: number
-  choices: string[]
   handleAnswerClick: Function
   skeletonChoices: boolean
 }
 
-export function Flashcard({index, text, choices, handleAnswerClick, skeletonChoices}: IFlashcardProps) {
-  const [shuffledChoices, setShuffledChoices] = useState(choices.map(e => ({ e, sort: Math.random() })) 
+export function Flashcard({index, flashcard, handleAnswerClick, skeletonChoices}: IFlashcardProps) {
+  const [shuffledChoices, setShuffledChoices] = useState(flashcard.multipleChoices.map(e => ({ e, sort: Math.random() })) 
   .sort((a, b) => a.sort - b.sort) 
   .map(({ e }) => e));
   useEffect(() => {
-    setShuffledChoices(choices.map(e => ({ e, sort: Math.random() })) 
+    setShuffledChoices(flashcard.multipleChoices.map(e => ({ e, sort: Math.random() })) 
     .sort((a, b) => a.sort - b.sort) 
     .map(({ e }) => e));
-  }, [index]);
+  }, [flashcard]);
   return (<IonGrid>
     <IonRow>
       <IonCol>
         <IonCard>
           <IonCardHeader>
             <IonCardSubtitle>{"Question " + index} </IonCardSubtitle>
-            <IonCardTitle>{text}</IonCardTitle>
+            <IonCardTitle>{flashcard.question}</IonCardTitle>
           </IonCardHeader>
         </IonCard>
       </IonCol>

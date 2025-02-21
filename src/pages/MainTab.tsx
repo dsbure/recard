@@ -63,15 +63,15 @@ const MainTab: React.FC = () => {
                   message: 'Are you sure you want to clear data?',
                   buttons: [
                     {
+                      text: 'Cancel',
+                      role: 'close'
+                    },
+                    {
                       text: 'Clear Data',
                       role: 'close',
                       handler: () => {
                         flashcardStorageService.clearData();
                       },
-                    },
-                    {
-                      text: 'Cancel',
-                      role: 'close'
                     }
                   ]
                 })
