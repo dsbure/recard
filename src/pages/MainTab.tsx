@@ -79,7 +79,7 @@ const MainTab: React.FC = () => {
               <IonIcon slot="icon-only" icon={trash}></IonIcon>
             </IonButton>
           </IonButtons>
-          <IonTitle>Flashcards para kay sir raplh</IonTitle>
+          <IonTitle>Recard</IonTitle>
         </IonToolbar>
       </IonHeader>
 

@@ -1,0 +1,28 @@
+.storyFlashcard::part(native) {
+	background-color: var(--ion-color-primary-shade);
+	color: #fff;
+}
+.storyFlashcard.new::part(native) {
+	background-color: var(--ion-color-primary-tint);
+}
+.storyFlashcard[disabled=""]::part(native) {
+	filter: grayscale(1);
+	opacity: 0.4;
+	color: #000;
+}
+
+.storyFlashcardContainer {
+	border-radius: 9999px;
+	padding: 0;
+	padding-right: 32px;
+	width: fit-content;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: start;
+}
+.storyFlashcardContainer[disabled="false"] ion-label {
+	padding-left: 8px;
+}
+.storyFlashcardContainer[disabled="true"] {
+	padding-left: 2px;
+}

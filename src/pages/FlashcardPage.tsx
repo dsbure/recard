@@ -74,16 +74,16 @@ const FlashcardPage: React.FC = () => {
     } else {
       const currentCategoryData: IFlashcardStorageCategory = await flashcardStorageService.getCategoryData(flashcardData.categoryName);
       let starProgress = flashcardData.id === currentCategoryData?.currentId || 0 ?
-        (currentCategoryData?.starProgress || 0) + 1 === 3 ? 0 :
+        (currentCategoryData?.starProgress || 0) + 1 === flashcardData.repeatTotal ? 0 :
           (currentCategoryData?.starProgress || 0) + 1 :
         currentCategoryData?.starProgress || 1;
       console.log(starProgress);
       
       await flashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
-        currentId: (currentCategoryData?.starProgress || 0) + 1 === 3 ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId || 0) : currentCategoryData?.currentId || 0,
+        currentId: (currentCategoryData?.starProgress || 0) + 1 === flashcardData.repeatTotal ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId || 0) : currentCategoryData?.currentId || 0,
         starProgress: starProgress,
-        starTotal: 3,
+        starTotal: flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal,
       });
       setMistakes(0);
       const resultsURL = `/results/${newScore}/${flashcardData.flashcards.length}/${flashcardData.topicName}`;
