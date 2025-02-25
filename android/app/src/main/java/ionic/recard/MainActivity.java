@@ -1,4 +1,4 @@
-package ionic.recard;
+package ionic.recall;
 
 import com.getcapacitor.BridgeActivity;
 

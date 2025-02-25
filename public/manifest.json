@@ -1,6 +1,6 @@
 {
-  "short_name": "Recard",
-  "name": "Recard Flascards",
+  "short_name": "Recall",
+  "name": "Recall Flashcards",
   "icons": [
     {
       "src": "assets/icon/favicon.png",
@@ -10,7 +10,7 @@
     {
       "src": "assets/icon/favicon.svg",
       "sizes": "any",
-      "type": "image/svg"
+      "type": "image/svg+xml"
     }
   ],
   "start_url": ".",

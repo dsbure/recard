@@ -18,7 +18,6 @@
 	width: fit-content;
 	display: grid;
 	grid-template-columns: auto auto;
-	justify-content: start;
 }
 .storyFlashcardContainer[disabled="false"] ion-label {
 	padding-left: 8px;

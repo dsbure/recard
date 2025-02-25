@@ -8,6 +8,8 @@
 	display: flex;
 	flex-direction: row;
 	width: 200%;
+	flex-grow: 1;
+	height: 100%;
 }
 #flashcards.lonely {
 	width: 100%;
@@ -17,4 +19,15 @@
 }
 .hidden {
 	display: none;
+}
+.flashcard-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.flashcard-page .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }

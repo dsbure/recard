@@ -1,3 +1,10 @@
 .storySnake ion-col {
 	display: grid;
 }
+.storySnake ion-row {
+	width: fit-content;
+}
+.storySnake {
+	display: grid;
+	justify-content: center;
+}

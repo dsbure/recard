@@ -1,14 +1,15 @@
-import { IonButton, IonButtons, IonCardContent, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import './MainTab.css';
-import { arrowBack, flash, heart, trash } from 'ionicons/icons';
+import { arrowBack, flash, heart, home, person, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
 import { useEffect, useState } from 'react';
 import { IFlashcardData } from '../components/IFlashcardData'; import { IFlashcardCategory } from "../components/IFlashcardCategory";
 import flashcardStorageService from '../services/flashcardStorageService';
+import { HomeView } from '../components/HomeView';
 
 const MainTab: React.FC = () => {
   const [pageView, setPageView] = useState(<></>);
-  const [selectedSegment, setSelectedSegment] = useState<string>("0");
+  const [selectedSegment, setSelectedSegment] = useState<string>("home");
 
   const [presentAlert] = useIonAlert();
   useEffect(() => {
@@ -34,6 +35,7 @@ const MainTab: React.FC = () => {
           <>
             <IonSegment
               value={selectedSegment}
+              scrollable={true}
               onIonChange={(e) => {
                 const value = e.detail.value;
                 if (value !== undefined) {
@@ -41,9 +43,17 @@ const MainTab: React.FC = () => {
                 }
               }}
             >
+              <IonSegmentButton className="homebutton" value="home" contentId="home">
+                <IonIcon icon={home}></IonIcon>
+              </IonSegmentButton>
               {segmentButtons}
             </IonSegment>
-            <IonSegmentView>{segmentViews}</IonSegmentView>
+            <IonSegmentView>
+              <IonSegmentContent id="home">
+                <HomeView />
+              </IonSegmentContent>
+              {segmentViews}
+            </IonSegmentView>
           </>
         );
       })
@@ -79,7 +89,7 @@ const MainTab: React.FC = () => {
               <IonIcon slot="icon-only" icon={trash}></IonIcon>
             </IonButton>
           </IonButtons>
-          <IonTitle>Recard</IonTitle>
+          <IonTitle>Recall</IonTitle>
         </IonToolbar>
       </IonHeader>
 
