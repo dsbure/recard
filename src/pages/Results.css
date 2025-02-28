@@ -1,0 +1,25 @@
+.results-header {
+	text-align: center;
+}
+.results-card {
+	max-width: 576px;
+	width: min(calc(100% - 20px), 576px);
+}
+.results-container {
+	align-items: center;
+	justify-items: center;
+	display: grid;
+	height: 100%;
+}
+.results-container .summary {
+	justify-content: center;
+	display: flex;
+}
+.results-icon {
+	justify-content: center;
+	display: flex;
+}
+.results-icon ion-icon {
+	width: 64px;
+	height: 64px;
+}

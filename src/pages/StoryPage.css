@@ -1,0 +1,29 @@
+.dialogue-box {
+	max-width: 576px;
+	min-width: calc(100% - 20px);
+	bottom: 0px;
+	overflow: scroll;
+	height: 256px;
+	display: flex;
+}
+.dialogue-box .header {
+	width: 135px;
+	min-width: 135px;
+	max-width: 135px;
+	background-color: var(--ion-background-color-step-200);
+}
+.dialogue-box .name {
+	height: 100%;
+}
+.dialogue {
+	padding-left: 0;
+	color: var(--ion-text-color);
+}
+.story-content {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding: auto;
+	gap: 0px;
+	max-height: calc(100vh - 56px);
+}

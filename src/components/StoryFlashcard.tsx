@@ -16,8 +16,8 @@ export interface IStoryFlashcardProps {
 export function StoryFlashcard({ offset, topic, locked, progress, newTopic }: IStoryFlashcardProps) {
   const router = useIonRouter();
   const handleButtonHover = () => {
-    router.push("/flashcard");
     localStorage.setItem("currentFlashcard", JSON.stringify(topic));
+    router.push("/flashcard");
   }
   const flashcardButton = (
     <IonButton 

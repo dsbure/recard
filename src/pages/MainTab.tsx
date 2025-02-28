@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { IFlashcardData } from '../components/IFlashcardData'; import { IFlashcardCategory } from "../components/IFlashcardCategory";
 import flashcardStorageService from '../services/flashcardStorageService';
 import { HomeView } from '../components/HomeView';
+import EXPStorageService from '../services/EXPStorageService';
 
 const MainTab: React.FC = () => {
   const [pageView, setPageView] = useState(<></>);
@@ -81,6 +82,7 @@ const MainTab: React.FC = () => {
                       role: 'close',
                       handler: () => {
                         flashcardStorageService.clearData();
+                        EXPStorageService.clearData();
                       },
                     }
                   ]

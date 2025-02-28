@@ -17,7 +17,7 @@ export function TopicView(category: IFlashcardCategory) {
         <IonCardSubtitle>{category.categoryDesc}</IonCardSubtitle>
       </IonCardHeader>
       <IonCardContent>
-        <IonButton>View Story</IonButton>
+        <IonButton routerLink={"/story/" + category.categoryName} expand="block">View Story</IonButton>
       </IonCardContent>
     </IonCard>
     <StorySnake category={category} categoryData={categoryData} />

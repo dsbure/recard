@@ -6,6 +6,7 @@ import { IFInteractionProps } from './IFInteractionProps';
 export function FIdentification({ handleAnswerClick, interaction, skeleton }: IFInteractionProps) {
   const input = useRef<HTMLIonInputElement>(null);
   const handleAnswer = (q: string) => {
+    if (q === "") return;
     if (Array.isArray(interaction.correct)) {
       handleAnswerClick(interaction.correct.map(e => e.toLowerCase()).includes(q.toLowerCase()), q);
     } else {
@@ -15,7 +16,7 @@ export function FIdentification({ handleAnswerClick, interaction, skeleton }: IF
   return (<IonCard>
     <IonCardContent className="identification-content">
       <IonInput label="Answer" labelPlacement="floating" fill="outline" placeholder="Enter your answer" ref={input}></IonInput>
-      <IonButton expand="block" onClick={() => handleAnswer(input.current?.value?.toString().toLowerCase() || "")}>{skeleton ? <IonSkeletonText animated={true} style={{ width: '80px' }} /> : <IonLabel>Submit</IonLabel>}</IonButton>
+      <IonButton expand="block" onClick={() => handleAnswer(input.current?.value?.toString().toLowerCase().trim() || "")}>Submit</IonButton>
     </IonCardContent>
   </IonCard>);
 }

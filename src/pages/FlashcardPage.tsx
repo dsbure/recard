@@ -3,7 +3,7 @@ import './FlashcardPage.css';
 import { useEffect, useRef, useState } from 'react';
 import { Flashcard } from '../components/Flashcard';
 import { useHistory } from 'react-router';
-import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, heart } from 'ionicons/icons';
+import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, heart, timer } from 'ionicons/icons';
 import { IFlashcardTopic } from '../components/IFlashcardTopic';
 import StorageService from '../services/StorageService';
 import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
@@ -19,6 +19,9 @@ const FlashcardPage: React.FC = () => {
   const [correctedAnswer, setCorrectedAnswer] = useState("");
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
+  const [startTime, setStartTime] = useState(Date.now());
+  const [currentTime, setCurrentTime] = useState(0);
+  const [formattedTime, setFormattedTime] = useState("00:00");
 
   const [presentAlert] = useIonAlert();
 
@@ -44,6 +47,8 @@ const FlashcardPage: React.FC = () => {
   };
 
   useIonViewWillEnter(() => {
+    setStartTime(Date.now());
+    setCurrentTime(Date.now());
     setMistakes(0);
     setCA(0);
     setCQI(0);
@@ -53,6 +58,7 @@ const FlashcardPage: React.FC = () => {
     setFlashcardData(data);
     setTimeout(() => setProgress((currentQuestionIndex + 1) / (data.flashcards.length + 1)), 0);
   });
+
   useEffect(() => {
     if (!cardAnim.current) {
       cardAnim.current = createAnimation()
@@ -62,6 +68,28 @@ const FlashcardPage: React.FC = () => {
         .fromTo('transform', 'translateX(0%)', 'translateX(-50%)');
     }
   }, [card]);
+
+  useEffect(() => {
+    // https://stackoverflow.com/a/59861536
+    const interval = setInterval(() => setCurrentTime(Date.now()), 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    setFormattedTime(formatTime(currentTime - startTime));
+  }, [currentTime]);
+
+  const formatTime = (time: number) => {
+    // w3schools
+    const days = Math.floor(time / (1000 * 60 * 60 * 24)); // grabe naman guys
+    const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((time % (1000 * 60)) / 1000);
+
+    return (days != 0 ? days + ":" : "") + (hours != 0 ? String(hours).padStart(2, '0') + ":" : "") + String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
+  };
 
   const handleNextFlashcard = async (newScore: number) => {
     if (currentQuestionIndex + 1 < flashcardData.flashcards.length) {
@@ -89,8 +117,11 @@ const FlashcardPage: React.FC = () => {
         starTotal: flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal,
       });
       setMistakes(0);
-      const resultsURL = `/results/${newScore}/${flashcardData.flashcards.length}/${flashcardData.topicName}`;
-      router.push(resultsURL);
+      const deltaTime = currentTime - startTime;
+      localStorage.setItem("flashcardScore", newScore.toString());
+      localStorage.setItem("rawTime", deltaTime.toString());
+      localStorage.setItem("formattedTime", formattedTime);
+      router.push("/results");
     }
   }
   const handleAnswerClick = (correct: boolean, userAnswer: string, type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse") => {
@@ -121,6 +152,14 @@ const FlashcardPage: React.FC = () => {
             </IonButton>
           </IonButtons>
           <IonTitle>Flashcard</IonTitle>
+          <IonButtons slot="end">
+            <IonChip className="timer" outline={true}>
+              <IonIcon icon={timer}/>
+              <IonLabel>
+                {formattedTime}
+              </IonLabel>
+            </IonChip>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="flashcard-page">
@@ -145,25 +184,25 @@ const FlashcardPage: React.FC = () => {
           </div>
           <div ref={card} id="flashcards" className={"non-scroll" + (currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ? "" : " lonely")}>
             <div id="curr">
-              <Flashcard 
-                key={currentQuestionIndex} 
-                flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]} 
-                index={currentQuestionIndex + 1} 
-                handleAnswerClick={handleAnswerClick} 
-                skeleton={false} 
+              <Flashcard
+                key={currentQuestionIndex}
+                flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]}
+                index={currentQuestionIndex + 1}
+                handleAnswerClick={handleAnswerClick}
+                skeleton={false}
                 type={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].type}
-                interaction={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction} 
+                interaction={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction}
               />
             </div>
             {(currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ?
               <div id="next">
-                <Flashcard 
-                  key={currentQuestionIndex + 1} 
-                  flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]]} 
-                  index={currentQuestionIndex + 2} 
-                  handleAnswerClick={() => { }} 
-                  skeleton={true} 
-                  type={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]].type} 
+                <Flashcard
+                  key={currentQuestionIndex + 1}
+                  flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]]}
+                  index={currentQuestionIndex + 2}
+                  handleAnswerClick={() => { }}
+                  skeleton={true}
+                  type={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]].type}
                   interaction={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]].interaction}
                 />
               </div>
@@ -183,7 +222,7 @@ const FlashcardPage: React.FC = () => {
                   <IonLabel>Your answer:</IonLabel>
                 </IonChip> {currentAnswer}
                 <br />
-              </>  : null}
+              </> : null}
               <IonChip color="success">
                 <IonIcon icon={checkmarkCircle} />
                 <IonLabel>Correct answer:</IonLabel>

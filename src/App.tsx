@@ -44,6 +44,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import StoryPage from './pages/StoryPage';
 
 setupIonicReact({
   mode: 'md',
@@ -60,8 +61,11 @@ const App: React.FC = () => (
           <Route exact path="/flashcard">
             <FlashcardPage />
           </Route>
-          <Route path="/results/:score/:total/:topicName">
+          <Route path="/results">
             <Results />
+          </Route>
+          <Route path="/story/:quarter">
+            <StoryPage />
           </Route>
           <Route exact path="/">
             <Redirect to="/mainTab" />

@@ -21,6 +21,7 @@ export function FMultipleChoice({ flashcard, handleAnswerClick, interaction, ske
   return (<>
     {shuffledChoices.map((q, i) => {
       return <IonButton className={(flashcardCorrect|| "") === q ? "choice correct" : "choice"} key={i} expand="block" onClick={() => handleAnswer(q)} disabled={(flashcardCorrect|| "") !== "" && (flashcardCorrect|| "") !== q}>
+        <div className="wipe"></div>
         {skeleton ? <IonSkeletonText animated={true} style={{ width: '80px' }} /> : <IonLabel>{q}</IonLabel>}
       </IonButton>
     })}
