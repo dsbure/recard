@@ -1,7 +1,7 @@
 .choice-container {
   flex: 1;
 }
-.choice-container ion-col {
+.choice-container.f-multipleChoice ion-col {
   display: flex;
   flex-direction: column;
 }
@@ -35,6 +35,7 @@
   width: 100%;
   background: var(--ion-color-success-tint);
   left: 0;
+  will-change: width;
   animation: linearwipe 1.5s cubic-bezier(0.381, 0.52, 0.523, 1) forwards;
 }
 @keyframes linearwipe {
@@ -46,7 +47,7 @@
   }
 }
 @media (min-width: 1000px) {
-  .choice-container ion-col {
+  .choice-container.f-multipleChoice ion-col {
     flex-direction: row;
   }
 }

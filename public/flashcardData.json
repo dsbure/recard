@@ -1,1297 +1,1556 @@
 {
   "categories": [
     {
-      "categoryName": "Q1",
       "categoryDesc": "desc. 1",
+      "categoryName": "Q1",
       "topics": [
         {
-          "id": 0,
           "categoryName": "Q1",
-          "topicName": "Subtopic 1",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "answer a",
+                  "answer b",
+                  "answer c",
+                  "answer d"
+                ],
+                "correct": "answer a"
+              },
               "question": "choose answer a",
-              "multipleChoices": [
-                "answer a",
-                "answer b",
-                "answer c",
-                "answer d"
-              ],
-              "correct": "answer a"
+              "type": "multipleChoice"
             },
             {
-              "question": "choose answer c",
-              "multipleChoices": [
-                "answer a",
-                "answer b",
-                "answer c",
-                "answer d"
-              ],
-              "correct": "answer c"
+              "interaction": {
+                "identification": "",
+                "correct": ["jam", "jamjam"]
+              },
+              "question": "type \"jam\" (case insensitive)",
+              "type": "identification"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "answer a",
+                  "answer b",
+                  "answer c",
+                  "answer d"
+                ],
+                "correct": "answer b"
+              },
               "question": "choose answer b",
-              "multipleChoices": [
-                "answer a",
-                "answer b",
-                "answer c",
-                "answer d"
-              ],
-              "correct": "answer b"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "0",
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "correct": "2"
+              },
               "question": "what is 1+1",
-              "multipleChoices": [
-                "0",
-                "1",
-                "2",
-                "3"
-              ],
-              "correct": "2"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 0,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 1"
         },
         {
-          "id": 1,
           "categoryName": "Q1",
-          "topicName": "Subtopic 2",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "1999",
+                  "1995",
+                  "1994",
+                  "2025"
+                ],
+                "correct": "1999"
+              },
               "question": "when was 1999",
-              "multipleChoices": [
-                "1999",
-                "1995",
-                "1994",
-                "2025"
-              ],
-              "correct": "1999"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "jeep",
+                  "jip",
+                  "geep",
+                  "dhjieap"
+                ],
+                "correct": "jeep"
+              },
               "question": "spell jeep",
-              "multipleChoices": [
-                "jeep",
-                "jip",
-                "geep",
-                "dhjieap"
-              ],
-              "correct": "jeep"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "0.000000000001",
+                  "-1",
+                  "epsilon",
+                  "10"
+                ],
+                "correct": "10"
+              },
               "question": "pick the largest number",
-              "multipleChoices": [
-                "0.000000000001",
-                "-1",
-                "epsilon",
-                "10"
-              ],
-              "correct": "10"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "0",
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "correct": "3"
+              },
               "question": "what is 1+2",
-              "multipleChoices": [
-                "0",
-                "1",
-                "2",
-                "3"
-              ],
-              "correct": "3"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "yes",
+                  "no",
+                  "maybe"
+                ],
+                "correct": "yes"
+              },
               "question": "is the sun hot",
-              "multipleChoices": [
-                "yes",
-                "no",
-                "maybe"
-              ],
-              "correct": "yes"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 1,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 2"
         },
         {
-          "id": 2,
           "categoryName": "Q1",
-          "topicName": "Subtopic 3",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "dog",
+                  "cat",
+                  "pigeon",
+                  "car"
+                ],
+                "correct": "pigeon"
+              },
               "question": "which animal is a bird?",
-              "multipleChoices": [
-                "dog",
-                "cat",
-                "pigeon",
-                "car"
-              ],
-              "correct": "pigeon"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "0",
+                  "2",
+                  "4",
+                  "8"
+                ],
+                "correct": "0"
+              },
               "question": "how many legs does a fish have?",
-              "multipleChoices": [
-                "0",
-                "2",
-                "4",
-                "8"
-              ],
-              "correct": "0"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "triangle",
+                  "square",
+                  "circle",
+                  "pentagon"
+                ],
+                "correct": "triangle"
+              },
               "question": "which shape has 3 sides?",
-              "multipleChoices": [
-                "triangle",
-                "square",
-                "circle",
-                "pentagon"
-              ],
-              "correct": "triangle"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 2,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 3"
         },
         {
-          "id": 3,
           "categoryName": "Q1",
-          "topicName": "Subtopic 4",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "orange",
+                  "blue",
+                  "green",
+                  "purple"
+                ],
+                "correct": "orange"
+              },
               "question": "what color is an orange?",
-              "multipleChoices": [
-                "orange",
-                "blue",
-                "green",
-                "purple"
-              ],
-              "correct": "orange"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "60",
+                  "30",
+                  "90",
+                  "15"
+                ],
+                "correct": "60"
+              },
               "question": "how many minutes are in an hour?",
-              "multipleChoices": [
-                "60",
-                "30",
-                "90",
-                "15"
-              ],
-              "correct": "60"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "cold",
+                  "warm",
+                  "fire",
+                  "ice"
+                ],
+                "correct": "cold"
+              },
               "question": "what is the opposite of hot?",
-              "multipleChoices": [
-                "cold",
-                "warm",
-                "fire",
-                "ice"
-              ],
-              "correct": "cold"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 3,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 4"
         },
         {
-          "id": 4,
           "categoryName": "Q1",
-          "topicName": "Subtopic 5",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Saturn",
+                  "Mars",
+                  "Earth",
+                  "Venus"
+                ],
+                "correct": "Saturn"
+              },
               "question": "which planet is known for its rings?",
-              "multipleChoices": [
-                "Saturn",
-                "Mars",
-                "Earth",
-                "Venus"
-              ],
-              "correct": "Saturn"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "oxygen",
+                  "carbon dioxide",
+                  "helium",
+                  "hydrogen"
+                ],
+                "correct": "oxygen"
+              },
               "question": "what gas do humans breathe in?",
-              "multipleChoices": [
-                "oxygen",
-                "carbon dioxide",
-                "helium",
-                "hydrogen"
-              ],
-              "correct": "oxygen"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "7",
+                  "5",
+                  "10",
+                  "12"
+                ],
+                "correct": "7"
+              },
               "question": "how many days are in a week?",
-              "multipleChoices": [
-                "7",
-                "5",
-                "10",
-                "12"
-              ],
-              "correct": "7"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 4,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 5"
         },
         {
-          "id": 5,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 6",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 6",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 5,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 6"
         },
         {
-          "id": 6,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 7",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 7",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 6,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 7"
         },
         {
-          "id": 7,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 8",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 8",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 7,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 8"
         },
         {
-          "id": 8,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 9",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 9",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 8,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 9"
         },
         {
-          "id": 9,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 10",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 10",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 9,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 10"
         },
         {
-          "id": 10,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 11",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 11",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 10,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 11"
         },
         {
-          "id": 11,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 12",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 12",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 11,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 12"
         },
         {
-          "id": 12,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 13",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 13",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 12,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 13"
         },
         {
-          "id": 13,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 14",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 14",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 13,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 14"
         },
         {
-          "id": 14,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 15",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 15",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 14,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 15"
         },
         {
-          "id": 15,
           "categoryName": "Q1",
-          "topicName": "Q1 - Sample Subtopic 16",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
               "question": "Sample question for Q1 - Subtopic 16",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 15,
+          "repeatTotal": 3,
+          "topicName": "Q1 - Sample Subtopic 16"
         }
       ]
     },
     {
-      "categoryName": "Q2",
       "categoryDesc": "desc. 2",
+      "categoryName": "Q2",
       "topics": [
         {
-          "id": 0,
           "categoryName": "Q2",
-          "topicName": "Long title Q1 - Sample Subtopic 10",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "26",
+                  "30",
+                  "24",
+                  "32"
+                ],
+                "correct": "26"
+              },
               "question": "how many letters are in the alphabet?",
-              "multipleChoices": [
-                "26",
-                "30",
-                "24",
-                "32"
-              ],
-              "correct": "26"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "Paris",
+                  "London",
+                  "Rome",
+                  "Berlin"
+                ],
+                "correct": "Paris"
+              },
               "question": "what is the capital of France?",
-              "multipleChoices": [
-                "Paris",
-                "London",
-                "Rome",
-                "Berlin"
-              ],
-              "correct": "Paris"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "banana",
+                  "apple",
+                  "cherry",
+                  "kiwi"
+                ],
+                "correct": "banana"
+              },
               "question": "which fruit is yellow?",
-              "multipleChoices": [
-                "banana",
-                "apple",
-                "cherry",
-                "kiwi"
-              ],
-              "correct": "banana"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 0,
+          "repeatTotal": 3,
+          "topicName": "Long title Q1 - Sample Subtopic 10"
         },
         {
-          "id": 1,
           "categoryName": "Q2",
-          "topicName": "Subtopic 7",
-          "repeatTotal": 3,
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "3",
+                  "4",
+                  "5",
+                  "6"
+                ],
+                "correct": "4"
+              },
               "question": "what is 2+2?",
-              "multipleChoices": [
-                "3",
-                "4",
-                "5",
-                "6"
-              ],
-              "correct": "4"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ],
+                "correct": "2"
+              },
               "question": "what is 5-3?",
-              "multipleChoices": [
-                "1",
-                "2",
-                "3",
-                "4"
-              ],
-              "correct": "2"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ],
+                "correct": "6"
+              },
               "question": "what is 3+3?",
-              "multipleChoices": [
-                "5",
-                "6",
-                "7",
-                "8"
-              ],
-              "correct": "6"
+              "type": "multipleChoice"
             }
-          ]
-        },
-        {
-          "id": 2,
-          "categoryName": "Q2",
-          "topicName": "Subtopic 8",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "how many wheels does a unicycle have?",
-              "multipleChoices": [
-                "1",
-                "2",
-                "3",
-                "4"
-              ],
-              "correct": "1"
-            },
-            {
-              "question": "what does a cow say?",
-              "multipleChoices": [
-                "moo",
-                "woof",
-                "meow",
-                "oink"
-              ],
-              "correct": "moo"
-            },
-            {
-              "question": "what color are most bananas?",
-              "multipleChoices": [
-                "blue",
-                "yellow",
-                "green",
-                "red"
-              ],
-              "correct": "yellow"
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "categoryName": "Q2",
-          "topicName": "Subtopic 9",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "what color is the sky on a clear day?",
-              "multipleChoices": [
-                "blue",
-                "red",
-                "green",
-                "purple"
-              ],
-              "correct": "blue"
-            },
-            {
-              "question": "how many eyes do spiders have?",
-              "multipleChoices": [
-                "8",
-                "2",
-                "6",
-                "4"
-              ],
-              "correct": "8"
-            },
-            {
-              "question": "what do clouds look like?",
-              "multipleChoices": [
-                "fluffy",
-                "sharp",
-                "liquid",
-                "square"
-              ],
-              "correct": "fluffy"
-            }
-          ]
-        },
-        {
-          "id": 4,
-          "categoryName": "Q2",
-          "topicName": "Subtopic 10",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "what do you call a baby dog?",
-              "multipleChoices": [
-                "puppy",
-                "kitten",
-                "cub",
-                "foal"
-              ],
-              "correct": "puppy"
-            },
-            {
-              "question": "what is the largest planet in our solar system?",
-              "multipleChoices": [
-                "Jupiter",
-                "Mars",
-                "Earth",
-                "Venus"
-              ],
-              "correct": "Jupiter"
-            },
-            {
-              "question": "what do bees produce?",
-              "multipleChoices": [
-                "honey",
-                "milk",
-                "sugar",
-                "juice"
-              ],
-              "correct": "honey"
-            }
-          ]
-        },
-        {
-          "id": 5,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 11",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 11",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 6,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 12",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 12",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 7,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 13",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 13",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 8,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 14",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 14",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 9,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 15",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 15",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 10,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 16",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 16",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 11,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 17",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 17",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 12,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 18",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 18",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 13,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 19",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 19",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 14,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 20",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 20",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        },
-        {
-          "id": 15,
-          "categoryName": "Q2",
-          "topicName": "Q2 - Sample Subtopic 21",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q2 - Subtopic 21",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "categoryName": "Q3",
-      "categoryDesc": "desc. 3",
-      "topics": [
-        {
-          "id": 0,
-          "categoryName": "Q3",
-          "topicName": "Subtopic 11",
-          "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "what is the boiling point of water in Celsius?",
-              "multipleChoices": [
-                "100",
-                "0",
-                "50",
-                "200"
-              ],
-              "correct": "100"
-            },
-            {
-              "question": "what is the freezing point of water in Celsius?",
-              "multipleChoices": [
-                "0",
-                "100",
-                "32",
-                "50"
-              ],
-              "correct": "0"
-            },
-            {
-              "question": "is water essential for life?",
-              "multipleChoices": [
-                "yes",
-                "no",
-                "maybe",
-                "sometimes"
-              ],
-              "correct": "yes"
-            }
-          ]
-        },
-        {
+          ],
           "id": 1,
-          "categoryName": "Q3",
-          "topicName": "Subtopic 12",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "what is the square root of 16?",
-              "multipleChoices": [
-                "4",
-                "2",
-                "8",
-                "16"
-              ],
-              "correct": "4"
-            },
-            {
-              "question": "what is 10 divided by 2?",
-              "multipleChoices": [
-                "5",
-                "2",
-                "10",
-                "20"
-              ],
-              "correct": "5"
-            },
-            {
-              "question": "what is 9 minus 3?",
-              "multipleChoices": [
-                "6",
-                "3",
-                "5",
-                "4"
-              ],
-              "correct": "6"
-            },
-            {
-              "question": "what is 7 plus 2?",
-              "multipleChoices": [
-                "9",
-                "8",
-                "10",
-                "7"
-              ],
-              "correct": "9"
-            }
-          ]
+          "topicName": "Subtopic 7"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ],
+                "correct": "1"
+              },
+              "question": "how many wheels does a unicycle have?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "moo",
+                  "woof",
+                  "meow",
+                  "oink"
+                ],
+                "correct": "moo"
+              },
+              "question": "what does a cow say?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "blue",
+                  "yellow",
+                  "green",
+                  "red"
+                ],
+                "correct": "yellow"
+              },
+              "question": "what color are most bananas?",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 2,
-          "categoryName": "Q3",
-          "topicName": "Subtopic 13",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "what is the chemical symbol for water?",
-              "multipleChoices": [
-                "H2O",
-                "O2",
-                "CO2",
-                "NaCl"
-              ],
-              "correct": "H2O"
-            },
-            {
-              "question": "what gas do plants produce during photosynthesis?",
-              "multipleChoices": [
-                "oxygen",
-                "carbon dioxide",
-                "nitrogen",
-                "hydrogen"
-              ],
-              "correct": "oxygen"
-            },
-            {
-              "question": "do plants need sunlight to grow?",
-              "multipleChoices": [
-                "yes",
-                "no",
-                "sometimes",
-                "only at night"
-              ],
-              "correct": "yes"
-            }
-          ]
+          "topicName": "Subtopic 8"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "blue",
+                  "red",
+                  "green",
+                  "purple"
+                ],
+                "correct": "blue"
+              },
+              "question": "what color is the sky on a clear day?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "8",
+                  "2",
+                  "6",
+                  "4"
+                ],
+                "correct": "8"
+              },
+              "question": "how many eyes do spiders have?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "fluffy",
+                  "sharp",
+                  "liquid",
+                  "square"
+                ],
+                "correct": "fluffy"
+              },
+              "question": "what do clouds look like?",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 3,
-          "categoryName": "Q3",
-          "topicName": "Subtopic 14",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "which day comes after Monday?",
-              "multipleChoices": [
-                "Tuesday",
-                "Wednesday",
-                "Sunday",
-                "Friday"
-              ],
-              "correct": "Tuesday"
-            },
-            {
-              "question": "what color is a ripe banana?",
-              "multipleChoices": [
-                "yellow",
-                "red",
-                "green",
-                "blue"
-              ],
-              "correct": "yellow"
-            },
-            {
-              "question": "what is the opposite of up?",
-              "multipleChoices": [
-                "down",
-                "left",
-                "right",
-                "up"
-              ],
-              "correct": "down"
-            },
-            {
-              "question": "what sound does a bell make?",
-              "multipleChoices": [
-                "ding",
-                "moo",
-                "quack",
-                "bark"
-              ],
-              "correct": "ding"
-            }
-          ]
+          "topicName": "Subtopic 9"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "puppy",
+                  "kitten",
+                  "cub",
+                  "foal"
+                ],
+                "correct": "puppy"
+              },
+              "question": "what do you call a baby dog?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Jupiter",
+                  "Mars",
+                  "Earth",
+                  "Venus"
+                ],
+                "correct": "Jupiter"
+              },
+              "question": "what is the largest planet in our solar system?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "honey",
+                  "milk",
+                  "sugar",
+                  "juice"
+                ],
+                "correct": "honey"
+              },
+              "question": "what do bees produce?",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 4,
-          "categoryName": "Q3",
-          "topicName": "Subtopic 15",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "what is the fastest land animal?",
-              "multipleChoices": [
-                "cheetah",
-                "turtle",
-                "elephant",
-                "sloth"
-              ],
-              "correct": "cheetah"
-            },
-            {
-              "question": "how many continents are there?",
-              "multipleChoices": [
-                "7",
-                "5",
-                "6",
-                "8"
-              ],
-              "correct": "7"
-            },
-            {
-              "question": "what is the largest ocean?",
-              "multipleChoices": [
-                "Pacific",
-                "Atlantic",
-                "Indian",
-                "Arctic"
-              ],
-              "correct": "Pacific"
-            },
-            {
-              "question": "is the Earth flat?",
-              "multipleChoices": [
-                "no",
-                "yes",
-                "maybe",
-                "sometimes"
-              ],
-              "correct": "no"
-            },
-            {
-              "question": "what is the boiling point of water in Fahrenheit?",
-              "multipleChoices": [
-                "212",
-                "32",
-                "100",
-                "200"
-              ],
-              "correct": "212"
-            }
-          ]
+          "topicName": "Subtopic 10"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 11",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 5,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 16",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 16",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 11"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 12",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 6,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 17",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 17",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 12"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 13",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 7,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 18",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 18",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 13"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 14",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 8,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 19",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 19",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 14"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 15",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 9,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 20",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 20",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 15"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 16",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 10,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 21",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 21",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 16"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 17",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 11,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 22",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 22",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 17"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 18",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 12,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 23",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 23",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 18"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 19",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 13,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 24",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 24",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 19"
         },
         {
+          "categoryName": "Q2",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 20",
+              "type": "multipleChoice"
+            }
+          ],
           "id": 14,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 25",
           "repeatTotal": 3,
-          "flashcards": [
-            {
-              "question": "Sample question for Q3 - Subtopic 25",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
-            }
-          ]
+          "topicName": "Q2 - Sample Subtopic 20"
         },
         {
-          "id": 15,
-          "categoryName": "Q3",
-          "topicName": "Q3 - Sample Subtopic 26",
-          "repeatTotal": 3,
+          "categoryName": "Q2",
           "flashcards": [
             {
-              "question": "Sample question for Q3 - Subtopic 26",
-              "multipleChoices": [
-                "Option 1",
-                "Option 2",
-                "Option 3",
-                "Option 4"
-              ],
-              "correct": "Option 1"
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q2 - Subtopic 21",
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 15,
+          "repeatTotal": 3,
+          "topicName": "Q2 - Sample Subtopic 21"
         }
       ]
     },
     {
-      "categoryName": "Q4",
-      "categoryDesc": "desc. 4",
+      "categoryDesc": "desc. 3",
+      "categoryName": "Q3",
       "topics": [
         {
-          "id": 0,
-          "categoryName": "Q4",
-          "topicName": "Subtopic 111",
-          "repeatTotal": 3,
+          "categoryName": "Q3",
           "flashcards": [
             {
+              "interaction": {
+                "multipleChoices": [
+                  "100",
+                  "0",
+                  "50",
+                  "200"
+                ],
+                "correct": "100"
+              },
               "question": "what is the boiling point of water in Celsius?",
-              "multipleChoices": [
-                "100",
-                "0",
-                "50",
-                "200"
-              ],
-              "correct": "100"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "0",
+                  "100",
+                  "32",
+                  "50"
+                ],
+                "correct": "0"
+              },
               "question": "what is the freezing point of water in Celsius?",
-              "multipleChoices": [
-                "0",
-                "100",
-                "32",
-                "50"
-              ],
-              "correct": "0"
+              "type": "multipleChoice"
             },
             {
+              "interaction": {
+                "multipleChoices": [
+                  "yes",
+                  "no",
+                  "maybe",
+                  "sometimes"
+                ],
+                "correct": "yes"
+              },
               "question": "is water essential for life?",
-              "multipleChoices": [
-                "yes",
-                "no",
-                "maybe",
-                "sometimes"
-              ],
-              "correct": "yes"
+              "type": "multipleChoice"
             }
-          ]
+          ],
+          "id": 0,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 11"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "4",
+                  "2",
+                  "8",
+                  "16"
+                ],
+                "correct": "4"
+              },
+              "question": "what is the square root of 16?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "5",
+                  "2",
+                  "10",
+                  "20"
+                ],
+                "correct": "5"
+              },
+              "question": "what is 10 divided by 2?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "6",
+                  "3",
+                  "5",
+                  "4"
+                ],
+                "correct": "6"
+              },
+              "question": "what is 9 minus 3?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "9",
+                  "8",
+                  "10",
+                  "7"
+                ],
+                "correct": "9"
+              },
+              "question": "what is 7 plus 2?",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 1,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 12"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "H2O",
+                  "O2",
+                  "CO2",
+                  "NaCl"
+                ],
+                "correct": "H2O"
+              },
+              "question": "what is the chemical symbol for water?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "oxygen",
+                  "carbon dioxide",
+                  "nitrogen",
+                  "hydrogen"
+                ],
+                "correct": "oxygen"
+              },
+              "question": "what gas do plants produce during photosynthesis?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "yes",
+                  "no",
+                  "sometimes",
+                  "only at night"
+                ],
+                "correct": "yes"
+              },
+              "question": "do plants need sunlight to grow?",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 2,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 13"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Tuesday",
+                  "Wednesday",
+                  "Sunday",
+                  "Friday"
+                ],
+                "correct": "Tuesday"
+              },
+              "question": "which day comes after Monday?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "yellow",
+                  "red",
+                  "green",
+                  "blue"
+                ],
+                "correct": "yellow"
+              },
+              "question": "what color is a ripe banana?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "down",
+                  "left",
+                  "right",
+                  "up"
+                ],
+                "correct": "down"
+              },
+              "question": "what is the opposite of up?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "ding",
+                  "moo",
+                  "quack",
+                  "bark"
+                ],
+                "correct": "ding"
+              },
+              "question": "what sound does a bell make?",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 3,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 14"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "cheetah",
+                  "turtle",
+                  "elephant",
+                  "sloth"
+                ],
+                "correct": "cheetah"
+              },
+              "question": "what is the fastest land animal?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "7",
+                  "5",
+                  "6",
+                  "8"
+                ],
+                "correct": "7"
+              },
+              "question": "how many continents are there?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Pacific",
+                  "Atlantic",
+                  "Indian",
+                  "Arctic"
+                ],
+                "correct": "Pacific"
+              },
+              "question": "what is the largest ocean?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "no",
+                  "yes",
+                  "maybe",
+                  "sometimes"
+                ],
+                "correct": "no"
+              },
+              "question": "is the Earth flat?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "212",
+                  "32",
+                  "100",
+                  "200"
+                ],
+                "correct": "212"
+              },
+              "question": "what is the boiling point of water in Fahrenheit?",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 4,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 15"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 16",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 5,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 16"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 17",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 6,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 17"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 18",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 7,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 18"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 19",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 8,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 19"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 20",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 9,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 20"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 21",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 10,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 21"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 22",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 11,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 22"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 23",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 12,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 23"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 24",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 13,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 24"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 25",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 14,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 25"
+        },
+        {
+          "categoryName": "Q3",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "Option 1",
+                  "Option 2",
+                  "Option 3",
+                  "Option 4"
+                ],
+                "correct": "Option 1"
+              },
+              "question": "Sample question for Q3 - Subtopic 26",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 15,
+          "repeatTotal": 3,
+          "topicName": "Q3 - Sample Subtopic 26"
+        }
+      ]
+    },
+    {
+      "categoryDesc": "desc. 4",
+      "categoryName": "Q4",
+      "topics": [
+        {
+          "categoryName": "Q4",
+          "flashcards": [
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "100",
+                  "0",
+                  "50",
+                  "200"
+                ],
+                "correct": "100"
+              },
+              "question": "what is the boiling point of water in Celsius?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "0",
+                  "100",
+                  "32",
+                  "50"
+                ],
+                "correct": "0"
+              },
+              "question": "what is the freezing point of water in Celsius?",
+              "type": "multipleChoice"
+            },
+            {
+              "interaction": {
+                "multipleChoices": [
+                  "yes",
+                  "no",
+                  "maybe",
+                  "sometimes"
+                ],
+                "correct": "yes"
+              },
+              "question": "is water essential for life?",
+              "type": "multipleChoice"
+            }
+          ],
+          "id": 0,
+          "repeatTotal": 3,
+          "topicName": "Subtopic 111"
         }
       ]
     }

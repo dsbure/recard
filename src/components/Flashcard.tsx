@@ -2,24 +2,20 @@ import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCa
 import { useEffect, useState } from 'react';
 import { IFlashcardTopic } from './IFlashcardTopic';
 import './Flashcard.css';
+import { FMultipleChoice } from './FMultipleChoice';
+import { IFlashcardInteraction } from './IFlashcardInteraction';
+import { FIdentification } from './FIdentification';
 
 export interface IFlashcardProps {
   flashcard: IFlashcardTopic["flashcards"]["0"]
   index: number
   handleAnswerClick: Function
-  skeletonChoices: boolean
-  correctChoice?: string
+  type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse"
+  interaction: IFlashcardInteraction
+  skeleton: boolean
 }
 
-export function Flashcard({index, flashcard, handleAnswerClick, skeletonChoices, correctChoice}: IFlashcardProps) {
-  const [shuffledChoices, setShuffledChoices] = useState(flashcard.multipleChoices.map(e => ({ e, sort: Math.random() })) 
-  .sort((a, b) => a.sort - b.sort) 
-  .map(({ e }) => e));
-  useEffect(() => {
-    setShuffledChoices(flashcard.multipleChoices.map(e => ({ e, sort: Math.random() })) 
-    .sort((a, b) => a.sort - b.sort) 
-    .map(({ e }) => e));
-  }, [flashcard]);
+export function Flashcard({ index, flashcard, handleAnswerClick, type, interaction, skeleton }: IFlashcardProps) {
   return (<IonGrid className="flashcard-content">
     <IonRow>
       <IonCol>
@@ -31,13 +27,12 @@ export function Flashcard({index, flashcard, handleAnswerClick, skeletonChoices,
         </IonCard>
       </IonCol>
     </IonRow>
-    <IonRow className="choice-container">
-      <IonCol className="ion-padding">
-        {shuffledChoices.map((q, i) => {
-          return <IonButton className={(correctChoice || "") === q ? "choice correct" : "choice"} key={i} expand="block" onClick={() => handleAnswerClick(q)} disabled={(correctChoice || "") !== "" && (correctChoice || "") !== q}>
-            {skeletonChoices ? <IonSkeletonText animated={true} style={{ width: '80px' }} /> : <IonLabel>{q}</IonLabel>}
-          </IonButton>
-        })}
+    <IonRow className={"choice-container f-" + type}>
+      <IonCol className={type === "multipleChoice" ? "ion-padding" : ""}>
+        {type === "multipleChoice" ?
+           <FMultipleChoice flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction} /> : 
+        type === "identification" ?
+           <FIdentification flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction} /> : null}
       </IonCol>
     </IonRow>
   </IonGrid>);

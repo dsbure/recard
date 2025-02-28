@@ -1,3 +1,5 @@
+import { IFlashcardInteraction } from "./IFlashcardInteraction";
+
 export interface IFlashcardTopic {
   topicName: string;
   categoryName: string;
@@ -6,8 +8,8 @@ export interface IFlashcardTopic {
   flashcards: [
     {
       question: string;
-      multipleChoices: string[];
-      correct: string;
+      type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse";
+      interaction: IFlashcardInteraction;
     }
   ];
 }

@@ -18,6 +18,7 @@ const FlashcardPage: React.FC = () => {
   const [currentQuestionOrder, setCQO] = useState<number[]>([0, 0]);
   const [correctedAnswer, setCorrectedAnswer] = useState("");
   const [currentAnswer, setCurrentAnswer] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const [presentAlert] = useIonAlert();
 
@@ -92,17 +93,23 @@ const FlashcardPage: React.FC = () => {
       router.push(resultsURL);
     }
   }
-  const handleAnswerClick = (choice: string) => {
-    setCurrentAnswer(choice);
-    const newScore = correctAnswers + (choice === flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].correct ? 1 : 0);
+  const handleAnswerClick = (correct: boolean, userAnswer: string, type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse") => {
+    setCurrentAnswer(userAnswer);
+    const newScore = correctAnswers + (correct ? 1 : 0);
     setCA(newScore);
-    setCorrectedAnswer(flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].correct);
-    if (choice !== flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].correct) {
+    const correctAnswer = flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct;
+    setCorrectedAnswer(Array.isArray(correctAnswer) ? correctAnswer.join(', ') : correctAnswer);
+    setIsCorrect(correct);
+    if (!correct) {
       setToastOpen(true);
       setMistakes((prevMistakes) => prevMistakes + 1);
       return;
     }
-    setTimeout(() => handleNextFlashcard(newScore), 2000);
+    if (type === "multipleChoice") {
+      setTimeout(() => handleNextFlashcard(newScore), 2000);
+    } else {
+      setToastOpen(true);
+    }
   };
   return (
     <IonPage>
@@ -138,11 +145,27 @@ const FlashcardPage: React.FC = () => {
           </div>
           <div ref={card} id="flashcards" className={"non-scroll" + (currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ? "" : " lonely")}>
             <div id="curr">
-              <Flashcard key={currentQuestionIndex} flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]} index={currentQuestionIndex + 1} handleAnswerClick={handleAnswerClick} skeletonChoices={false} correctChoice={correctedAnswer}/>
+              <Flashcard 
+                key={currentQuestionIndex} 
+                flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]} 
+                index={currentQuestionIndex + 1} 
+                handleAnswerClick={handleAnswerClick} 
+                skeleton={false} 
+                type={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].type}
+                interaction={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction} 
+              />
             </div>
             {(currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ?
               <div id="next">
-                <Flashcard key={currentQuestionIndex + 1} flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]]} index={currentQuestionIndex + 2} handleAnswerClick={() => { }} skeletonChoices={true} />
+                <Flashcard 
+                  key={currentQuestionIndex + 1} 
+                  flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]]} 
+                  index={currentQuestionIndex + 2} 
+                  handleAnswerClick={() => { }} 
+                  skeleton={true} 
+                  type={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]].type} 
+                  interaction={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]].interaction}
+                />
               </div>
               : <></>)}
           </div>
@@ -151,14 +174,16 @@ const FlashcardPage: React.FC = () => {
         <IonModal id="question-modal" ref={(e) => setModal(e)} isOpen={toastOpen} canDismiss={!toastOpen} handle={false} initialBreakpoint={1} breakpoints={[0, 1]}>
           <IonCard>
             <IonCardHeader>
-              <IonCardTitle>Incorrect!</IonCardTitle>
+              <IonCardTitle>{(!isCorrect ? "Inc" : "C") + "orrect!"}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <IonChip color="danger">
-                <IonIcon icon={closeCircle} />
-                <IonLabel>Your answer:</IonLabel>
-              </IonChip> {currentAnswer}
-              <br />
+              {!isCorrect ? <>
+                <IonChip color="danger">
+                  <IonIcon icon={closeCircle} />
+                  <IonLabel>Your answer:</IonLabel>
+                </IonChip> {currentAnswer}
+                <br />
+              </>  : null}
               <IonChip color="success">
                 <IonIcon icon={checkmarkCircle} />
                 <IonLabel>Correct answer:</IonLabel>
