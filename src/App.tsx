@@ -46,34 +46,40 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 import StoryPage from './pages/StoryPage';
 
+/* Vercel Analytics */
+import { Analytics } from "@vercel/analytics/react";
+
 setupIonicReact({
   mode: 'md',
 });
 
 const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter basename="/">
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/mainTab">
-            <MainTab />
-          </Route>
-          <Route exact path="/flashcard">
-            <FlashcardPage />
-          </Route>
-          <Route path="/results">
-            <Results />
-          </Route>
-          <Route path="/story/:quarter">
-            <StoryPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/mainTab" />
-          </Route>
-        </IonRouterOutlet>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
+  <>
+    <IonApp>
+      <IonReactRouter basename="/">
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/mainTab">
+              <MainTab />
+            </Route>
+            <Route exact path="/flashcard">
+              <FlashcardPage />
+            </Route>
+            <Route path="/results">
+              <Results />
+            </Route>
+            <Route path="/story/:quarter">
+              <StoryPage />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/mainTab" />
+            </Route>
+          </IonRouterOutlet>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+    <Analytics />
+  </>
 );
 
 export default App;
