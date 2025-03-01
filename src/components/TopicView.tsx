@@ -1,19 +1,21 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonCardContent } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonCardContent, useIonViewDidLeave, useIonViewWillEnter } from '@ionic/react';
 import { StorySnake } from '../components/StorySnake';
 import { IFlashcardCategory } from "./IFlashcardCategory";
 import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function TopicView(category: IFlashcardCategory) {
   const [categoryData, setCategoryData] = useState<IFlashcardStorageCategory>();
 
   useEffect(() => {
-    let mounted = true;
-    flashcardStorageService.getCategoryData(category.categoryName).then((e) => {
-      if (mounted) setCategoryData(e);
-    });
-    return () => { mounted = false };
+    const updateData = async () => {
+      setTimeout(() => flashcardStorageService.getCategoryData(category.categoryName).then((e) => setCategoryData(e)), 0);
+    };
+    const unsubscribe = flashcardStorageService.subscribe(updateData);
+    updateData();
+    return () => { unsubscribe() };
   }, []);
+
   return <>
     <IonCard className="topicHeader">
       <IonCardHeader>

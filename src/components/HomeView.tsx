@@ -1,7 +1,5 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonLabel, IonProgressBar, useIonViewWillEnter, IonChip } from '@ionic/react';
-import { IFlashcardCategory } from "./IFlashcardCategory";
-import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
-import { useEffect, useState } from 'react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonLabel, IonProgressBar, useIonViewWillEnter, IonChip, useIonViewDidLeave } from '@ionic/react';
+import { useEffect, useRef, useState } from 'react';
 import EXPStorageService from '../services/EXPStorageService';
 
 export function HomeView() {
@@ -10,19 +8,22 @@ export function HomeView() {
   const [expToNextLevel, setExpToNextLevel] = useState(100);
 
   useEffect(() => {
-    let mounted = true;
-  
-    EXPStorageService.getExperienceData().then((e) => {
-      if (mounted) setExpData(e);
-    });
-    EXPStorageService.getLevelProgress().then((e) => {
-      if (mounted) setProgress(e);
-    });
-    EXPStorageService.getEXPToNextLevel().then((e) => {
-      if (mounted) setExpToNextLevel(e);
-    });
-    
-    return () => { mounted = false };
+    const updateData = async () => {
+      setTimeout(() => {
+        EXPStorageService.getExperienceData().then((e) => {
+          setExpData(e);
+        })
+        EXPStorageService.getLevelProgress().then((e) => {
+          setProgress(e);
+        })
+        EXPStorageService.getEXPToNextLevel().then((e) => {
+          setExpToNextLevel(e);
+        })
+      }, 0);
+    };
+    const unsubscribe = EXPStorageService.subscribe(updateData);
+    updateData();
+    return () => { unsubscribe() };
   }, []);
   
   return <>

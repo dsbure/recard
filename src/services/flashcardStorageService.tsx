@@ -12,6 +12,23 @@ export interface IFlashcardStorage {
 };
 
 const flashcardStorageService = {
+	subscribers: [] as Function[],
+
+	constructor() {
+		this.subscribers = [];
+	},
+	
+	subscribe(callback: Function) {
+		if (!this.subscribers.includes(callback)) this.subscribers.push(callback);
+		return () => {
+			this.subscribers = this.subscribers.filter((e) => e !== callback);
+		};
+	},
+
+	notifySubscribers() {
+		this.subscribers.forEach((callback) => callback());
+	},
+
 	async setCategoryData({ ...flashcardData }: IFlashcardStorageCategory) {
 		let currentData: IFlashcardStorage["flashcardData"] = await StorageService.getItem("flashcardData") || [];
 		if (currentData.length === 0) {
@@ -25,6 +42,7 @@ const flashcardStorageService = {
 			}
 			StorageService.setItem("flashcardData", currentData);
 		}
+		this.notifySubscribers();
 	},
 
 	async getCategoryData(name: string) {
@@ -36,11 +54,13 @@ const flashcardStorageService = {
 				break;
 			}
 		}
+		
 		return returnedCategory;
 	},
 
 	async clearData() {
 		StorageService.removeItem("flashcardData");
+		this.notifySubscribers();
 	}
 };
 
