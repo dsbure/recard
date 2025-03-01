@@ -52,7 +52,7 @@ setupIonicReact({
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter basename="/recard">
+    <IonReactRouter basename="/">
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/mainTab">

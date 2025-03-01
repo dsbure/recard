@@ -14,7 +14,7 @@ const MainTab: React.FC = () => {
 
   const [presentAlert] = useIonAlert();
   useEffect(() => {
-    fetch('/recard/flashcardData.json')
+    fetch('/flashcardData.json')
       .then((response) => response.json())
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
