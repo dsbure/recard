@@ -7,9 +7,13 @@ import { useEffect, useState } from 'react';
 export function TopicView(category: IFlashcardCategory) {
   const [categoryData, setCategoryData] = useState<IFlashcardStorageCategory>();
 
-  flashcardStorageService.getCategoryData(category.categoryName).then((e) => {
-    setCategoryData(e);
-  });
+  useEffect(() => {
+    let mounted = true;
+    flashcardStorageService.getCategoryData(category.categoryName).then((e) => {
+      if (mounted) setCategoryData(e);
+    });
+    return () => { mounted = false };
+  }, []);
   return <>
     <IonCard className="topicHeader">
       <IonCardHeader>

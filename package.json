@@ -2,7 +2,7 @@
   "name": "recall",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://dsbure.github.io/recard",
+  "homepage": ".",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",

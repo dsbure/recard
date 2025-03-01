@@ -8,11 +8,23 @@ export function HomeView() {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0 });
   const [progress, setProgress] = useState(0);
   const [expToNextLevel, setExpToNextLevel] = useState(100);
-  
-  EXPStorageService.getExperienceData().then((e) => setExpData(e));
-  EXPStorageService.getLevelProgress().then((e) => setProgress(e));
-  EXPStorageService.getEXPToNextLevel().then((e) => setExpToNextLevel(e));
 
+  useEffect(() => {
+    let mounted = true;
+  
+    EXPStorageService.getExperienceData().then((e) => {
+      if (mounted) setExpData(e);
+    });
+    EXPStorageService.getLevelProgress().then((e) => {
+      if (mounted) setProgress(e);
+    });
+    EXPStorageService.getEXPToNextLevel().then((e) => {
+      if (mounted) setExpToNextLevel(e);
+    });
+    
+    return () => { mounted = false };
+  }, []);
+  
   return <>
     <IonCard className="topicHeader">
       <IonCardHeader>
