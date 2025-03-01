@@ -9,6 +9,7 @@ export function FMultipleChoice({ flashcard, handleAnswerClick, interaction, ske
     .sort((a, b) => a.sort - b.sort)
     .map(({ e }) => e));
   useEffect(() => {
+    setFlashcardCorrect("");
     setShuffledChoices(interaction.multipleChoices!.map(e => ({ e, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ e }) => e));
@@ -16,7 +17,7 @@ export function FMultipleChoice({ flashcard, handleAnswerClick, interaction, ske
   const [flashcardCorrect, setFlashcardCorrect] = useState("");
   const handleAnswer = (q: string) => {
   	setFlashcardCorrect(Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct);
-	handleAnswerClick(q === (Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct), q, "multipleChoice");
+	  handleAnswerClick(q === (Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct), q, "multipleChoice");
   }
   return (<>
     {shuffledChoices.map((q, i) => {

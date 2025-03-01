@@ -3,6 +3,7 @@
     {
       "categoryDesc": "desc. 1",
       "categoryName": "Q1",
+      "index": 1,
       "topics": [
         {
           "categoryName": "Q1",
@@ -508,6 +509,7 @@
     {
       "categoryDesc": "desc. 2",
       "categoryName": "Q2",
+      "index": 2,
       "topics": [
         {
           "categoryName": "Q2",
@@ -980,6 +982,7 @@
     {
       "categoryDesc": "desc. 3",
       "categoryName": "Q3",
+      "index": 3,
       "topics": [
         {
           "categoryName": "Q3",
@@ -1504,6 +1507,7 @@
     {
       "categoryDesc": "desc. 4",
       "categoryName": "Q4",
+      "index": 4,
       "topics": [
         {
           "categoryName": "Q4",

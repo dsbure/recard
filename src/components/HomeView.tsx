@@ -1,6 +1,7 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonLabel, IonProgressBar, useIonViewWillEnter, IonChip, useIonViewDidLeave } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonLabel, IonProgressBar, useIonViewWillEnter, IonChip, useIonViewDidLeave, IonButton } from '@ionic/react';
 import { useEffect, useRef, useState } from 'react';
 import EXPStorageService from '../services/EXPStorageService';
+import FetchFlashcardData from '../services/FetchFlashcardData';
 
 export function HomeView() {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0 });
@@ -37,6 +38,7 @@ export function HomeView() {
         <IonProgressBar value={progress} />
         <IonChip>Total: {expData.currentEXP} XP</IonChip>
         <IonChip>Next Level: {expToNextLevel} XP</IonChip>
+        <IonButton expand="block" onClick={() => { FetchFlashcardData.getFlashcardData(true) }}>Refresh Flashcard Data (requires refresh/app restart)</IonButton>
       </IonCardContent>
     </IonCard>
   </>;

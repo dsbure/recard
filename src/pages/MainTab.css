@@ -38,3 +38,15 @@ ion-segment-button.md::part(indicator-background) {
   width: calc(100% - var(--padding));
   margin: calc(var(--padding) / 2);
 }
+.loading-card {
+  width: fit-content;
+  margin: auto;
+}
+.loading-card ion-card-header {  
+  display: grid;
+  justify-items: center;
+}
+.loading-card ion-spinner {
+  width: 3em;
+  height: 3em;
+}

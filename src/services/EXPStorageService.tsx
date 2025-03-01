@@ -42,7 +42,8 @@ const EXPStorageService = {
 		let experienceData: IEXPStorage = await this.getExperienceData();
 		experienceData.currentEXP += exp;
 		experienceData.levelEXP += exp;
-		if (experienceData.levelEXP >= levelExperiences[Math.min(experienceData.currentLevel - 1, levelExperiences.length - 1)]) {
+		while (experienceData.levelEXP >= levelExperiences[Math.min(experienceData.currentLevel - 1, levelExperiences.length - 1)]) {
+			if (experienceData.levelEXP === Infinity) break; 
 			experienceData.levelEXP -= levelExperiences[Math.min(experienceData.currentLevel - 1, levelExperiences.length - 1)];
 			experienceData.currentLevel++;
 		}

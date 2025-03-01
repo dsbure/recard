@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import './MainTab.css';
 import { arrowBack, flash, heart, home, person, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
@@ -7,15 +7,21 @@ import { IFlashcardData } from '../components/IFlashcardData'; import { IFlashca
 import flashcardStorageService from '../services/flashcardStorageService';
 import { HomeView } from '../components/HomeView';
 import EXPStorageService from '../services/EXPStorageService';
+import FetchFlashcardData from '../services/FetchFlashcardData';
 
 const MainTab: React.FC = () => {
-  const [pageView, setPageView] = useState(<></>);
+  const [pageView, setPageView] = useState(<>
+      <IonCard className="loading-card">
+        <IonCardHeader>
+          <IonSpinner name="dots"></IonSpinner>
+        </IonCardHeader>
+      </IonCard>
+  </>);
   const [selectedSegment, setSelectedSegment] = useState<string>("home");
 
   const [presentAlert] = useIonAlert();
   useEffect(() => {
-    fetch('/flashcardData.json')
-      .then((response) => response.json())
+    FetchFlashcardData.getFlashcardData()
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
         if (!data?.categories) return;
