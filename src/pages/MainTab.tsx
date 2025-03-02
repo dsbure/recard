@@ -45,6 +45,7 @@ const MainTab: React.FC = () => {
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then((data: IFlashcardCategory[]) => {
+          if (!data) return;
           const segmentButtons = data.map((category, index) => (
             <IonSegmentButton key={index} value={index.toString()} contentId={`tab${index}`}>
               <IonLabel>{category.categoryName}</IonLabel>
