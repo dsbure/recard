@@ -36,7 +36,7 @@ const FetchFlashcardData = {
         index:        categoryData.index,
         topics:       [] as unknown as IFlashcardTopic[],
       } as IFlashcardCategory;
-    })
+    }).sort((a, b) => a.index - b.index);
     StorageService.setItem("cachedCategoryData", categoriesMapped).then(
       () => this.notifySubscribers()
     );
