@@ -1,8 +1,10 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonCardContent, useIonViewDidLeave, useIonViewWillEnter } from '@ionic/react';
+import { useIonViewDidLeave, useIonViewWillEnter } from '@ionic/react';
 import { StorySnake } from '../components/StorySnake';
 import { IFlashcardCategory } from "./IFlashcardCategory";
 import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
 import { useEffect, useRef, useState } from 'react';
+import { TopicHeader } from './TopicHeader';
+
 
 export function TopicView(category: IFlashcardCategory) {
   const [categoryData, setCategoryData] = useState<IFlashcardStorageCategory>();
@@ -17,15 +19,7 @@ export function TopicView(category: IFlashcardCategory) {
   }, []);
 
   return <>
-    <IonCard className="topicHeader">
-      <IonCardHeader>
-        <IonCardTitle>{category.categoryName}</IonCardTitle>
-        <IonCardSubtitle>{category.categoryDesc}</IonCardSubtitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <IonButton routerLink={"/story/" + category.categoryName} expand="block">View Story</IonButton>
-      </IonCardContent>
-    </IonCard>
+    <TopicHeader {...category} />
     <StorySnake category={category} categoryData={categoryData} />
   </>;
 }

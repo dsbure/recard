@@ -50,3 +50,21 @@ ion-segment-button.md::part(indicator-background) {
   width: 3em;
   height: 3em;
 }
+#main-header {
+  box-shadow: none;
+  --ion-toolbar-background: transparent
+}
+#recall-logo {
+  height: 30px;
+  width: fit-content;
+}
+.avatar-toolbar {
+  height: 32px;
+  width: 32px;
+  padding: 0;
+}
+.avatar-toolbar ion-avatar {
+  height: 32px;
+  width: 32px;
+  margin: 0;
+}

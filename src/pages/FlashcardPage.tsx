@@ -71,7 +71,7 @@ const FlashcardPage: React.FC = () => {
 
   useEffect(() => {
     // https://stackoverflow.com/a/59861536
-    const interval = setInterval(() => setCurrentTime(Date.now()), 1000);
+    const interval = setInterval(() => setCurrentTime(Date.now()), 500);
     return () => {
       clearInterval(interval);
     };
