@@ -19,15 +19,16 @@ const MainTab: React.FC = () => {
     </IonSegmentButton>
   </>);
   const [pageView, setPageView] = useState(<></>);
-  const [pageViewLoaded, setPageViewLoaded] = useState(false);
   const [selectedSegment, setSelectedSegment] = useState<string>("home");
 
   const themeDetector = useThemeDetector();
   const [colorTheme, setColorTheme] = useState("light");
 
   const [presentAlert] = useIonAlert();
+  
+  let pageViewLoaded = false;
   useEffect(() => {
-    FetchFlashcardData.getFlashcardData(false, import.meta.env.VITE_IN_DEVELOPMENT)
+    FetchFlashcardData.getFlashcardData(false, false) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
         if (!data?.categories) return;
@@ -37,9 +38,8 @@ const MainTab: React.FC = () => {
             <TopicView {...category} />
           </IonSegmentContent>
         ));
-
         setPageView(<>{segmentViews}</>);
-        setPageViewLoaded(true);
+        pageViewLoaded = true;
       })
       .catch((error) => console.error('Load error:', error));
     const updateFlashcardTabs = async () => {
