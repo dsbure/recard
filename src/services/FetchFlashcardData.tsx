@@ -127,6 +127,10 @@ const FetchFlashcardData = {
       }
     }
     return flashcardData.flashcardData;
+  },
+  async clearCachedData() {
+    await StorageService.removeItem("cachedFlashcardData");
+    await StorageService.removeItem("cachedCategoryData");
   }
 };
 

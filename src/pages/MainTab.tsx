@@ -93,7 +93,7 @@ const MainTab: React.FC = () => {
               onClick={() => {
                 presentAlert({
                   header: 'Clear Data',
-                  message: 'Are you sure you want to clear data?',
+                  message: 'Are you sure you want to clear data? (or clear cached data to fix errors)',
                   buttons: [
                     {
                       text: 'Cancel',
@@ -105,6 +105,13 @@ const MainTab: React.FC = () => {
                       handler: () => {
                         flashcardStorageService.clearData();
                         EXPStorageService.clearData();
+                      },
+                    },
+                    {
+                      text: 'Clear Cached Data',
+                      role: 'close',
+                      handler: () => {
+                        FetchFlashcardData.clearCachedData();
                       },
                     }
                   ]
