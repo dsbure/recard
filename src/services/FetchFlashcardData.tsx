@@ -125,6 +125,7 @@ const FetchFlashcardData = {
       if (dataExpired) {
         flashcardData = await fetchAndCacheData();
       }
+      this.notifySubscribers();
     }
     return flashcardData.flashcardData;
   },
