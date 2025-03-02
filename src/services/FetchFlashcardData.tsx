@@ -108,6 +108,7 @@ const FetchFlashcardData = {
     }
 
     let flashcardData = await StorageService.getItem("cachedFlashcardData");
+    let categoryData = await StorageService.getItem("cachedCategoryData");
 
     const fetchAndCacheData = async () => {
       const flashcardData = await this.fetchDataFromFirebase(db);
@@ -116,7 +117,7 @@ const FetchFlashcardData = {
       return { flashcardData, timestamp };
     };
 
-    if (!flashcardData || forceFetch) {
+    if ((!flashcardData || !categoryData) || forceFetch) {
       flashcardData = await fetchAndCacheData();
     } else {
       const currentTime = Date.now();
