@@ -55,6 +55,7 @@ const fetchAllData = async (db: Firestore) => {
 const FetchFlashcardData = {
 	async getFlashcardData(forceFetch: boolean = false, useLocal: boolean = false) {
     if (useLocal) {
+      console.log("Fetching local flashcard data");
       return await fetch("/flashcardData.json").then(e => e.json());
     }
 

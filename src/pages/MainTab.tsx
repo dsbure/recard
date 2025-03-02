@@ -21,7 +21,7 @@ const MainTab: React.FC = () => {
 
   const [presentAlert] = useIonAlert();
   useEffect(() => {
-    FetchFlashcardData.getFlashcardData()
+    FetchFlashcardData.getFlashcardData(false, import.meta.env.VITE_IN_DEVELOPMENT)
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
         if (!data?.categories) return;

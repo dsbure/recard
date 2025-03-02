@@ -5,6 +5,7 @@ import './Flashcard.css';
 import { FMultipleChoice } from './FMultipleChoice';
 import { IFlashcardInteraction } from './IFlashcardInteraction';
 import { FIdentification } from './FIdentification';
+import { FTrueOrFalse } from './FTrueOrFalse';
 
 export interface IFlashcardProps {
   flashcard: IFlashcardTopic["flashcards"]["0"]
@@ -28,11 +29,13 @@ export function Flashcard({ index, flashcard, handleAnswerClick, type, interacti
       </IonCol>
     </IonRow>
     <IonRow className={"choice-container f-" + type}>
-      <IonCol className={type === "multipleChoice" ? "ion-padding" : ""}>
+      <IonCol className={type === "multipleChoice" || type === "trueFalse" ? "ion-padding" : ""}>
         {type === "multipleChoice" ?
-           <FMultipleChoice flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction} /> : 
+          <FMultipleChoice flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : 
         type === "identification" ?
-           <FIdentification flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction} /> : null}
+          <FIdentification flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction} /> : 
+        type === "trueFalse" ?
+          <FTrueOrFalse    flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : null}
       </IonCol>
     </IonRow>
   </IonGrid>);

@@ -1,0 +1,21 @@
+.true-or-false {
+	height: 100%;
+	display: grid;
+	grid-template-columns: auto;
+	grid-gap: 0em;
+}
+.true-or-false .choice {
+	font-size: 1.5em;
+}
+.true-or-false .choice ion-icon {
+	position: absolute;
+	color: rgba(24, 27, 48, 0.133);
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+	transition: opacity 0.3s;
+}
+.true-or-false .correct ion-icon {
+	opacity: 0;
+}

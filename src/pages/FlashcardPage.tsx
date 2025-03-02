@@ -90,7 +90,7 @@ const FlashcardPage: React.FC = () => {
 
     return (days != 0 ? days + ":" : "") + (hours != 0 ? String(hours).padStart(2, '0') + ":" : "") + String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
   };
-
+  
   const handleNextFlashcard = async (newScore: number) => {
     if (currentQuestionIndex + 1 < flashcardData.flashcards.length) {
       setProgress((currentQuestionIndex + 2) / (flashcardData.flashcards.length + 1));
@@ -108,7 +108,6 @@ const FlashcardPage: React.FC = () => {
         (currentCategoryData?.starProgress || 0) + 1 === flashcardData.repeatTotal ? 0 :
           (currentCategoryData?.starProgress || 0) + 1 :
         currentCategoryData?.starProgress || 1;
-      console.log(starProgress);
 
       await flashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
@@ -136,7 +135,7 @@ const FlashcardPage: React.FC = () => {
       setMistakes((prevMistakes) => prevMistakes + 1);
       return;
     }
-    if (type === "multipleChoice") {
+    if (type === "multipleChoice" || type === "trueFalse") {
       setTimeout(() => handleNextFlashcard(newScore), 2000);
     } else {
       setToastOpen(true);

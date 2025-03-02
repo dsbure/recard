@@ -31,16 +31,11 @@
             },
             {
               "interaction": {
-                "multipleChoices": [
-                  "answer a",
-                  "answer b",
-                  "answer c",
-                  "answer d"
-                ],
-                "correct": "answer b"
+                "trueFalse": "",
+                "correct": "true"
               },
-              "question": "choose answer b",
-              "type": "multipleChoice"
+              "question": "pogi ba siya?",
+              "type": "trueFalse"
             },
             {
               "interaction": {
