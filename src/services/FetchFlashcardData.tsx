@@ -96,14 +96,14 @@ const FetchFlashcardData = {
   async getFlashcardData(forceFetch: boolean = false, useLocal: boolean = false) {
     if (useLocal) {
       console.log("Fetching local flashcard data");
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const flashcardData = await fetch("/flashcardData.json").then(e => e.json());
       const timestamp = Date.now();
       await StorageService.setItem("cachedFlashcardData", { flashcardData, timestamp });
       await StorageService.setItem("cachedCategoryData", flashcardData.categories).then(
         () => this.notifySubscribers()
       );
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       return flashcardData;
     }
 

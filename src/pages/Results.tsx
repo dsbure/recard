@@ -30,7 +30,7 @@ const Results: React.FC = () => {
   });
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader id="results-header">
         <IonToolbar>
           <IonTitle>Results</IonTitle>
         </IonToolbar>

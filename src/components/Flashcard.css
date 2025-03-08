@@ -1,7 +1,7 @@
 .choice-container {
   flex: 1;
 }
-.choice-container.f-multipleChoice ion-col {
+.choice-container.f-multipleChoice ion-col, .choice-container.f-checkboxes ion-col {
   display: flex;
   flex-direction: column;
 }
@@ -15,7 +15,7 @@
 }
 .choice {
   flex: 1;
-  transition: 0.3s ease-out;
+  transition: 0.2s ease-out;
   will-change: transform;
   padding: 0 !important;
 }
@@ -61,6 +61,32 @@
 }
 .timer {
   font-family: "Space Mono", monospace;
+}
+.choice-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 12px !important;
+  --size: 24px;
+  --border-color: transparent;
+  --checkbox-background: var(--ion-background-color);
+  --border-color-checked: transparent;
+  --checkbox-background-checked: transparent;
+}
+.f-checkboxes .choice {
+  --background: var(--ion-background-color-step-150);
+  --color: var(--ion-text-color-step-150);
+}
+.f-checkboxes .choice.checked {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+.f-checkboxes .choice.correct {
+  --background: var(--ion-color-success-shade);
+  --color: var(--ion-color-success-contrast);
+}
+.f-checkboxes .choice.correct:not(.checked) {
+  opacity: 0.5;
 }
 @media (min-width: 992px) {
   .choice-container.f-multipleChoice ion-col {

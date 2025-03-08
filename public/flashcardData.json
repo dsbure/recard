@@ -10,16 +10,19 @@
           "flashcards": [
             {
               "interaction": {
-                "multipleChoices": [
-                  "answer a",
-                  "answer b",
-                  "answer c",
-                  "answer d"
+                "checkboxes": [
+                  "si kuya",
+                  "ako",
+                  "afganie",
+                  "david"
                 ],
-                "correct": "answer a"
+                "correct": [
+                  "si kuya",
+                  "ako"
+                ]
               },
-              "question": "choose answer a",
-              "type": "multipleChoice"
+              "question": "check the pogi",
+              "type": "checkboxes"
             },
             {
               "interaction": {

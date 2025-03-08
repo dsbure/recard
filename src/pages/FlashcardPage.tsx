@@ -123,8 +123,8 @@ const FlashcardPage: React.FC = () => {
       router.push("/results");
     }
   }
-  const handleAnswerClick = (correct: boolean, userAnswer: string, type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse") => {
-    setCurrentAnswer(userAnswer);
+  const handleAnswerClick = (correct: boolean, userAnswer: string | string[], type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse") => {
+    setCurrentAnswer(Array.isArray(userAnswer) ? userAnswer.join(', ') : userAnswer);
     const newScore = correctAnswers + (correct ? 1 : 0);
     setCA(newScore);
     const correctAnswer = flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct;
@@ -143,7 +143,7 @@ const FlashcardPage: React.FC = () => {
   };
   return (
     <IonPage>
-      <IonHeader id="header">
+      <IonHeader id="flashcard-header">
         <IonToolbar>
           <IonButtons slot="start">
             <IonButton routerLink="/mainTab" routerDirection="back" shape="round">
