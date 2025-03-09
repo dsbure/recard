@@ -8,6 +8,14 @@ import { FIdentification } from './FIdentification';
 import { FTrueOrFalse } from './FTrueOrFalse';
 import { FCheckboxes } from './FCheckboxes';
 
+const humanReadableNames = {
+  "multipleChoice": "MULTIPLE CHOICE",
+  "identification": "IDENTIFICATION",
+  "matchType": "MATCHING TYPE",
+  "checkboxes": "CHECKBOXES",
+  "trueFalse": "TRUE OR FALSE"
+};
+
 export interface IFlashcardProps {
   flashcard: IFlashcardTopic["flashcards"]["0"]
   index: number
@@ -23,7 +31,14 @@ export function Flashcard({ index, flashcard, handleAnswerClick, type, interacti
       <IonCol>
         <IonCard>
           <IonCardHeader>
-            <IonCardSubtitle>{"Question " + index} </IonCardSubtitle>
+            <IonCardSubtitle className="question-header">
+              <span>
+                {"Question " + index}
+              </span>
+              <span className="type">
+                {humanReadableNames[type]}
+              </span>
+            </IonCardSubtitle>
             <IonCardTitle>{flashcard.question}</IonCardTitle>
           </IonCardHeader>
         </IonCard>

@@ -88,6 +88,15 @@
 .f-checkboxes .choice.correct:not(.checked) {
   opacity: 0.5;
 }
+.question-header {
+  display: flex;
+}
+.question-header span:not(.type) {
+  flex: 1;
+}
+.question-header .type {
+  font-weight: 1000;
+}
 @media (min-width: 992px) {
   .choice-container.f-multipleChoice ion-col {
     flex-direction: row;
