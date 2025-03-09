@@ -105,8 +105,8 @@ const FlashcardPage: React.FC = () => {
     } else {
       const currentCategoryData: IFlashcardStorageCategory = await flashcardStorageService.getCategoryData(flashcardData.categoryName);
       let starProgress = flashcardData.id === currentCategoryData?.currentId || 0 ?
-        (currentCategoryData?.starProgress || 0) + 1 === flashcardData.repeatTotal ? 0 :
-          (currentCategoryData?.starProgress || 0) + 1 :
+        (currentCategoryData?.starProgress || 0) + 1 >= flashcardData.repeatTotal ?
+          0 : (currentCategoryData?.starProgress || 0) + 1 :
         currentCategoryData?.starProgress || 1;
 
       await flashcardStorageService.setCategoryData({
