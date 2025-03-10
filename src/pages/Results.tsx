@@ -1,9 +1,11 @@
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTitle, IonToolbar, useIonRouter, useIonViewWillEnter } from '@ionic/react';
 import './Results.css';
 import { useParams } from 'react-router';
-import { checkmarkCircle, flag, pin, star, timer, warning } from 'ionicons/icons';
+import { checkmarkCircle, flag, pin, star, timer } from 'ionicons/icons';
 import { useState } from 'react';
 import EXPStorageService from '../services/EXPStorageService';
+import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
+import { IFlashcardTopic } from '../components/IFlashcardTopic';
 
 
 const Results: React.FC = () => {
@@ -12,6 +14,8 @@ const Results: React.FC = () => {
   const [total, setTotal] = useState(1);
   const [formattedTime, setFormattedTime] = useState("");
   const [topicName, setTopicName] = useState("Topic");
+  
+  const [flashcardData, setFlashcardData] = useState<IFlashcardTopic>(JSON.parse(localStorage.getItem("currentFlashcard")!));
 
   useIonViewWillEnter(() => {
     const data = JSON.parse(localStorage.getItem("currentFlashcard")!);
@@ -27,7 +31,18 @@ const Results: React.FC = () => {
     const experience = Math.round((1800000) * (accuracy) / parseInt(localStorage.getItem("rawTime")!));
     setExp(experience);
     EXPStorageService.addEXP(experience);
+    setFlashcardData(JSON.parse(localStorage.getItem("currentFlashcard")!));
   });
+
+  const debug_unlockAll = async () => {
+    const currentCategoryData: IFlashcardStorageCategory = await flashcardStorageService.getCategoryData(flashcardData.categoryName);
+    await flashcardStorageService.setCategoryData({
+      category: flashcardData.categoryName,
+      currentId: 99,
+      starProgress: 99,
+      starTotal: flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal,
+    });
+  }
   return (
     <IonPage>
       <IonHeader id="results-header">
@@ -69,6 +84,7 @@ const Results: React.FC = () => {
             </IonCardHeader>
             <IonCardContent>
               <IonButton expand="block" routerLink="/mainTab" routerDirection="back">Return to Home</IonButton>
+              <IonButton expand="block" routerLink="/mainTab" routerDirection="back" onClick={debug_unlockAll} color="warning">[DEBUG] Unlock All in this Category</IonButton>
             </IonCardContent>
           </IonCard>
         </div>

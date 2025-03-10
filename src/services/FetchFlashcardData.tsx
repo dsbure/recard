@@ -25,7 +25,13 @@ const FetchFlashcardData = {
 	},
 
   async fetchDataFromFirebase(db: Firestore) {
-    const categoriesCol = collection(db, "categories");
+    let categoriesCol;
+    try {
+      categoriesCol = collection(db, "categories");
+    } catch (e) {
+      console.log(`error fetching categories from firebase: ${e}`);
+      return;
+    }
     const categoriesSnapshot = await getDocs(categoriesCol);
 
     const categoriesMapped = categoriesSnapshot.docs.map((categoryDoc) => {
@@ -40,12 +46,19 @@ const FetchFlashcardData = {
     StorageService.setItem("cachedCategoryData", categoriesMapped).then(
       () => this.notifySubscribers()
     );
-    
+    let throwaway = false;
     const categories = await Promise.all(
       categoriesSnapshot.docs.map(async (categoryDoc) => {
         const categoryData = categoryDoc.data();
 
-        const topicsCol = collection(db, "categories", categoryDoc.id, "topics")
+        let topicsCol;
+        try {
+          topicsCol = collection(db, "categories", categoryDoc.id, "topics");
+        } catch (e) {
+          throwaway = true;
+          console.log(`error fetching topics from firebase: ${e}`);
+          return;
+        }
         const topicsSnapshot = await getDocs(topicsCol);
 
         const topics = await Promise.all(
@@ -75,7 +88,6 @@ const FetchFlashcardData = {
             return topic;
           })
         );
-
         topics.sort((a, b) => a.id - b.id);
 
         return {
@@ -86,15 +98,16 @@ const FetchFlashcardData = {
         } as IFlashcardCategory;
       })
     );
+    if (throwaway) return;
 
-    categories.sort((a, b) => a.index - b.index);
+    categories.sort((a, b) => a!.index - b!.index);
 
     console.log("Fetched data from Firestore");
     return { categories };
   },
 
   async getFlashcardData(forceFetch: boolean = false, useLocal: boolean = false) {
-    if (useLocal) {
+    const getLocalFlashcardData = async () => {
       console.log("Fetching local flashcard data");
       await new Promise(resolve => setTimeout(resolve, 1000));
       const flashcardData = await fetch("/flashcardData.json").then(e => e.json());
@@ -107,14 +120,26 @@ const FetchFlashcardData = {
       return flashcardData;
     }
 
+    if (useLocal) {
+      return await getLocalFlashcardData();
+    }
+
     let flashcardData = await StorageService.getItem("cachedFlashcardData");
     let categoryData = await StorageService.getItem("cachedCategoryData");
-
     const fetchAndCacheData = async () => {
-      const flashcardData = await this.fetchDataFromFirebase(db);
+      const fetchedFlashcardData = await this.fetchDataFromFirebase(db);
       const timestamp = Date.now();
-      await StorageService.setItem("cachedFlashcardData", { flashcardData, timestamp });
-      return { flashcardData, timestamp };
+      if (!fetchedFlashcardData) {
+        if (!flashcardData) {
+          console.log("fetching from localstorage");
+          const localFlashcardData = await getLocalFlashcardData();
+          return { localFlashcardData, timestamp };
+        } else {
+          return { flashcardData, timestamp };
+        }
+      };
+      await StorageService.setItem("cachedFlashcardData", { flashcardData: fetchedFlashcardData, timestamp });
+      return { flashcardData: fetchedFlashcardData, timestamp };
     };
 
     if ((!flashcardData || !categoryData) || forceFetch) {
@@ -128,6 +153,7 @@ const FetchFlashcardData = {
       }
       this.notifySubscribers();
     }
+    
     return flashcardData.flashcardData;
   },
   async clearCachedData() {

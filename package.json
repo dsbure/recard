@@ -38,7 +38,8 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-router": "^5.3.4",
-    "react-router-dom": "^5.3.4"
+    "react-router-dom": "^5.3.4",
+    "vite-plugin-pwa": "^0.21.1"
   },
   "devDependencies": {
     "@capacitor/cli": "7.0.1",

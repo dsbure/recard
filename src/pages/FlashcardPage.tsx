@@ -184,7 +184,7 @@ const FlashcardPage: React.FC = () => {
           <div ref={card} id="flashcards" className={"non-scroll" + (currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ? "" : " lonely")}>
             <div id="curr">
               <Flashcard
-                key={currentQuestionIndex}
+                key={currentQuestionIndex + "" + startTime}
                 flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]}
                 index={currentQuestionIndex + 1}
                 handleAnswerClick={handleAnswerClick}
@@ -196,7 +196,7 @@ const FlashcardPage: React.FC = () => {
             {(currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ?
               <div id="next">
                 <Flashcard
-                  key={currentQuestionIndex + 1}
+                  key={(currentQuestionIndex + 1) + "" + startTime}
                   flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex + 1]]}
                   index={currentQuestionIndex + 2}
                   handleAnswerClick={() => { }}

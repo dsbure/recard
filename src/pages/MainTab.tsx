@@ -31,8 +31,7 @@ const MainTab: React.FC = () => {
     FetchFlashcardData.getFlashcardData(false, false) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
-        if (!data?.categories) return;
-
+        if (!data.categories) return;
         const segmentViews = data.categories.map((category, index) => (
           <IonSegmentContent key={index} id={`tab${index}`}>
             <TopicView {...category} />
