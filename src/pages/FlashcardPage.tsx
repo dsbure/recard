@@ -163,15 +163,15 @@ const FlashcardPage: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen className="flashcard-page">
         <div className="container">
-          <div>
+          <div className="flashcard-header ion-padding">
             <IonCard>
               <IonProgressBar value={progress} />
             </IonCard>
-            <span style={{ display: 'flex', paddingBlock: '0' }} className="ion-padding">
-              <IonLabel className="ion-padding">
-                {currentQuestionIndex + 1 + "/" + flashcardData.flashcards.length}
-              </IonLabel>
-              <IonLabel className="ion-padding">
+            <span className="additional-info">
+              <IonChip>
+                {currentQuestionIndex + 1 + " / " + flashcardData.flashcards.length}
+              </IonChip>
+              <IonLabel>
                 {flashcardData.topicName}
               </IonLabel>
               <span style={{ flex: '1' }}></span>

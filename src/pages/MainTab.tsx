@@ -147,6 +147,7 @@ const MainTab: React.FC = () => {
             setSelectedSegment(value.toString());
           }
         }}
+        className="tab-switcher"
       >
         <IonSegmentButton className="homebutton" value="home" contentId="home">
           <IonIcon icon={home}></IonIcon>
