@@ -93,13 +93,8 @@ ion-segment-button.md::part(indicator-background) {
   filter: invert(93%) sepia(41%) saturate(304%) hue-rotate(73deg) brightness(88%) contrast(82%);
   z-index: 10;
 }
-ion-card {
-  max-width: min(576px, calc(100vw - 10px));
-  width: 100%;
-  justify-self: center;
-}
-ion-col, ion-row, ion-grid {
-  max-width: min(576px, calc(100vw - 10px));
+ion-col, ion-row, ion-grid, ion-card {
+  max-width: min(576px, calc(100vw - 20px));
 }
 #main-content ion-segment-content {
   justify-content: center;
@@ -127,7 +122,7 @@ ion-col, ion-row, ion-grid {
   flex: 1;
 }
 .gem-container {
-  max-width: min(576px, calc(100vw - 10px));
+  max-width: min(576px, calc(100vw - 20px));
   display: flex;
   margin-inline: auto;
 }

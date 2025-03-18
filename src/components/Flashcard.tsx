@@ -7,6 +7,7 @@ import { IFlashcardInteraction } from './IFlashcardInteraction';
 import { FIdentification } from './FIdentification';
 import { FTrueOrFalse } from './FTrueOrFalse';
 import { FCheckboxes } from './FCheckboxes';
+import { FMatchingType } from './FMatchingType';
 
 const humanReadableNames = {
   "multipleChoice": "MULTIPLE CHOICE",
@@ -45,7 +46,7 @@ export function Flashcard({ index, flashcard, handleAnswerClick, type, interacti
       </IonCol>
     </IonRow>
     <IonRow className={"choice-container f-" + type}>
-      <IonCol className={type === "multipleChoice" || type === "trueFalse" || type === "checkboxes" ? "ion-padding" : ""}>
+      <IonCol className={type === "multipleChoice" || type === "trueFalse" || type === "checkboxes" || type === "matchType" ? "ion-padding" : ""}>
         {type === "multipleChoice" ?
           <FMultipleChoice flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : 
         type === "identification" ?
@@ -53,7 +54,9 @@ export function Flashcard({ index, flashcard, handleAnswerClick, type, interacti
         type === "trueFalse" ?
           <FTrueOrFalse    flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : 
         type === "checkboxes" ?
-          <FCheckboxes    flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : null}
+          <FCheckboxes     flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : 
+        type === "matchType" ?
+          <FMatchingType   flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : null}
       </IonCol>
     </IonRow>
   </IonGrid>);

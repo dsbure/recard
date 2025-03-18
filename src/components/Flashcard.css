@@ -36,6 +36,7 @@
 .correct {
   --background: var(--ion-color-success-shade);
   --color: var(--ion-color-success-contrast);
+  --correct-background: var(--ion-color-success-tint);
   pointer-events: none;
   transform: scale(1.01);
 }
@@ -45,7 +46,7 @@
   height: 100%;
   width: 100%;
   z-index: 0;
-  background: var(--ion-color-success-tint);
+  background: var(--correct-background);
   left: 0;
   will-change: transform;
   animation: linearwipe 1.5s cubic-bezier(0.381, 0.52, 0.523, 1) forwards;

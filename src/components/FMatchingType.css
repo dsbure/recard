@@ -1,0 +1,25 @@
+.match-type-side {
+  flex: 1;
+  display: grid;
+}
+.match-type-side .choice {
+  min-height: 6em;
+}
+.match-type-side .choice:not(.correct) {
+  --background: var(--ion-background-color-step-150);
+  --color: var(--ion-text-color-step-150);
+}
+.match-type-side .choice.checked:not(.correct) {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+.match-type-side .choice.in.correct.checked {
+  --background: var(--ion-color-danger-shade);
+  --color: var(--ion-color-danger-contrast);
+  --correct-background: var(--ion-color-danger-tint);
+}
+.f-matchType ion-col {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}

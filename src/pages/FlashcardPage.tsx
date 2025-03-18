@@ -123,23 +123,27 @@ const FlashcardPage: React.FC = () => {
       router.push("/results");
     }
   }
-  const handleAnswerClick = (correct: boolean, userAnswer: string | string[], type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse") => {
+  const handleAnswerClick = (correct: boolean, userAnswer: string | string[], type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse", correctedInContext?: string) => {
     setCurrentAnswer(Array.isArray(userAnswer) ? userAnswer.join(', ') : userAnswer);
     const newScore = correctAnswers + (correct ? 1 : 0);
     setCA(newScore);
     const correctAnswer = flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct;
-    setCorrectedAnswer(Array.isArray(correctAnswer) ? correctAnswer.join(', ') : correctAnswer);
+    if (correctedInContext) {
+      setCorrectedAnswer(correctedInContext);
+    } else {
+      setCorrectedAnswer(Array.isArray(correctAnswer) ? correctAnswer.join(', ') : correctAnswer);
+    }
     setIsCorrect(correct);
     if (!correct) {
       setToastOpen(true);
       setMistakes((prevMistakes) => prevMistakes + 1);
       return;
     }
-    if (type === "multipleChoice" || type === "trueFalse") {
-      setTimeout(() => handleNextFlashcard(newScore), 2000);
-    } else {
-      setToastOpen(true);
-    }
+    //if (type === "multipleChoice" || type === "trueFalse") //{
+    //  setTimeout(() => handleNextFlashcard(newScore), 2000);
+    //} else {
+    setToastOpen(true); // ma'am ayna core
+    //}
   };
   return (
     <IonPage>

@@ -6,9 +6,9 @@ export interface IGemCardProps {
 }
 
 export function GemCard({ icon, gemName, quarter, fill, disabled }: IGemCardProps) {
-  return (<IonCard className="gem-card" disabled={disabled}>
+  return (<IonCard className="gem-card">
     <IonCardHeader className="gem-card-container">
-      <IonIcon icon={icon} style={{ fill: fill }}/>
+      <IonIcon icon={icon} style={{ fill: !disabled ? fill : "var(--ion-text-color-step-350)", opacity: !disabled ? 1 : 0.5 }} />
       <IonCardTitle>{gemName}</IonCardTitle>
       <IonCardSubtitle>{quarter}</IonCardSubtitle>
     </IonCardHeader>
