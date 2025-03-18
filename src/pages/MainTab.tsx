@@ -154,7 +154,7 @@ const MainTab: React.FC = () => {
         </IonSegmentButton>
         {headerButtons}
       </IonSegment>
-      <IonSegmentView>
+      <IonSegmentView id="main-content">
         <IonSegmentContent id="home">
           <HomeView />
         </IonSegmentContent>

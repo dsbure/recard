@@ -4,6 +4,7 @@ import { IFlashcardCategory } from "./IFlashcardCategory";
 import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
 import { useEffect, useRef, useState } from 'react';
 import { TopicHeader } from './TopicHeader';
+import './TopicHeader.css';
 
 
 export function TopicView(category: IFlashcardCategory) {

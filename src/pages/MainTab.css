@@ -94,12 +94,15 @@ ion-segment-button.md::part(indicator-background) {
   z-index: 10;
 }
 ion-card {
-  max-width: 576px;
+  max-width: min(576px, calc(100vw - 10px));
   justify-self: center;
-  margin-inline: auto;
 }
 ion-col, ion-row, ion-grid {
-  max-width: 576px;
+  max-width: min(576px, calc(100vw - 10px));
+}
+#main-content ion-segment-content {
+  justify-content: center;
+  display: grid;
 }
 #total-progress-container {
   background-color: var(--ion-background-color-step-100);
@@ -123,10 +126,9 @@ ion-col, ion-row, ion-grid {
   flex: 1;
 }
 .gem-container {
-  max-width: 576px;
+  max-width: min(576px, calc(100vw - 10px));
   display: flex;
   margin-inline: auto;
-  gap: 10px;
 }
 .gem-card-container {
   display: grid;
