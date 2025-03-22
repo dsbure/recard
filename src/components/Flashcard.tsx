@@ -1,9 +1,9 @@
 import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonLabel, IonSkeletonText } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { IFlashcardTopic } from './IFlashcardTopic';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './Flashcard.css';
 import { FMultipleChoice } from './FMultipleChoice';
-import { IFlashcardInteraction } from './IFlashcardInteraction';
+import { IFlashcardInteraction } from '../interfaces/IFlashcardInteraction';
 import { FIdentification } from './FIdentification';
 import { FTrueOrFalse } from './FTrueOrFalse';
 import { FCheckboxes } from './FCheckboxes';

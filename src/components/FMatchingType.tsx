@@ -2,7 +2,7 @@ import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCa
 import { Ref, useEffect, useRef, useState } from 'react';
 import './Flashcard.css';
 import './FMatchingType.css';
-import { IFInteractionProps } from './IFInteractionProps';
+import { IFInteractionProps } from '../interfaces/IFInteractionProps';
 
 const shuffleItems = (array: string[]) => {
   return array.map(e => ({ e, sort: Math.random() }))

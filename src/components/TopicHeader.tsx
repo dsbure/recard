@@ -1,5 +1,5 @@
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton } from '@ionic/react';
-import { IFlashcardCategory } from './IFlashcardCategory';
+import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 
 export function TopicHeader(category: IFlashcardCategory) {
   return (<IonCard className="topicHeader">

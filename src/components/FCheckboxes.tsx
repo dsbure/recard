@@ -1,8 +1,8 @@
 import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonLabel, IonSkeletonText, IonCheckbox } from '@ionic/react';
 import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useRef, useState } from 'react';
-import { IFlashcardTopic } from './IFlashcardTopic';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './Flashcard.css';
-import { IFInteractionProps } from './IFInteractionProps';
+import { IFInteractionProps } from '../interfaces/IFInteractionProps';
 
 
 const CheckboxChoice: React.FC<{ skeleton: boolean, flashcardCorrect: string[], choiceContent: string, toggleChoice: (e: string, add: boolean) => void }> = ({ skeleton, flashcardCorrect, choiceContent, toggleChoice }) => {

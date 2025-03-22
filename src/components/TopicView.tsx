@@ -1,7 +1,7 @@
 import { useIonViewDidLeave, useIonViewWillEnter } from '@ionic/react';
 import { StorySnake } from '../components/StorySnake';
-import { IFlashcardCategory } from "./IFlashcardCategory";
-import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
+import { IFlashcardCategory } from "../interfaces/IFlashcardCategory";
+import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
 import { useEffect, useRef, useState } from 'react';
 import { TopicHeader } from './TopicHeader';
 import './TopicHeader.css';
@@ -12,9 +12,9 @@ export function TopicView(category: IFlashcardCategory) {
 
   useEffect(() => {
     const updateData = async () => {
-      setTimeout(() => flashcardStorageService.getCategoryData(category.categoryName).then((e) => setCategoryData(e)), 0);
+      setTimeout(() => FlashcardStorageService.getCategoryData(category.categoryName).then((e) => setCategoryData(e)), 0);
     };
-    const unsubscribe = flashcardStorageService.subscribe(updateData);
+    const unsubscribe = FlashcardStorageService.subscribe(updateData);
     updateData();
     return () => { unsubscribe() };
   }, []);

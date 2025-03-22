@@ -3,8 +3,8 @@ import './MainTab.css';
 import { arrowBack, flash, heart, home, person, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
 import { useEffect, useState } from 'react';
-import { IFlashcardData } from '../components/IFlashcardData'; import { IFlashcardCategory } from "../components/IFlashcardCategory";
-import flashcardStorageService from '../services/flashcardStorageService';
+import { IFlashcardData } from '../interfaces/IFlashcardData'; import { IFlashcardCategory } from "../interfaces/IFlashcardCategory";
+import FlashcardStorageService from '../services/FlashcardStorageService';
 import { HomeView } from '../components/HomeView';
 import EXPStorageService from '../services/EXPStorageService';
 import FetchFlashcardData from '../services/FetchFlashcardData';
@@ -103,7 +103,7 @@ const MainTab: React.FC = () => {
                       text: 'Clear Data',
                       role: 'close',
                       handler: () => {
-                        flashcardStorageService.clearData();
+                        FlashcardStorageService.clearData();
                         EXPStorageService.clearData();
                       },
                     },

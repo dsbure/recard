@@ -2,32 +2,46 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, 
 import { useEffect, useRef, useState } from 'react';
 import EXPStorageService from '../services/EXPStorageService';
 import FetchFlashcardData from '../services/FetchFlashcardData';
-import { diamond } from 'ionicons/icons';
+import { diamond, text } from 'ionicons/icons';
 import { GemCard } from './GemCard';
+import FlashcardStorageService from '../services/flashcardStorageService';
 
 export function HomeView() {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0 });
   const [progress, setProgress] = useState(0);
-  const [totalProgress, setTotalProgress] = useState(0.15); // TODO: add true progress
+  const [totalProgress, setTotalProgress] = useState(0);
   const [expToNextLevel, setExpToNextLevel] = useState(100);
 
-  useEffect(() => {
-    const updateData = async () => {
-      setTimeout(() => {
-        EXPStorageService.getExperienceData().then((e) => {
-          setExpData(e);
-        })
-        EXPStorageService.getLevelProgress().then((e) => {
-          setProgress(e);
-        })
-        EXPStorageService.getEXPToNextLevel().then((e) => {
-          setExpToNextLevel(e);
-        })
-      }, 0);
+  useIonViewWillEnter(() => {
+    const updateEXPData = async () => {
+      const [expData, progress, expToNextLevel] = await Promise.all([
+        EXPStorageService.getExperienceData(),
+        EXPStorageService.getLevelProgress(),
+        EXPStorageService.getEXPToNextLevel(),
+      ]);
+
+      setExpData(expData);
+      setProgress(progress);
+      setExpToNextLevel(expToNextLevel);
     };
-    const unsubscribe = EXPStorageService.subscribe(updateData);
-    updateData();
-    return () => { unsubscribe() };
+    const updateTotalProgressData = async () => {
+      const [totalFinished, totalTopics] = await Promise.all([
+        FlashcardStorageService.getTotalFinished(),
+        FetchFlashcardData.getTotalTopics(),
+      ]);
+
+      setTotalProgress(totalFinished / (totalTopics || 1));
+    };
+    const unsubscribeEXPStorageService = EXPStorageService.subscribe(updateEXPData);
+    const unsubscribeFetchFlashcardData = FetchFlashcardData.subscribe(updateTotalProgressData);
+    const unsubscribeFSSData = FlashcardStorageService.subscribe(updateTotalProgressData);
+    updateEXPData();
+    updateTotalProgressData();
+    return () => { 
+      unsubscribeEXPStorageService();
+      unsubscribeFetchFlashcardData();
+      unsubscribeFSSData();
+    };
   }, []);
 
   return <div className="ion-padding">
@@ -45,7 +59,14 @@ export function HomeView() {
       </IonCardContent>
     </IonCard>
     <IonCard id="total-progress-container">
-      <IonLabel id="total-progress-label" style={{ right: `calc(${(1 - totalProgress) * 100}% + 8px)` }}>{Math.round(totalProgress * 100)}%</IonLabel>
+      <IonLabel 
+        id="total-progress-label" 
+        style={{ 
+          right: `calc(${(1 - totalProgress) * 100}% - ${totalProgress < 0.15 ? "62" : "4"}px)`,
+          color: (totalProgress < 0.15 ? "var(--ion-text-color)" : "var(--ion-background-color)"),
+        }}>
+          {Math.round(totalProgress * 100)}%
+        </IonLabel>
       <IonProgressBar value={totalProgress} buffer={totalProgress} id="total-progress" />
     </IonCard>
     <div className="gem-container">

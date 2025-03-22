@@ -1,9 +1,9 @@
 import { db } from '../firebase/firebase';
 import { collection, getDocs, Firestore } from "firebase/firestore";
 import StorageService from './StorageService';
-import { IFlashcardTopic } from '../components/IFlashcardTopic';
-import { IFlashcardData } from '../components/IFlashcardData';
-import { IFlashcardCategory } from '../components/IFlashcardCategory';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
+import { IFlashcardData } from '../interfaces/IFlashcardData';
+import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 
 const FetchFlashcardData = {
   subscribers: [] as Function[],
@@ -106,7 +106,7 @@ const FetchFlashcardData = {
     return { categories };
   },
 
-  async getFlashcardData(forceFetch: boolean = false, useLocal: boolean = false) {
+  async getFlashcardData(forceFetch: boolean = false, useLocal: boolean = false): Promise<IFlashcardData> {
     const getLocalFlashcardData = async () => {
       console.log("Fetching local flashcard data");
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -124,7 +124,7 @@ const FetchFlashcardData = {
       return await getLocalFlashcardData();
     }
 
-    let flashcardData = await StorageService.getItem("cachedFlashcardData");
+    let flashcardData: { flashcardData: IFlashcardData, timestamp: number } = await StorageService.getItem("cachedFlashcardData");
     let categoryData = await StorageService.getItem("cachedCategoryData");
     const fetchAndCacheData = async () => {
       const fetchedFlashcardData = await this.fetchDataFromFirebase(db);
@@ -133,7 +133,7 @@ const FetchFlashcardData = {
         if (!flashcardData) {
           console.log("fetching from localstorage");
           const localFlashcardData = await getLocalFlashcardData();
-          return { localFlashcardData, timestamp };
+          return { flashcardData: localFlashcardData, timestamp };
         } else {
           return { flashcardData, timestamp };
         }
@@ -156,6 +156,21 @@ const FetchFlashcardData = {
     
     return flashcardData.flashcardData;
   },
+  
+  async getTotalTopics() {
+    let flashcardData: { flashcardData: IFlashcardData, timestamp: number } = await StorageService.getItem("cachedFlashcardData");
+    let topics = 0;
+    flashcardData.flashcardData.categories.forEach(c => topics += c.topics.length);
+    return topics;
+  },
+
+  // debug
+  async getCategoryTotal(category: string) {
+    let flashcardData: { flashcardData: IFlashcardData, timestamp: number } = await StorageService.getItem("cachedFlashcardData");
+    const categoryData = flashcardData.flashcardData.categories.find(c => c.categoryName === category);
+    return categoryData?.topics.length || 0;
+  },
+
   async clearCachedData() {
     await StorageService.removeItem("cachedFlashcardData");
     await StorageService.removeItem("cachedCategoryData");

@@ -1,8 +1,8 @@
 import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonLabel, IonSkeletonText, IonIcon } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { IFlashcardTopic } from './IFlashcardTopic';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './FTrueOrFalse.css';
-import { IFInteractionProps } from './IFInteractionProps';
+import { IFInteractionProps } from '../interfaces/IFInteractionProps';
 import { checkmarkCircle, closeCircle } from 'ionicons/icons';
 
 export function FTrueOrFalse({ flashcard, handleAnswerClick, interaction, skeleton }: IFInteractionProps) {

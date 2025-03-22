@@ -1,6 +1,6 @@
 import { IonButton, IonIcon, IonChip, IonLabel, useIonRouter } from '@ionic/react';
 import { checkmark, checkmarkCircle, lockClosed, star } from 'ionicons/icons';
-import { IFlashcardTopic } from './IFlashcardTopic';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './StoryFlashcard.css';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';

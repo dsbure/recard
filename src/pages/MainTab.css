@@ -109,12 +109,10 @@ ion-col, ion-row, ion-grid, ion-card {
 #total-progress-label {
   position: absolute;
   z-index: 10;
-  color: var(--ion-background-color);
   font-size: 1.125em;
   font-weight: 1000;
   line-height: 1.75em;
-  width: 100px;
-  text-align: end;
+  width: 50px;
 }
 .gem-card {
   background-color: var(--ion-background-color-step-150);
@@ -125,6 +123,11 @@ ion-col, ion-row, ion-grid, ion-card {
   max-width: min(576px, calc(100vw - 20px));
   display: flex;
   margin-inline: auto;
+}
+.gem-card-button {
+  font-size: 1em;
+  text-transform: none !important;
+  letter-spacing: normal;
 }
 .gem-card-container {
   display: grid;

@@ -1,8 +1,8 @@
 import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonLabel, IonSkeletonText } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { IFlashcardTopic } from './IFlashcardTopic';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './Flashcard.css';
-import { IFInteractionProps } from './IFInteractionProps';
+import { IFInteractionProps } from '../interfaces/IFInteractionProps';
 
 export function FMultipleChoice({ flashcard, handleAnswerClick, interaction, skeleton }: IFInteractionProps) {
   const [shuffledChoices, setShuffledChoices] = useState(interaction.multipleChoices!.map(e => ({ e, sort: Math.random() }))

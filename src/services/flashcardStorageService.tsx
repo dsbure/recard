@@ -5,13 +5,14 @@ export interface IFlashcardStorageCategory {
 	currentId: number;
 	starProgress: number;
 	starTotal: number;
+	isComplete: boolean;
 }
 
 export interface IFlashcardStorage {
 	flashcardData: IFlashcardStorageCategory[];
 };
 
-const flashcardStorageService = {
+const FlashcardStorageService = {
 	subscribers: [] as Function[],
 
 	constructor() {
@@ -58,10 +59,17 @@ const flashcardStorageService = {
 		return returnedCategory;
 	},
 
+	async getTotalFinished() {
+		const currentData: IFlashcardStorage["flashcardData"] = await StorageService.getItem("flashcardData") || [];
+		let total = 0;
+		currentData.forEach(e => total += e.currentId + (e.starProgress / e.starTotal));
+		return total;
+	},
+
 	async clearData() {
 		StorageService.removeItem("flashcardData");
 		this.notifySubscribers();
 	}
 };
 
-export default flashcardStorageService;
+export default FlashcardStorageService;

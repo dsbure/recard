@@ -4,8 +4,9 @@ import { useParams } from 'react-router';
 import { checkmarkCircle, flag, pin, star, timer } from 'ionicons/icons';
 import { useState } from 'react';
 import EXPStorageService from '../services/EXPStorageService';
-import flashcardStorageService, { IFlashcardStorageCategory } from '../services/flashcardStorageService';
-import { IFlashcardTopic } from '../components/IFlashcardTopic';
+import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
+import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
+import FetchFlashcardData from '../services/FetchFlashcardData';
 
 
 const Results: React.FC = () => {
@@ -35,12 +36,13 @@ const Results: React.FC = () => {
   });
 
   const debug_unlockAll = async () => {
-    const currentCategoryData: IFlashcardStorageCategory = await flashcardStorageService.getCategoryData(flashcardData.categoryName);
-    await flashcardStorageService.setCategoryData({
+    const currentCategoryData: IFlashcardStorageCategory = await FlashcardStorageService.getCategoryData(flashcardData.categoryName);
+    await FlashcardStorageService.setCategoryData({
       category: flashcardData.categoryName,
-      currentId: 99,
-      starProgress: 99,
+      currentId: await FetchFlashcardData.getCategoryTotal(currentCategoryData.category) - 1,
+      starProgress: 3,
       starTotal: flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal,
+      isComplete: true,
     });
   }
   return (

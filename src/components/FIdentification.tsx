@@ -1,7 +1,7 @@
 import { IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonLabel, IonSkeletonText, IonInput, IonCardContent, useIonViewWillEnter } from '@ionic/react';
 import { useEffect, useRef, useState } from 'react';
 import './FIdentification.css';
-import { IFInteractionProps } from './IFInteractionProps';
+import { IFInteractionProps } from '../interfaces/IFInteractionProps';
 
 export function FIdentification({ handleAnswerClick, interaction, skeleton }: IFInteractionProps) {
   const input = useRef<HTMLIonInputElement>(null);
