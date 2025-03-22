@@ -4,7 +4,7 @@ import EXPStorageService from '../services/EXPStorageService';
 import FetchFlashcardData from '../services/FetchFlashcardData';
 import { diamond, text } from 'ionicons/icons';
 import { GemCard } from './GemCard';
-import FlashcardStorageService from '../services/flashcardStorageService';
+import FlashcardStorageService from '../services/FlashcardStorageService';
 
 export function HomeView() {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0 });

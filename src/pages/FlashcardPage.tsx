@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, heart, timer } from 'ionicons/icons';
 import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import StorageService from '../services/StorageService';
-import flashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
+import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
 import FetchFlashcardData from '../services/FetchFlashcardData';
 
 
@@ -104,7 +104,7 @@ const FlashcardPage: React.FC = () => {
         }, 0);
       });
     } else {
-      const currentCategoryData: IFlashcardStorageCategory = await flashcardStorageService.getCategoryData(flashcardData.categoryName);
+      const currentCategoryData: IFlashcardStorageCategory = await FlashcardStorageService.getCategoryData(flashcardData.categoryName);
       const starProgress = flashcardData.id === currentCategoryData?.currentId || 0 ?
         (currentCategoryData?.starProgress || 0) + 1 >= flashcardData.repeatTotal ?
           0 : (currentCategoryData?.starProgress || 0) + 1 :
@@ -112,7 +112,7 @@ const FlashcardPage: React.FC = () => {
 
       const starTotal = flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal;
 
-      await flashcardStorageService.setCategoryData({
+      await FlashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
         currentId: (currentCategoryData?.starProgress || 0) + 1 === flashcardData.repeatTotal ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId || 0) : currentCategoryData?.currentId || 0,
         starProgress: starProgress,

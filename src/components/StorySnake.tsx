@@ -2,7 +2,7 @@ import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { StoryFlashcard } from './StoryFlashcard';
 import './StorySnake.css';
 import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
-import { IFlashcardStorageCategory } from '../services/flashcardStorageService';
+import { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
 
 export interface IStorySnakeProps {
   category: IFlashcardCategory;
