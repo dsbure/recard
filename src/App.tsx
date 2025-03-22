@@ -49,6 +49,8 @@ import StoryPage from './pages/StoryPage';
 /* Vercel Analytics */
 import { Analytics } from "@vercel/analytics/react";
 
+import 'animate.css';
+
 setupIonicReact({
   mode: 'md',
 });

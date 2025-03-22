@@ -46,7 +46,7 @@ const MainTab: React.FC = () => {
         StorageService.getItem("cachedCategoryData").then((data: IFlashcardCategory[]) => {
           if (!data) return;
           const segmentButtons = data.map((category, index) => (
-            <IonSegmentButton key={index} value={index.toString()} contentId={`tab${index}`}>
+            <IonSegmentButton key={index} value={index.toString()} contentId={`tab${index}`} className="animate__animated animate__bounceInLeft">
               <IonLabel>{category.categoryName}</IonLabel>
             </IonSegmentButton>
           ));

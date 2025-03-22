@@ -54,7 +54,7 @@ const Results: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className="results-container">
-          <IonCard className="results-card">
+          <IonCard className="results-card animate__animated animate__backInUp">
             <IonCardContent className="results-icon">
               <IonIcon icon={flag} size="large"/>
             </IonCardContent>

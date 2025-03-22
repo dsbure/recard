@@ -1,9 +1,13 @@
 .choice-container {
   flex: 1;
+  --animate-duration: 300ms;
 }
 .choice-container.f-multipleChoice ion-col, .choice-container.f-checkboxes ion-col {
   display: flex;
   flex-direction: column;
+}
+.choice-container:not(.animate__animated) {
+  opacity: 0;
 }
 .choice > *:not(.wipe) {
   z-index: 1;

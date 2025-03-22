@@ -45,7 +45,7 @@ export function Flashcard({ index, flashcard, handleAnswerClick, type, interacti
         </IonCard>
       </IonCol>
     </IonRow>
-    <IonRow className={"choice-container f-" + type}>
+    <IonRow className={("choice-container f-" + type) + (skeleton ? "" : " animate__animated animate__fadeInDown")}>
       <IonCol className={type === "multipleChoice" || type === "trueFalse" || type === "checkboxes" || type === "matchType" ? "ion-padding" : ""}>
         {type === "multipleChoice" ?
           <FMultipleChoice flashcard={flashcard} handleAnswerClick={handleAnswerClick} skeleton={skeleton} interaction={interaction}/> : 

@@ -30,8 +30,6 @@ const MatchingTypeChoice: React.FC<{ ref?: React.LegacyRef<HTMLIonButtonElement>
     if (!dismissed) setChecked(currentSelected === content);
   }, [currentSelected]);
   useEffect(() => {
-    console.log(dismissed);
-    
     if (!dismissed) setLocalCorrect(isCorrect);
   }, [isCorrect]);
   useEffect(() => {
