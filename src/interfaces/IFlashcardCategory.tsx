@@ -5,4 +5,8 @@ export interface IFlashcardCategory {
   categoryDesc: string;
   index: number;
   topics: IFlashcardTopic[];
+
+  gemName: string;
+  gemIcon: string;
+  gemQtr: string;
 }

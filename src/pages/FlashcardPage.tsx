@@ -105,12 +105,12 @@ const FlashcardPage: React.FC = () => {
       });
     } else {
       const currentCategoryData: IFlashcardStorageCategory = await FlashcardStorageService.getCategoryData(flashcardData.categoryName);
-      const starProgress = flashcardData.id === currentCategoryData?.currentId || 0 ?
+      const starProgress = (flashcardData.id === (currentCategoryData?.currentId || 0)) ?
         (currentCategoryData?.starProgress || 0) + 1 >= flashcardData.repeatTotal ?
           0 : (currentCategoryData?.starProgress || 0) + 1 :
         currentCategoryData?.starProgress || 1;
 
-      const starTotal = flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal;
+      const starTotal = (flashcardData.id === (currentCategoryData?.currentId || 0)) ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal;
 
       await FlashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,

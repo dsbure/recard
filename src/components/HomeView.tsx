@@ -5,12 +5,19 @@ import FetchFlashcardData from '../services/FetchFlashcardData';
 import { diamond, text } from 'ionicons/icons';
 import { GemCard } from './GemCard';
 import FlashcardStorageService from '../services/FlashcardStorageService';
+import StorageService from '../services/StorageService';
+import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 
-export function HomeView() {
+interface IHomeView {
+  setTab: (index: string) => void
+}
+
+export function HomeView({setTab}: IHomeView) {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0 });
   const [progress, setProgress] = useState(0);
   const [totalProgress, setTotalProgress] = useState(0);
   const [expToNextLevel, setExpToNextLevel] = useState(100);
+  const [categories, setCategories] = useState(<></>);
 
   useIonViewWillEnter(() => {
     const updateEXPData = async () => {
@@ -32,14 +39,29 @@ export function HomeView() {
 
       setTotalProgress(totalFinished / (totalTopics || 1));
     };
+    const updateGemCards = async () => {
+      StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
+        if (!data) return;
+        const gemCards = await Promise.all(data?.map(async (e, i) => {
+          let disabled = await FlashcardStorageService.getCategoryData(e.categoryName).then(catData => !catData.isComplete);
+          
+          return <GemCard icon={e.gemIcon} gemName={e.gemName} quarter={e.gemQtr} disabled={disabled} setTab={() => setTab(e.index.toString())} key={i}/>
+        }));
+          
+        setCategories(<>{gemCards.map(e => e)}</>);
+      })
+    };
     const unsubscribeEXPStorageService = EXPStorageService.subscribe(updateEXPData);
-    const unsubscribeFetchFlashcardData = FetchFlashcardData.subscribe(updateTotalProgressData);
+    const unsubscribeFetchFlashcardDataPD = FetchFlashcardData.subscribe(updateTotalProgressData);
+    const unsubscribeFetchFlashcardDataGC = FetchFlashcardData.subscribe(updateGemCards);
     const unsubscribeFSSData = FlashcardStorageService.subscribe(updateTotalProgressData);
+
     updateEXPData();
     updateTotalProgressData();
     return () => { 
       unsubscribeEXPStorageService();
-      unsubscribeFetchFlashcardData();
+      unsubscribeFetchFlashcardDataPD();
+      unsubscribeFetchFlashcardDataGC();
       unsubscribeFSSData();
     };
   }, []);
@@ -70,10 +92,7 @@ export function HomeView() {
       <IonProgressBar value={totalProgress} buffer={totalProgress} id="total-progress" />
     </IonCard>
     <div className="gem-container">
-      <GemCard icon={diamond} gemName="Garnet" quarter="1st Quarter" fill="#a32a62" disabled={false}/>
-      <GemCard icon={diamond} gemName="Citrine" quarter="2nd Quarter" fill="#e7e794" disabled={true}/>
-      <GemCard icon={diamond} gemName="Chrysoprase" quarter="3rd Quarter" fill="#96b29d" disabled={true}/>
-      <GemCard icon={diamond} gemName="Lapis Lazuli" quarter="4th Quarter" fill="#0299ec" disabled={true}/>
+      {categories}
     </div>
   </div>;
 }

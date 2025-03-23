@@ -128,6 +128,9 @@ ion-col, ion-row, ion-grid, ion-card {
   font-size: 1em;
   text-transform: none !important;
   letter-spacing: normal;
+  height: 100%;
+  margin: 0;
+  display: flex;
 }
 .gem-card-container {
   display: grid;
@@ -135,7 +138,7 @@ ion-col, ion-row, ion-grid, ion-card {
   text-align: center;
   grid-template-columns: 100%;
 }
-.gem-card-container ion-icon {
+.gem-card-container ion-img {
   width: 32px;
   height: 32px;
   fill: red;

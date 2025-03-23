@@ -2,6 +2,9 @@
   flex: 1;
   --animate-duration: 300ms;
 }
+.question {
+  z-index: 1;
+}
 .choice-container.f-multipleChoice ion-col, .choice-container.f-checkboxes ion-col {
   display: flex;
   flex-direction: column;
@@ -22,6 +25,8 @@
   transition: 0.2s ease-out;
   will-change: transform;
   padding: 0 !important;
+  text-transform: none;
+  letter-spacing: normal;
 }
 .choice[disabled=""] {
   filter: saturate(0.35);

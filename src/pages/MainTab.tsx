@@ -25,15 +25,15 @@ const MainTab: React.FC = () => {
   const [colorTheme, setColorTheme] = useState("light");
 
   const [presentAlert] = useIonAlert();
-  
+
   let pageViewLoaded = false;
   useEffect(() => {
-    FetchFlashcardData.getFlashcardData(false, false) //import.meta.env.VITE_IN_DEVELOPMENT
+    FetchFlashcardData.getFlashcardData(false, import.meta.env.VITE_IN_DEVELOPMENT) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
         if (!data.categories) return;
         const segmentViews = data.categories.map((category, index) => (
-          <IonSegmentContent key={index} id={`tab${index}`}>
+          <IonSegmentContent key={index} id={`tab${category.index}`}>
             <TopicView {...category} />
           </IonSegmentContent>
         ));
@@ -45,11 +45,11 @@ const MainTab: React.FC = () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then((data: IFlashcardCategory[]) => {
           if (!data) return;
-          const segmentButtons = data.map((category, index) => (
-            <IonSegmentButton key={index} value={index.toString()} contentId={`tab${index}`} className="animate__animated animate__bounceInLeft">
+          const segmentButtons = data.map((category, index) => {
+            return <IonSegmentButton key={index} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster">
               <IonLabel>{category.categoryName}</IonLabel>
             </IonSegmentButton>
-          ));
+        });
 
           setHeaderButtons(<>{segmentButtons}</>);
           if (!pageViewLoaded) {
@@ -57,7 +57,7 @@ const MainTab: React.FC = () => {
               {
                 data.map((category, index) => {
                   return (
-                    <IonSegmentContent key={index} id={`tab${index}`}>
+                    <IonSegmentContent key={index} id={`tab${category.index}`}>
                       <TopicHeader {...category} />
                       <IonCard className="loading-card">
                         <IonCardHeader>
@@ -70,8 +70,7 @@ const MainTab: React.FC = () => {
               }
             </>);
           }
-        }
-        );
+        });
       }, 0);
     };
     const unsubscribe = FetchFlashcardData.subscribe(updateFlashcardTabs);
@@ -121,7 +120,7 @@ const MainTab: React.FC = () => {
             </IonButton>
             <IonChip
               onClick={() => { }}
-              className="avatar-toolbar"  
+              className="avatar-toolbar"
             >
               <IonAvatar>
                 <img alt="User" src="./avatar.svg" />
@@ -156,7 +155,7 @@ const MainTab: React.FC = () => {
       </IonSegment>
       <IonSegmentView id="main-content">
         <IonSegmentContent id="home">
-          <HomeView />
+          <HomeView setTab={(index: string) => setSelectedSegment(`${index}`)}/>
         </IonSegmentContent>
         {pageView}
       </IonSegmentView>

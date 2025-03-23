@@ -4,6 +4,11 @@
       "categoryName": "Q1",
       "categoryDesc": "desc. 1",
       "index": 1,
+
+      "gemName": "COJ",
+      "gemIcon": "./favicon.svg",
+      "gemQtr": "Quarter 1",
+
       "topics": [
         {
           "id": 0,
@@ -475,6 +480,11 @@
       "categoryName": "Q2",
       "categoryDesc": "desc. 2",
       "index": 2,
+
+      "gemName": "EHeads",
+      "gemIcon": "./favicon.svg",
+      "gemQtr": "Quarter 2",
+
       "topics": [
         {
           "id": 0,
@@ -948,6 +958,11 @@
       "categoryName": "Q3",
       "categoryDesc": "desc. 3",
       "index": 3,
+
+      "gemName": "Silent Sanctuary",
+      "gemIcon": "./favicon.svg",
+      "gemQtr": "Quarter 3",
+
       "topics": [
         {
           "id": 0,
@@ -1473,6 +1488,11 @@
       "categoryName": "Q4",
       "categoryDesc": "desc. 4",
       "index": 4,
+
+      "gemName": "Lola Amour",
+      "gemIcon": "./favicon.svg",
+      "gemQtr": "Quarter 4",
+
       "topics": [
         {
           "id": 0,

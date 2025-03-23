@@ -164,7 +164,6 @@ const FetchFlashcardData = {
     return topics;
   },
 
-  // debug
   async getCategoryTotal(category: string) {
     let flashcardData: { flashcardData: IFlashcardData, timestamp: number } = await StorageService.getItem("cachedFlashcardData");
     const categoryData = flashcardData.flashcardData.categories.find(c => c.categoryName === category);
