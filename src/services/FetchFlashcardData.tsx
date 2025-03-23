@@ -40,6 +40,9 @@ const FetchFlashcardData = {
         categoryName: categoryData.categoryName,
         categoryDesc: categoryData.categoryDesc,
         index:        categoryData.index,
+        gemName:      categoryData.gemName,
+        gemIcon:      categoryData.gemIcon,
+        gemQtr:       categoryData.gemQtr,
         topics:       [] as unknown as IFlashcardTopic[],
       } as IFlashcardCategory;
     }).sort((a, b) => a.index - b.index);
