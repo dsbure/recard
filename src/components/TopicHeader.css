@@ -1,3 +1,26 @@
+.view-story-button {
+    margin-inline: 10px;
+}
 .topicHeader {
-    width: 100%;
+    text-align: center;
+    border-radius: 1000px;
+    z-index: 3;
+}
+.topicHeader ion-card-header {
+    padding: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.topicHeader ion-card-header > :not(.header-separator) {
+    width: fit-content;
+    margin: 0;
+}
+.header-separator {
+    width: 2px;
+    height: 20px;
+    background-color: var(--ion-text-color-step-550);
+    border-radius: 2px;
+    margin-inline: 8px;
 }

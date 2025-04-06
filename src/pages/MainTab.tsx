@@ -136,23 +136,25 @@ const MainTab: React.FC = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      <IonSegment
-        value={selectedSegment}
-        scrollable={true}
-        onIonChange={(e) => {
-          const value = e.detail.value;
-          if (value !== undefined) {
-            setSelectedSegment(value.toString());
-          }
-        }}
-        className="tab-switcher"
-      >
-        <IonSegmentButton className="homebutton" value="home" contentId="home">
-          <IonIcon icon={home}></IonIcon>
-        </IonSegmentButton>
-        {headerButtons}
-      </IonSegment>
+      
+      <div className="tab-switcher-container">
+        <IonSegment
+          value={selectedSegment}
+          scrollable={true}
+          onIonChange={(e) => {
+            const value = e.detail.value;
+            if (value !== undefined) {
+              setSelectedSegment(value.toString());
+            }
+          }}
+          className="tab-switcher"
+        >
+          <IonSegmentButton className="homebutton" value="home" contentId="home">
+            <IonIcon icon={home}></IonIcon>
+          </IonSegmentButton>
+          {headerButtons}
+        </IonSegment>
+      </div>
       <IonSegmentView id="main-content">
         <IonSegmentContent id="home">
           <HomeView setTab={(index: string) => setSelectedSegment(`${index}`)}/>

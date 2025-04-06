@@ -3,6 +3,10 @@
   top: 10px;
   z-index: 1;
 }
+.tab-switcher-container {
+  box-shadow: 0 10px 10px var(--ion-background-color);
+  z-index: 2;
+}
 ion-segment {
   display: flex;
   background-color: var(--ion-toolbar-background);
@@ -17,6 +21,7 @@ ion-segment {
   max-height: 48px;
   max-width: 100vw;
   justify-content: start;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
 }
 ion-segment-content {
   height: fit-content;
@@ -91,7 +96,7 @@ ion-segment-button.md::part(indicator-background) {
   width: 100%;
   height: var(--avatar-height);
   filter: invert(93%) sepia(41%) saturate(304%) hue-rotate(73deg) brightness(88%) contrast(82%);
-  z-index: 10;
+  z-index: 1;
 }
 ion-col, ion-row, ion-grid, ion-card {
   max-width: min(576px, calc(100vw - 20px));
@@ -121,8 +126,14 @@ ion-col, ion-row, ion-grid, ion-card {
 }
 .gem-container {
   max-width: min(576px, calc(100vw - 20px));
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin-inline: auto;
+}
+@media (max-width: 992px) {
+  .gem-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .gem-card-button {
   font-size: 1em;
