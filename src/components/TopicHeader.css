@@ -24,3 +24,6 @@
     border-radius: 2px;
     margin-inline: 8px;
 }
+ion-segment-content {
+    overflow: clip;
+}

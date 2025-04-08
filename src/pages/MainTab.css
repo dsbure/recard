@@ -1,11 +1,18 @@
 .topicHeader {
   position: sticky;
   top: 10px;
-  z-index: 1;
 }
 .tab-switcher-container {
   box-shadow: 0 10px 10px var(--ion-background-color);
   z-index: 2;
+}
+
+ion-button:not(.button-round), ion-card {
+  border-radius: 16px;
+  --border-radius: 16px;
+}
+ion-modal {
+  --border-radius: 26px 26px 0 0;
 }
 ion-segment {
   display: flex;

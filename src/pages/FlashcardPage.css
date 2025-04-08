@@ -3,8 +3,9 @@
 }
 #question-modal ion-card {
 	width: 100%;
-	max-width: min(576px, calc(100vw - 20px));
+	max-width: min(576px, calc(100vw - 24px));
 	margin-inline: auto;
+	margin-block: 12px;
 }
 .non-scroll {
 	height: fit-content;
