@@ -20,6 +20,7 @@ const FlashcardPage: React.FC = () => {
   const [correctedAnswer, setCorrectedAnswer] = useState("");
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(true);
   const [startTime, setStartTime] = useState(Date.now());
   const [currentTime, setCurrentTime] = useState(0);
   const [formattedTime, setFormattedTime] = useState("00:00");
@@ -132,6 +133,7 @@ const FlashcardPage: React.FC = () => {
     const newScore = correctAnswers + (correct ? 1 : 0);
     setCA(newScore);
     const correctAnswer = flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct;
+    setShowAnswer(type !== "matchType" && type !== "trueFalse");
     if (correctedInContext) {
       setCorrectedAnswer(correctedInContext);
     } else {
@@ -230,10 +232,11 @@ const FlashcardPage: React.FC = () => {
                 </IonChip> {currentAnswer}
                 <br />
               </> : null}
-              <IonChip color="success">
+              {showAnswer ? <><IonChip color="success">
                 <IonIcon icon={checkmarkCircle} />
                 <IonLabel>Correct answer:</IonLabel>
-              </IonChip> {correctedAnswer}
+              </IonChip> {correctedAnswer}</> : null}
+              
               <IonButton expand="block" onClick={() => {
                 modal?.dismiss();
                 setToastOpen(false);

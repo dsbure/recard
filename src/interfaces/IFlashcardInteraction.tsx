@@ -7,5 +7,7 @@ export interface IFlashcardInteraction {
   matchTypeSideA?: string[];
   matchTypeSideB?: string[];
 
+  images?: string[];
+
   correct: string | string[];
 }

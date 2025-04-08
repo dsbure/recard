@@ -151,11 +151,69 @@
           "topicName": "Lesson 1 part 2",
           "flashcards": [
             {
-              "question": "may pag-asa pa ba?",
-              "type": "trueFalse",
+              "question": "Pick the image that hates color >:)",
+              "type": "multipleChoice",
               "interaction": {
-                "trueFalse": "",
-                "correct": "false"
+                "correct": "recall mono icon",
+                "multipleChoices": [
+                  "recall (light)",
+                  "recall (dark)",
+                  "recall (icon)",
+                  "recall mono icon"
+                ],
+                "images": [
+                  "./recall-wordmark-dark.svg",
+                  "./recall-wordmark-light.svg",
+                  "./favicon.svg",
+                  "./favicon-mon.png"
+                ]
+              }
+            },
+            {
+              "question": "Check the ones with only the letter r.",
+              "type": "checkboxes",
+              "interaction": {
+                "correct": [
+                  "recall (icon)",
+                  "recall mono icon"
+                ],
+                "checkboxes": [
+                  "recall (light)",
+                  "recall (dark)",
+                  "recall (icon)",
+                  "recall mono icon"
+                ],
+                "images": [
+                  "./recall-wordmark-dark.svg",
+                  "./recall-wordmark-light.svg",
+                  "./favicon.svg",
+                  "./favicon-mon.png"
+                ]
+              }
+            },
+            {
+              "question": "match the thing withthe icon>?!",
+              "type": "matchType",
+              "interaction": {
+                "correct": "",
+                "matchTypeSideA": [
+                  "recall (light)",
+                  "recall (dark)",
+                  "recall (icon)",
+                  "recall mono icon"
+                ],
+                "matchTypeSideB": [
+                  "recall (light)",
+                  "recall (dark)",
+                  "recall (icon)",
+                  "recall mono icon"
+                ],
+                "images": [
+                  "./recall-wordmark-dark.svg",
+                  "./recall-wordmark-light.svg",
+                  "./favicon.svg",
+                  "./favicon-mon.png"
+                ]
               }
             }
           ]

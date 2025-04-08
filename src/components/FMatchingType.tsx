@@ -3,6 +3,7 @@ import { Ref, useEffect, useRef, useState } from 'react';
 import './Flashcard.css';
 import './FMatchingType.css';
 import { IFInteractionProps } from '../interfaces/IFInteractionProps';
+import { IFlashcardInteraction } from '../interfaces/IFlashcardInteraction';
 
 const shuffleItems = (array: string[]) => {
   return array.map(e => ({ e, sort: Math.random() }))
@@ -11,7 +12,7 @@ const shuffleItems = (array: string[]) => {
 };
 
 
-const MatchingTypeChoice: React.FC<{ ref?: React.LegacyRef<HTMLIonButtonElement>, skeleton: boolean, isCorrect: boolean | null, setSideChoice: (choice: string) => void, content: string, currentSelected: string, onDismiss?: () => void }> = ({ ref, skeleton, isCorrect, setSideChoice, content, currentSelected, onDismiss }) => {
+const MatchingTypeChoice: React.FC<{ ref?: React.LegacyRef<HTMLIonButtonElement>, skeleton: boolean, isCorrect: boolean | null, setSideChoice: (choice: string) => void, content: string, currentSelected: string, onDismiss?: () => void, interaction?: IFlashcardInteraction }> = ({ ref, skeleton, isCorrect, setSideChoice, content, currentSelected, onDismiss, interaction }) => {
   const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [localCorrect, setLocalCorrect] = useState(isCorrect);
@@ -43,9 +44,19 @@ const MatchingTypeChoice: React.FC<{ ref?: React.LegacyRef<HTMLIonButtonElement>
   }, [isCorrect]);
   return (<IonButton className={(localCorrect !== null ? `choice correct ${!localCorrect ? "in" : ""}` : "choice") + (checked ? " checked" : "")} expand="block" onClick={() => handleClick()} ref={ref} disabled={disabled}>
     <div className="wipe"></div>
-    {skeleton ? <IonSkeletonText animated={true} style={{
-      width: '80px'
-    }} /> : <IonLabel>{content}</IonLabel>}
+    {
+      skeleton ? (
+        <IonSkeletonText animated={true} style={{ width: '80px' }} />
+      ) : interaction?.images ? (
+        <img
+          src={interaction.images[interaction.matchTypeSideB?.findIndex(e => e === content) || 0]}
+          alt={content}
+          title={content}
+        />
+      ) : (
+        <IonLabel>{content}</IonLabel>
+      )
+    }
   </IonButton>);
 }
 // horribly implemented
@@ -77,10 +88,10 @@ export function FMatchingType({ flashcard, handleAnswerClick, interaction, skele
 
   useEffect(() => {
     if (selectedSideA === "" || selectedSideB === "") return;
-    
+
     const sideAIndex = interaction.matchTypeSideA!.indexOf(selectedSideA);
     const sideBIndex = interaction.matchTypeSideB!.indexOf(selectedSideB);
-    
+
     setCorrectSideA([selectedSideA, sideAIndex === sideBIndex]);
     setCorrectSideB([selectedSideB, sideAIndex === sideBIndex]);
 
@@ -91,8 +102,8 @@ export function FMatchingType({ flashcard, handleAnswerClick, interaction, skele
   useEffect(() => {
     if (totalMatches >= interaction.matchTypeSideA!.length) {
       handleAnswerClick(
-        totalCorrect === totalMatches, 
-        `${totalCorrect === totalMatches ? "" : "in"}correct`, 
+        totalCorrect === totalMatches,
+        `${totalCorrect === totalMatches ? "" : "in"}correct`,
         "matchType", "correct");
     }
   }, [totalMatches]);
@@ -106,27 +117,28 @@ export function FMatchingType({ flashcard, handleAnswerClick, interaction, skele
   return (<>
     <div className="match-type-side-a match-type-side">
       {choicesSideA.map((q, i) => {
-        return <MatchingTypeChoice 
-          key={i} 
-          skeleton={skeleton} 
+        return <MatchingTypeChoice
+          key={i}
+          skeleton={skeleton}
           setSideChoice={(choice: string) => setSelectedSideA(choice)}
           onDismiss={dismiss}
-          content={q} 
-          isCorrect={correctSideA[0] === q ? correctSideA[1] : null} 
-          currentSelected={selectedSideA}/>
+          content={q}
+          isCorrect={correctSideA[0] === q ? correctSideA[1] : null}
+          currentSelected={selectedSideA} />
       })}
     </div>
     <div className="match-type-separator"></div>
     <div className="match-type-side-b match-type-side">
       {choicesSideB.map((q, i) => {
-        
-        return <MatchingTypeChoice 
-          key={i} 
-          skeleton={skeleton} 
-          setSideChoice={(choice: string) => setSelectedSideB(choice)} 
-          content={q} 
-          isCorrect={correctSideB[0] === q ? correctSideB[1] : null} 
-          currentSelected={selectedSideB}/>
+
+        return <MatchingTypeChoice
+          key={i}
+          skeleton={skeleton}
+          setSideChoice={(choice: string) => setSelectedSideB(choice)}
+          content={q}
+          isCorrect={correctSideB[0] === q ? correctSideB[1] : null}
+          currentSelected={selectedSideB}
+          interaction={interaction} />
       })}
     </div>
   </>);

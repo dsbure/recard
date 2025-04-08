@@ -3,24 +3,37 @@ import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect,
 import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './Flashcard.css';
 import { IFInteractionProps } from '../interfaces/IFInteractionProps';
+import { IFlashcardInteraction } from '../interfaces/IFlashcardInteraction';
 
 
-const CheckboxChoice: React.FC<{ skeleton: boolean, flashcardCorrect: string[], choiceContent: string, toggleChoice: (e: string, add: boolean) => void }> = ({ skeleton, flashcardCorrect, choiceContent, toggleChoice }) => {
+const CheckboxChoice: React.FC<{ skeleton: boolean, flashcardCorrect: string[], choiceContent: string, toggleChoice: (e: string, add: boolean) => void, interaction: IFlashcardInteraction }> = ({ skeleton, flashcardCorrect, choiceContent, toggleChoice, interaction }) => {
   const [checked, setChecked] = useState(false);
   const toggleState = () => {
     toggleChoice(choiceContent, !checked);
     setChecked(prev => !prev);
   }
   return (
-    <IonButton 
-      className={(flashcardCorrect.includes(choiceContent) ? "choice correct" : "choice") + (checked ? " checked" : "")} 
-      expand="block" 
-      onClick={toggleState} 
+    <IonButton
+      className={(flashcardCorrect.includes(choiceContent) ? "choice correct" : "choice") + (checked ? " checked" : "")}
+      expand="block"
+      onClick={toggleState}
       disabled={flashcardCorrect.length !== 0 && !flashcardCorrect.includes(choiceContent)}
     >
       <div className="wipe"></div>
       <IonCheckbox className="choice-checkbox" checked={checked} style={{ pointerEvents: 'none' }}></IonCheckbox>
-      {skeleton ? <IonSkeletonText animated={true} style={{ width: '80px' }} /> : <IonLabel>{choiceContent}</IonLabel>}
+      {
+        skeleton ? (
+          <IonSkeletonText animated={true} style={{ width: '80px' }} />
+        ) : interaction.images ? (
+          <img
+            src={interaction.images[interaction.checkboxes?.findIndex(e => e === choiceContent) || 0]}
+            alt={choiceContent}
+            title={choiceContent}
+          />
+        ) : (
+          <IonLabel>{choiceContent}</IonLabel>
+        )
+      }
     </IonButton>
   );
 }
@@ -69,7 +82,7 @@ export function FCheckboxes({ flashcard, handleAnswerClick, interaction, skeleto
   }
   return (<>
     {shuffledChoices.map((q, i) => {
-      return <CheckboxChoice key={i} skeleton={skeleton} flashcardCorrect={flashcardCorrect} choiceContent={q} toggleChoice={setChoice}></CheckboxChoice>
+      return <CheckboxChoice key={i} skeleton={skeleton} flashcardCorrect={flashcardCorrect} choiceContent={q} toggleChoice={setChoice} interaction={interaction}></CheckboxChoice>
     })}
     <hr />
     <IonButton className="submit-checkboxes" size="large" expand="block" onClick={() => handleAnswer()}>Submit</IonButton>

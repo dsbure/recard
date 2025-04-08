@@ -1,9 +1,11 @@
 .match-type-side {
   flex: 1;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 .match-type-side .choice {
   min-height: 6em;
+  flex-grow: 1;
 }
 .match-type-side .choice:not(.correct) {
   --background: var(--ion-background-color-step-150);

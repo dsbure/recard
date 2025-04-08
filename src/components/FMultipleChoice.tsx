@@ -14,16 +14,30 @@ export function FMultipleChoice({ flashcard, handleAnswerClick, interaction, ske
       .sort((a, b) => a.sort - b.sort)
       .map(({ e }) => e));
   }, [flashcard]);
+
   const [flashcardCorrect, setFlashcardCorrect] = useState("");
   const handleAnswer = (q: string) => {
-  	setFlashcardCorrect(Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct);
-	  handleAnswerClick(q === (Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct), q, "multipleChoice");
+    setFlashcardCorrect(Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct);
+    handleAnswerClick(q === (Array.isArray(flashcard.interaction.correct) ? "" : flashcard.interaction.correct), q, "multipleChoice");
   }
+
   return (<>
     {shuffledChoices.map((q, i) => {
-      return <IonButton className={(flashcardCorrect|| "") === q ? "choice correct" : "choice"} key={i} expand="block" onClick={() => handleAnswer(q)} disabled={(flashcardCorrect|| "") !== "" && (flashcardCorrect|| "") !== q}>
+      return <IonButton className={(flashcardCorrect || "") === q ? "choice correct" : "choice"} key={i} expand="block" onClick={() => handleAnswer(q)} disabled={(flashcardCorrect || "") !== "" && (flashcardCorrect || "") !== q}>
         <div className="wipe"></div>
-        {skeleton ? <IonSkeletonText animated={true} style={{ width: '80px' }} /> : <IonLabel>{q}</IonLabel>}
+        {
+          skeleton ? (
+            <IonSkeletonText animated={true} style={{ width: '80px' }} />
+          ) : interaction.images ? (
+            <img
+              src={interaction.images[interaction.multipleChoices?.findIndex(e => e === q) || 0]}
+              alt={q}
+              title={q}
+            />
+          ) : (
+            <IonLabel>{q}</IonLabel>
+          )
+        }
       </IonButton>
     })}
   </>);
