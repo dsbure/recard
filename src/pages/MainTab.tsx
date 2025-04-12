@@ -11,7 +11,44 @@ import FetchFlashcardData from '../services/FetchFlashcardData';
 import StorageService from '../services/StorageService';
 import { TopicHeader } from '../components/TopicHeader';
 import { useThemeDetector } from '../hooks/useThemeDetector';
-import { IPlayerData } from '../interfaces/IPlayerData';
+import { usePopper } from '../hooks/Popper';
+
+const DebugButton: React.FC = () => {
+  const [presentAlert] = useIonAlert();
+
+  return <IonButton
+    onClick={() => {
+      presentAlert({
+        header: 'Clear Data',
+        message: 'Are you sure you want to clear data? (or clear cached data to fix errors)',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'close'
+          },
+          {
+            text: 'Clear Data',
+            role: 'close',
+            handler: () => {
+              FlashcardStorageService.clearData();
+              EXPStorageService.clearData();
+              StorageService.deleteAll();
+            },
+          },
+          {
+            text: 'Clear Cached Data',
+            role: 'close',
+            handler: () => {
+              FetchFlashcardData.clearCachedData();
+            },
+          }
+        ]
+      })
+    }} shape="round">
+    <IonIcon slot="icon-only" icon={bug}></IonIcon>
+  </IonButton>
+}
+
 
 const MainTab: React.FC = () => {
   const [headerButtons, setHeaderButtons] = useState(<>
@@ -22,18 +59,21 @@ const MainTab: React.FC = () => {
   const [pageView, setPageView] = useState(<></>);
   const [selectedSegment, setSelectedSegment] = useState<string>("home");
 
-  const [popoverOpen, setPopoverOpen] = useState(true);
-
-  const [presentAlert] = useIonAlert();
-
   const themeDetector = useThemeDetector();
   const [colorTheme, setColorTheme] = useState("light");
-  const popover = useRef<HTMLIonPopoverElement>(null);
+
+  const router = useIonRouter();
+  
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const popper = usePopper({
+    children: "Tap here to start your journey!",
+    isOpen: popoverOpen,
+    setIsOpen: setPopoverOpen
+  });
+
   useEffect(() => {
     setColorTheme(themeDetector);
   }, [themeDetector]);
-
-  const router = useIonRouter();
 
   let pageViewLoaded = false;
   useEffect(() => {
@@ -56,23 +96,17 @@ const MainTab: React.FC = () => {
         pageViewLoaded = true;
       })
       .catch((error) => console.error('Load error:', error));
+      
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
           if (!data) return;
           const segmentButtons = data.map((category, index) => {
-            let tutPopup;
-            StorageService.getItem("tutorialDone").then((e) => {
-              if (!e && index === 0) {
-                tutPopup = <IonPopover key={index + "pp"} trigger="tab0" isOpen={popoverOpen} onDidDismiss={() => setPopoverOpen(false)}>Tap here to start your journey!</IonPopover>;
-              }
-            });
-            
+
             return <>
-            <IonSegmentButton key={index} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster" >
-              <IonLabel id={`tab${index}`}>{category.categoryName}</IonLabel>
-            </IonSegmentButton>
-            {tutPopup}
+              <IonSegmentButton {...(index === 0 ? {ref: popper.refs.setReference} : {})} key={`index-${index}`} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster" >
+                <IonLabel key={index}>{category.categoryName}</IonLabel>
+              </IonSegmentButton>
             </>
           });
 
@@ -94,6 +128,8 @@ const MainTab: React.FC = () => {
                 })
               }
             </>);
+            setTimeout(() => 
+              setPopoverOpen(true), 1000)
           }
         });
       }, 0);
@@ -101,43 +137,18 @@ const MainTab: React.FC = () => {
     const unsubscribe = FetchFlashcardData.subscribe(updateFlashcardTabs);
     return () => { unsubscribe() };
   }, []);
+  useEffect(() => {
+    if (selectedSegment === "1") {
+      setPopoverOpen(false);
+    }
+  }, [selectedSegment]);
 
   return (
     <IonPage>
       <IonHeader id="main-header">
         <IonToolbar>
           <IonButtons slot="end">
-            <IonButton
-              onClick={() => {
-                presentAlert({
-                  header: 'Clear Data',
-                  message: 'Are you sure you want to clear data? (or clear cached data to fix errors)',
-                  buttons: [
-                    {
-                      text: 'Cancel',
-                      role: 'close'
-                    },
-                    {
-                      text: 'Clear Data',
-                      role: 'close',
-                      handler: () => {
-                        FlashcardStorageService.clearData();
-                        EXPStorageService.clearData();
-                        StorageService.deleteAll();
-                      },
-                    },
-                    {
-                      text: 'Clear Cached Data',
-                      role: 'close',
-                      handler: () => {
-                        FetchFlashcardData.clearCachedData();
-                      },
-                    }
-                  ]
-                })
-              }} shape="round">
-              <IonIcon slot="icon-only" icon={bug}></IonIcon>
-            </IonButton>
+            <DebugButton />
             <IonChip
               onClick={() => { }}
               className="avatar-toolbar"
@@ -157,6 +168,7 @@ const MainTab: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
+      {popper.popover}
       <div className="tab-switcher-container">
         <IonSegment
           value={selectedSegment}
