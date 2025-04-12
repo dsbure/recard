@@ -7,6 +7,7 @@ import { GemCard } from './GemCard';
 import FlashcardStorageService from '../services/FlashcardStorageService';
 import StorageService from '../services/StorageService';
 import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
+import { IPlayerData } from '../interfaces/IPlayerData';
 
 interface IHomeView {
   setTab: (index: string) => void
@@ -18,8 +19,13 @@ export function HomeView({setTab}: IHomeView) {
   const [totalProgress, setTotalProgress] = useState(0);
   const [expToNextLevel, setExpToNextLevel] = useState(100);
   const [categories, setCategories] = useState(<></>);
+  
+  const [name, setName] = useState("");
 
   useIonViewWillEnter(() => {
+    StorageService.getItem("playerData").then((e) => {
+      setName((e as IPlayerData).name);
+    });
     const updateEXPData = async () => {
       const [expData, progress, expToNextLevel] = await Promise.all([
         EXPStorageService.getExperienceData(),
@@ -71,7 +77,7 @@ export function HomeView({setTab}: IHomeView) {
     <IonCard id="main-avatar-container">
       <IonCardHeader>
         <IonCardSubtitle>Welcome,</IonCardSubtitle>
-        <IonCardTitle id="avatar-name">ZED!</IonCardTitle>
+        <IonCardTitle id="avatar-name">{name}!</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
         <h2>Level {expData.currentLevel}</h2>

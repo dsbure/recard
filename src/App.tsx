@@ -50,6 +50,7 @@ import StoryPage from './pages/StoryPage';
 import { Analytics } from "@vercel/analytics/react";
 
 import 'animate.css';
+import Onboarding from './pages/Onboarding';
 
 setupIonicReact({
   mode: 'md',
@@ -69,6 +70,9 @@ const App: React.FC = () => (
             </Route>
             <Route path="/results">
               <Results />
+            </Route>
+            <Route path="/onboarding">
+              <Onboarding />
             </Route>
             <Route path="/story/:quarter">
               <StoryPage />

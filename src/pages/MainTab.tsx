@@ -1,8 +1,8 @@
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonPage, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonPage, IonPopover, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
 import './MainTab.css';
-import { arrowBack, flash, heart, home, person, trash } from 'ionicons/icons';
+import { arrowBack, bug, flash, heart, home, person, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IFlashcardData } from '../interfaces/IFlashcardData'; import { IFlashcardCategory } from "../interfaces/IFlashcardCategory";
 import FlashcardStorageService from '../services/FlashcardStorageService';
 import { HomeView } from '../components/HomeView';
@@ -11,6 +11,7 @@ import FetchFlashcardData from '../services/FetchFlashcardData';
 import StorageService from '../services/StorageService';
 import { TopicHeader } from '../components/TopicHeader';
 import { useThemeDetector } from '../hooks/useThemeDetector';
+import { IPlayerData } from '../interfaces/IPlayerData';
 
 const MainTab: React.FC = () => {
   const [headerButtons, setHeaderButtons] = useState(<>
@@ -21,13 +22,27 @@ const MainTab: React.FC = () => {
   const [pageView, setPageView] = useState(<></>);
   const [selectedSegment, setSelectedSegment] = useState<string>("home");
 
-  const themeDetector = useThemeDetector();
-  const [colorTheme, setColorTheme] = useState("light");
+  const [popoverOpen, setPopoverOpen] = useState(true);
 
   const [presentAlert] = useIonAlert();
 
+  const themeDetector = useThemeDetector();
+  const [colorTheme, setColorTheme] = useState("light");
+  const popover = useRef<HTMLIonPopoverElement>(null);
+  useEffect(() => {
+    setColorTheme(themeDetector);
+  }, [themeDetector]);
+
+  const router = useIonRouter();
+
   let pageViewLoaded = false;
   useEffect(() => {
+    StorageService.getItem("onboarded").then((e) => {
+      if (!e) {
+        router.push("/onboarding");
+        return;
+      }
+    });
     FetchFlashcardData.getFlashcardData(false, import.meta.env.VITE_IN_DEVELOPMENT) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
@@ -43,13 +58,23 @@ const MainTab: React.FC = () => {
       .catch((error) => console.error('Load error:', error));
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
-        StorageService.getItem("cachedCategoryData").then((data: IFlashcardCategory[]) => {
+        StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
           if (!data) return;
           const segmentButtons = data.map((category, index) => {
-            return <IonSegmentButton key={index} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster">
-              <IonLabel>{category.categoryName}</IonLabel>
+            let tutPopup;
+            StorageService.getItem("tutorialDone").then((e) => {
+              if (!e && index === 0) {
+                tutPopup = <IonPopover key={index + "pp"} trigger="tab0" isOpen={popoverOpen} onDidDismiss={() => setPopoverOpen(false)}>Tap here to start your journey!</IonPopover>;
+              }
+            });
+            
+            return <>
+            <IonSegmentButton key={index} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster" >
+              <IonLabel id={`tab${index}`}>{category.categoryName}</IonLabel>
             </IonSegmentButton>
-        });
+            {tutPopup}
+            </>
+          });
 
           setHeaderButtons(<>{segmentButtons}</>);
           if (!pageViewLoaded) {
@@ -77,12 +102,6 @@ const MainTab: React.FC = () => {
     return () => { unsubscribe() };
   }, []);
 
-  useEffect(() => {
-    setColorTheme(
-      themeDetector ? "dark" : "light"
-    );
-  }, [themeDetector]);
-
   return (
     <IonPage>
       <IonHeader id="main-header">
@@ -104,6 +123,7 @@ const MainTab: React.FC = () => {
                       handler: () => {
                         FlashcardStorageService.clearData();
                         EXPStorageService.clearData();
+                        StorageService.deleteAll();
                       },
                     },
                     {
@@ -116,7 +136,7 @@ const MainTab: React.FC = () => {
                   ]
                 })
               }} shape="round">
-              <IonIcon slot="icon-only" icon={trash}></IonIcon>
+              <IonIcon slot="icon-only" icon={bug}></IonIcon>
             </IonButton>
             <IonChip
               onClick={() => { }}
@@ -136,7 +156,7 @@ const MainTab: React.FC = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      
+
       <div className="tab-switcher-container">
         <IonSegment
           value={selectedSegment}
@@ -157,7 +177,7 @@ const MainTab: React.FC = () => {
       </div>
       <IonSegmentView id="main-content">
         <IonSegmentContent id="home">
-          <HomeView setTab={(index: string) => setSelectedSegment(`${index}`)}/>
+          <HomeView setTab={(index: string) => setSelectedSegment(`${index}`)} />
         </IonSegmentContent>
         {pageView}
       </IonSegmentView>

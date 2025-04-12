@@ -1,11 +1,11 @@
-.results-header {
+.centered-header {
 	text-align: center;
 }
 .results-card {
 	max-width: 576px;
 	width: min(calc(100% - 20px), 576px);
 }
-.results-container {
+.centered-container {
 	align-items: center;
 	justify-items: center;
 	display: grid;
@@ -15,11 +15,11 @@
 	justify-content: center;
 	display: flex;
 }
-.results-icon {
+.centered-icon {
 	justify-content: center;
 	display: flex;
 }
-.results-icon ion-icon {
+.centered-icon ion-icon {
 	width: 64px;
 	height: 64px;
 }

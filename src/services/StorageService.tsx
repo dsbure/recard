@@ -19,6 +19,10 @@ const StorageService = {
 
 	async removeItem(key: string) {
 		await storage.remove(key);
+	},
+	
+	async deleteAll() {
+		await storage.clear();
 	}
 };
 

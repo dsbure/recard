@@ -53,9 +53,9 @@ const Results: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <div className="results-container">
+        <div className="centered-container">
           <IonCard className="results-card animate__animated animate__backInUp">
-            <IonCardContent className="results-icon">
+            <IonCardContent className="centered-icon">
               <IonIcon icon={flag} size="large"/>
             </IonCardContent>
             <IonCardContent className="summary">
@@ -78,7 +78,7 @@ const Results: React.FC = () => {
                 </IonLabel>
               </IonChip>
             </IonCardContent>
-            <IonCardHeader className="results-header">
+            <IonCardHeader className="centered-header">
               <IonCardTitle>
                 Level Finished!
               </IonCardTitle>

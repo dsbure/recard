@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-// https://medium.com/hypersphere-codes/detecting-system-theme-in-javascript-css-react-f6b961916d48
-export const useThemeDetector = () => {
+// adapted from https://medium.com/hypersphere-codes/detecting-system-theme-in-javascript-css-react-f6b961916d48
+export const useThemeDetector = (): string => {
 	const getCurrentTheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
 	const [isDarkTheme, setIsDarkTheme] = useState(getCurrentTheme());
 	const mqListener = ((e: { matches: boolean | ((prevState: boolean) => boolean); }) => {
@@ -13,5 +13,5 @@ export const useThemeDetector = () => {
 		darkThemeMq.addEventListener("change", mqListener);
 		return () => darkThemeMq.removeEventListener("change", mqListener);
 	}, []);
-	return isDarkTheme;
+	return isDarkTheme ? "dark" : "light";
 }
