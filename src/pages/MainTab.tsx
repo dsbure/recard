@@ -111,6 +111,11 @@ const MainTab: React.FC = () => {
           });
 
           setHeaderButtons(<>{segmentButtons}</>);
+          setTimeout(() => {
+            setPopoverOpen(true);
+            console.log("Popover open");
+            console.log(popper.popover);
+          }, 1000);
           if (!pageViewLoaded) {
             setPageView(<>
               {
@@ -128,8 +133,6 @@ const MainTab: React.FC = () => {
                 })
               }
             </>);
-            setTimeout(() => 
-              setPopoverOpen(true), 1000)
           }
         });
       }, 0);
