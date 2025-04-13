@@ -2,7 +2,7 @@ import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeade
 import './MainTab.css';
 import { arrowBack, bug, flash, heart, home, person, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IFlashcardData } from '../interfaces/IFlashcardData'; import { IFlashcardCategory } from "../interfaces/IFlashcardCategory";
 import FlashcardStorageService from '../services/FlashcardStorageService';
 import { HomeView } from '../components/HomeView';
@@ -75,14 +75,17 @@ const MainTab: React.FC = () => {
     setColorTheme(themeDetector);
   }, [themeDetector]);
 
-  let pageViewLoaded = false;
-  useEffect(() => {
+  useLayoutEffect(() => {
     StorageService.getItem("onboarded").then((e) => {
       if (!e) {
         router.push("/onboarding");
         return;
       }
     });
+  }, []);
+  let pageViewLoaded = false;
+  useEffect(() => {
+  
     FetchFlashcardData.getFlashcardData(false, import.meta.env.VITE_IN_DEVELOPMENT) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
