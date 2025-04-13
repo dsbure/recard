@@ -73,9 +73,6 @@
     transform: scaleX(1);
   }
 }
-.timer {
-  font-family: "Space Mono", monospace;
-}
 .choice-checkbox {
   position: absolute;
   top: 0;

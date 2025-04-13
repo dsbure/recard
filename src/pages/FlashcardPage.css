@@ -23,6 +23,9 @@
 #flashcards > div {
 	width: 100%;
 }
+.timer, .streak {
+  font-family: "Space Mono", monospace;
+}
 .hidden {
 	display: none;
 }

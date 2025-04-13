@@ -61,8 +61,6 @@ const MainTab: React.FC = () => {
 
   const themeDetector = useThemeDetector();
   const [colorTheme, setColorTheme] = useState("light");
-
-  const router = useIonRouter();
   
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popper = usePopper({
@@ -75,14 +73,6 @@ const MainTab: React.FC = () => {
     setColorTheme(themeDetector);
   }, [themeDetector]);
 
-  useLayoutEffect(() => {
-    StorageService.getItem("onboarded").then((e) => {
-      if (!e) {
-        router.push("/onboarding");
-        return;
-      }
-    });
-  }, []);
   let pageViewLoaded = false;
   useEffect(() => {
   
@@ -103,7 +93,7 @@ const MainTab: React.FC = () => {
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
-          if (!data || !(await StorageService.getItem("onboarded"))) return;
+          if (!data) return;
           const segmentButtons = data.map((category, index) => {
 
             return <>

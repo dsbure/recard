@@ -51,6 +51,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import 'animate.css';
 import Onboarding from './pages/Onboarding';
+import BlankPage from './pages/BlankPage';
 
 setupIonicReact({
   mode: 'md',
@@ -62,6 +63,9 @@ const App: React.FC = () => (
       <IonReactRouter basename="/">
         <IonTabs>
           <IonRouterOutlet>
+            <Route exact path="/blank">
+              <BlankPage />
+            </Route>
             <Route exact path="/mainTab">
               <MainTab />
             </Route>
@@ -78,7 +82,7 @@ const App: React.FC = () => (
               <StoryPage />
             </Route>
             <Route exact path="/">
-              <Redirect to="/mainTab" />
+              <Redirect to="/blank" />
             </Route>
           </IonRouterOutlet>
         </IonTabs>

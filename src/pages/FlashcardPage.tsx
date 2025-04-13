@@ -3,7 +3,7 @@ import './FlashcardPage.css';
 import { useEffect, useRef, useState } from 'react';
 import { Flashcard } from '../components/Flashcard';
 import { useHistory } from 'react-router';
-import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, heart, timer } from 'ionicons/icons';
+import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, flame, heart, timer } from 'ionicons/icons';
 import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import StorageService from '../services/StorageService';
 import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
@@ -15,6 +15,7 @@ const FlashcardPage: React.FC = () => {
   const [correctAnswers, setCA] = useState(0);
   const [mistakes, setMistakes] = useState(0);
   const [totalLives, setTotalLives] = useState(5);
+  const [currentStreak, setCurrentStreak] = useState(0);
   const [currentQuestionIndex, setCQI] = useState(0);
   const [currentQuestionOrder, setCQO] = useState<number[]>([0, 0]);
   const [correctedAnswer, setCorrectedAnswer] = useState("");
@@ -54,6 +55,7 @@ const FlashcardPage: React.FC = () => {
     setMistakes(0);
     setCA(0);
     setCQI(0);
+    setCurrentStreak(0);
     setCorrectedAnswer("");
     const data = JSON.parse(localStorage.getItem("currentFlashcard")!);
     setCQO(shuffleOrder(data.flashcards.length));
@@ -131,7 +133,9 @@ const FlashcardPage: React.FC = () => {
   const handleAnswerClick = (correct: boolean, userAnswer: string | string[], type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse", correctedInContext?: string) => {
     setCurrentAnswer(Array.isArray(userAnswer) ? userAnswer.join(', ') : userAnswer);
     const newScore = correctAnswers + (correct ? 1 : 0);
+    const newStreak = (correct ? currentStreak + 1 : 0);
     setCA(newScore);
+    setCurrentStreak(newStreak);
     const correctAnswer = flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct;
     setShowAnswer(type !== "matchType" && type !== "trueFalse");
     if (correctedInContext) {
@@ -162,6 +166,10 @@ const FlashcardPage: React.FC = () => {
           </IonButtons>
           <IonTitle>Flashcard</IonTitle>
           <IonButtons slot="end">
+              <IonChip className="streak" color={currentStreak > 0 ? "warning" : "dark"}>
+                <IonIcon icon={flame} />
+                <IonLabel>{currentStreak}</IonLabel>
+              </IonChip>
             <IonChip className="timer" outline={true}>
               <IonIcon icon={timer}/>
               <IonLabel>

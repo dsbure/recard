@@ -68,17 +68,17 @@ function CharacterSelectButton({ name, imageSrc, desc, onClick }: ICSButton) {
 }
 const Onboarding: React.FC = () => {
 	const welcome = <>
-		<IonIcon icon="./favicon.svg" className="recall-oicon" />
+		<IonIcon icon="./favicon.svg" className="recall-oicon animate__animated animate__backInRight animate__slow" />
 		<IonCardHeader>
 			<IonCardTitle>
 				Welcome to
 				<br />
-				<IonImg src={`./recall-wordmark-ambi.svg`} alt="recall" className="animate__animated animate__backInRight" id="recall-onboarding" />
+				<IonImg src={`./recall-wordmark-ambi.svg`} alt="recall" className="animate__animated animate__backInDown" id="recall-onboarding" />
 			</IonCardTitle>
-			<IonCardSubtitle>[witty_tagline]</IonCardSubtitle>
+			<IonCardSubtitle className="animate__animated animate__backInDown">[witty_tagline]</IonCardSubtitle>
 		</IonCardHeader>
 		<IonCardContent className="ocard">
-			<IonButton className="obutton" size="large" onClick={() => setCurrentPage(1)}>
+			<IonButton className="obutton animate__animated animate__backInUp animate__slower" size="large" onClick={() => setCurrentPage(1)}>
 				<IonIcon icon={arrowForward} slot="start" />
 				Continue
 			</IonButton>
