@@ -103,7 +103,7 @@ const MainTab: React.FC = () => {
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
-          if (!data) return;
+          if (!data || !(await StorageService.getItem("onboarded"))) return;
           const segmentButtons = data.map((category, index) => {
 
             return <>
@@ -115,9 +115,7 @@ const MainTab: React.FC = () => {
 
           setHeaderButtons(<>{segmentButtons}</>);
           setTimeout(async () => {
-            if (await StorageService.getItem("onboarded")) {
-              setPopoverOpen(true);
-            }
+            setPopoverOpen(true);
           }, 1000);
           if (!pageViewLoaded) {
             setPageView(<>
