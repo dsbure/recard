@@ -227,7 +227,7 @@ const FlashcardPage: React.FC = () => {
               : <></>)}
           </div>
         </div>
-        {//<SigmaModes />}
+        {/*<SigmaModes />*/}
         <IonModal id="question-modal" ref={(e) => setModal(e)} isOpen={toastOpen} canDismiss={!toastOpen} handle={false} initialBreakpoint={1} breakpoints={[0, 1]} >
           <IonCard className={toastOpen ? ("animate__animated " + (isCorrect ? "animate__tada" : "animate__shakeX")) : ""}>
             <IonCardHeader>
