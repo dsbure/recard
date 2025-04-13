@@ -114,8 +114,10 @@ const MainTab: React.FC = () => {
           });
 
           setHeaderButtons(<>{segmentButtons}</>);
-          if (await StorageService.getItem("onboarded")) setTimeout(() => {
-            setPopoverOpen(true);
+          setTimeout(async () => {
+            if (await StorageService.getItem("onboarded")) {
+              setPopoverOpen(true);
+            }
           }, 1000);
           if (!pageViewLoaded) {
             setPageView(<>
