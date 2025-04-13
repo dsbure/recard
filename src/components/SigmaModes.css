@@ -1,0 +1,37 @@
+.sigma-modes {
+	margin: 0;
+	margin-inline: auto;
+	display: flex;
+}
+.sigma-modes ion-card-content {
+	padding: 0;
+	display: flex;
+	align-items: center;
+}
+.sigma-modes ion-button {
+	margin: 0;
+	--box-shadow: none;
+	--background: var(--ion-background-color-step-50);
+	--color: var(--ion-text-color);
+	--border-radius: 12px;
+}
+.sigma-modes-button {
+	display: flex;
+	flex-direction: column;
+	padding: 4px;
+	flex: 1;
+}
+.sigma-modes-name {
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 1000;
+	color: var(--ion-text-color-step-250);
+}
+.sigma-modes-content {
+	display: flex;
+	justify-content: stretch;
+	width: 100%;
+}
+.sigma-modes-header {
+	display: none;
+}

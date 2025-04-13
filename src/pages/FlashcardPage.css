@@ -34,11 +34,14 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	height: fit-content;
 }
 .flashcard-page .container {
-	height: 100%;
+	height: calc(100% - 80px);
 	display: flex;
 	flex-direction: column;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .flashcard-header {
 	max-width: 576px;

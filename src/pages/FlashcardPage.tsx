@@ -8,6 +8,7 @@ import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import StorageService from '../services/StorageService';
 import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
 import FetchFlashcardData from '../services/FetchFlashcardData';
+import SigmaModes from '../components/SigmaModes';
 
 
 const FlashcardPage: React.FC = () => {
@@ -94,7 +95,7 @@ const FlashcardPage: React.FC = () => {
 
     return (days != 0 ? days + ":" : "") + (hours != 0 ? String(hours).padStart(2, '0') + ":" : "") + String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
   };
-  
+
   const handleNextFlashcard = async (newScore: number) => {
     if (currentQuestionIndex + 1 < flashcardData.flashcards.length) {
       setProgress((currentQuestionIndex + 2) / (flashcardData.flashcards.length + 1));
@@ -166,12 +167,12 @@ const FlashcardPage: React.FC = () => {
           </IonButtons>
           <IonTitle>Flashcard</IonTitle>
           <IonButtons slot="end">
-              <IonChip className="streak" color={currentStreak > 0 ? "warning" : "dark"}>
-                <IonIcon icon={flame} />
-                <IonLabel>{currentStreak}</IonLabel>
-              </IonChip>
+            <IonChip className="streak" color={currentStreak > 0 ? "warning" : "dark"}>
+              <IonIcon icon={flame} />
+              <IonLabel>{currentStreak}</IonLabel>
+            </IonChip>
             <IonChip className="timer" outline={true}>
-              <IonIcon icon={timer}/>
+              <IonIcon icon={timer} />
               <IonLabel>
                 {formattedTime}
               </IonLabel>
@@ -226,7 +227,7 @@ const FlashcardPage: React.FC = () => {
               : <></>)}
           </div>
         </div>
-
+        {//<SigmaModes />}
         <IonModal id="question-modal" ref={(e) => setModal(e)} isOpen={toastOpen} canDismiss={!toastOpen} handle={false} initialBreakpoint={1} breakpoints={[0, 1]} >
           <IonCard className={toastOpen ? ("animate__animated " + (isCorrect ? "animate__tada" : "animate__shakeX")) : ""}>
             <IonCardHeader>
@@ -244,7 +245,7 @@ const FlashcardPage: React.FC = () => {
                 <IonIcon icon={checkmarkCircle} />
                 <IonLabel>Correct answer:</IonLabel>
               </IonChip> {correctedAnswer}</> : null}
-              
+
               <IonButton expand="block" onClick={() => {
                 modal?.dismiss();
                 setToastOpen(false);
