@@ -3,7 +3,7 @@ import './FlashcardPage.css';
 import { useEffect, useRef, useState } from 'react';
 import { Flashcard } from '../components/Flashcard';
 import { useHistory } from 'react-router';
-import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, flame, heart, timer } from 'ionicons/icons';
+import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, flame, heart, iceCream, snow, timer } from 'ionicons/icons';
 import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import StorageService from '../services/StorageService';
 import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
@@ -27,6 +27,10 @@ const FlashcardPage: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [formattedTime, setFormattedTime] = useState("00:00");
 
+  const [hasImmunity, setHasImmunity] = useState(false);
+  const [timeFreeze, setTimeFreeze] = useState(false);
+  const [timeFreezeTimeStart, setTFTS] = useState(0);
+
   const [presentAlert] = useIonAlert();
 
   const [toastOpen, setToastOpen] = useState(false);
@@ -34,6 +38,7 @@ const FlashcardPage: React.FC = () => {
 
   const card = useRef<HTMLDivElement | null>(null);
   const cardAnim = useRef<Animation | null>(null);
+  const currentFlashcard = useRef<any>(null);
 
   const router = useIonRouter();
 
@@ -61,6 +66,8 @@ const FlashcardPage: React.FC = () => {
     const data = JSON.parse(localStorage.getItem("currentFlashcard")!);
     setCQO(shuffleOrder(data.flashcards.length));
     setFlashcardData(data);
+    setHasImmunity(false);
+    setTimeFreeze(false);
     setTimeout(() => setProgress((currentQuestionIndex + 1) / (data.flashcards.length + 1)), 0);
   });
 
@@ -83,6 +90,7 @@ const FlashcardPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (timeFreeze) return;
     setFormattedTime(formatTime(currentTime - startTime));
   }, [currentTime]);
 
@@ -100,6 +108,13 @@ const FlashcardPage: React.FC = () => {
     if (currentQuestionIndex + 1 < flashcardData.flashcards.length) {
       setProgress((currentQuestionIndex + 2) / (flashcardData.flashcards.length + 1));
       setCorrectedAnswer("");
+      setHasImmunity(false);
+      if (timeFreeze) {
+        setTimeFreeze(false);
+        setStartTime((prev) => 
+          prev + (Date.now() - timeFreezeTimeStart)
+        );
+      }
       cardAnim.current?.play();
       cardAnim.current?.onFinish(() => {
         setTimeout(() => {
@@ -131,21 +146,28 @@ const FlashcardPage: React.FC = () => {
       router.push("/results");
     }
   }
-  const handleAnswerClick = (correct: boolean, userAnswer: string | string[], type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse", correctedInContext?: string) => {
+  const handleAnswerClick = (correct: boolean, userAnswer: string | string[], type: "multipleChoice" | "identification" | "matchType" | "checkboxes" | "trueFalse" | "skipped", correctedInContext?: string) => {
+    const answerCorrect = hasImmunity || correct;
     setCurrentAnswer(Array.isArray(userAnswer) ? userAnswer.join(', ') : userAnswer);
-    const newScore = correctAnswers + (correct ? 1 : 0);
-    const newStreak = (correct ? currentStreak + 1 : 0);
+    const newScore = correctAnswers + (answerCorrect ? 1 : 0);
+    const newStreak = answerCorrect ? currentStreak + 1 : 0;
+
     setCA(newScore);
     setCurrentStreak(newStreak);
+
     const correctAnswer = flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct;
     setShowAnswer(type !== "matchType" && type !== "trueFalse");
-    if (correctedInContext) {
-      setCorrectedAnswer(correctedInContext);
-    } else {
-      setCorrectedAnswer(Array.isArray(correctAnswer) ? correctAnswer.join(', ') : correctAnswer);
-    }
+    const formattedCorrectAnswer = Array.isArray(correctAnswer) 
+      ? correctAnswer.join(', ') 
+      : correctAnswer;
+
+    const skippedSuffix = type === "skipped" ? " (skipped)" : "";
+
+    setCorrectedAnswer(correctedInContext || (formattedCorrectAnswer + skippedSuffix));
+
     setIsCorrect(correct);
-    if (!correct) {
+
+    if (!answerCorrect) {
       setToastOpen(true);
       setMistakes((prevMistakes) => prevMistakes + 1);
       return;
@@ -156,8 +178,24 @@ const FlashcardPage: React.FC = () => {
     setToastOpen(true); // ma'am ayna core
     //}
   };
+
+  const skipFunction = () => {
+    handleAnswerClick(true, flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct, "skipped");
+  };
+  const immunityFunction = () => {
+    setHasImmunity(true);
+  };
+  const fiftyFiftyFunction = () => {
+    currentFlashcard.current?.fiftyFifty();
+  };
+  const timeFreezeFunction = () => {
+    setTFTS(Date.now());
+    setTimeFreeze(true);
+  };
   return (
     <IonPage>
+      <div className={"immunity " + 
+      (hasImmunity ?  "enabled" : null)}></div>
       <IonHeader id="flashcard-header">
         <IonToolbar>
           <IonButtons slot="start">
@@ -171,8 +209,8 @@ const FlashcardPage: React.FC = () => {
               <IonIcon icon={flame} />
               <IonLabel>{currentStreak}</IonLabel>
             </IonChip>
-            <IonChip className="timer" outline={true}>
-              <IonIcon icon={timer} />
+            <IonChip className={`timer ${timeFreeze ? "frozen" : ""}`} outline={!timeFreeze}>
+              <IonIcon icon={timeFreeze ? snow : timer} />
               <IonLabel>
                 {formattedTime}
               </IonLabel>
@@ -203,6 +241,7 @@ const FlashcardPage: React.FC = () => {
           <div ref={card} id="flashcards" className={"non-scroll" + (currentQuestionOrder[currentQuestionIndex + 1] < flashcardData.flashcards.length ? "" : " lonely")}>
             <div id="curr">
               <Flashcard
+                ref={currentFlashcard}
                 key={currentQuestionIndex + "" + startTime}
                 flashcard={flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]]}
                 index={currentQuestionIndex + 1}
@@ -227,11 +266,11 @@ const FlashcardPage: React.FC = () => {
               : <></>)}
           </div>
         </div>
-        {/*<SigmaModes />*/}
+        <SigmaModes skipFunction={skipFunction} immunityFunction={immunityFunction} fiftyFiftyFunction={fiftyFiftyFunction} timeFreezeFunction={timeFreezeFunction} />
         <IonModal id="question-modal" ref={(e) => setModal(e)} isOpen={toastOpen} canDismiss={!toastOpen} handle={false} initialBreakpoint={1} breakpoints={[0, 1]} >
-          <IonCard className={toastOpen ? ("animate__animated " + (isCorrect ? "animate__tada" : "animate__shakeX")) : ""}>
+          <IonCard className={toastOpen ? ("animate__animated " + (isCorrect || hasImmunity ? "animate__tada" : "animate__shakeX")) : ""}>
             <IonCardHeader>
-              <IonCardTitle>{(!isCorrect ? "Inc" : "C") + "orrect!"}</IonCardTitle>
+              <IonCardTitle>{isCorrect ? "Correct!" : (hasImmunity ? "Immune!"  : "Incorrect!")}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
               {!isCorrect ? <>

@@ -24,7 +24,8 @@
 	width: 100%;
 }
 .timer, .streak {
-  font-family: "Space Mono", monospace;
+  	font-family: "Space Mono", monospace;
+  	transition: 0.333s;
 }
 .hidden {
 	display: none;
@@ -58,4 +59,28 @@
 	flex: 12;
 	text-align: center;
 	font-size: 1.125em;
+}
+.immunity {
+	background: radial-gradient(circle,rgba(235, 255, 84, 0) 0%, rgba(107, 255, 156, 0.05) 50%, rgba(145, 255, 240, 0.25) 100%);
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+	opacity: 0;
+	transition: all 1s;
+	pointer-events: none;
+}
+.immunity.enabled {
+	opacity: 0.6;
+}
+.timer.frozen {
+	background-color: var(--ion-color-secondary);
+	color: var(--ion-background-color);
+	font-weight: 800;
+}
+.timer ion-icon {
+	transition: 0.333s;
+}
+.timer.frozen ion-icon {
+	fill: var(--ion-background-color);
 }

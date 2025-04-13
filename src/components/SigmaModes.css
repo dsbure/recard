@@ -20,6 +20,15 @@
 	flex-direction: column;
 	padding: 4px;
 	flex: 1;
+	transition: 0.333s;
+}
+.sigma-modes-button:not(.enabled) {
+	pointer-events: none;
+	filter: blur(4px);
+}
+.sigma-modes-button:not(.enabled) ion-button {
+	--background: var(--ion-background-color-step-100);
+	--color: var(--ion-text-color-step-450);
 }
 .sigma-modes-name {
 	text-align: center;

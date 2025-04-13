@@ -11,7 +11,7 @@
 	display: grid;
 	height: 100%;
 }
-.results-container .summary {
+.centered-container .summary {
 	justify-content: center;
 	display: flex;
 }

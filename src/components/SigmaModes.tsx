@@ -6,6 +6,7 @@ export interface ISMBProps {
   sigmaFunction: () => void;
   name: string;
   icon: string;
+  enabled: boolean;
 }
 
 export interface ISMProps {
@@ -15,8 +16,8 @@ export interface ISMProps {
   timeFreezeFunction: () => void;
 }
 
-function SigmaModeButton({ sigmaFunction, name, icon }: ISMBProps) {
-  return <div className="sigma-modes-button">
+function SigmaModeButton({ sigmaFunction, name, icon, enabled }: ISMBProps) {
+  return <div className={"sigma-modes-button " + (enabled ? "enabled" : "")}>
     <IonButton onClick={sigmaFunction}>
       <IonIcon icon={icon} slot="icon-only" />
     </IonButton>
@@ -34,10 +35,10 @@ export default function SigmaModes({ skipFunction, immunityFunction, fiftyFiftyF
       </IonCardTitle>
     </IonCardHeader>
     <IonCardContent className="sigma-modes-content">
-      <SigmaModeButton sigmaFunction={skipFunction} name={"Skip"} icon={invertMode} />
-      <SigmaModeButton sigmaFunction={immunityFunction} name={"Immmunity"} icon={shieldHalf} />
-      <SigmaModeButton sigmaFunction={fiftyFiftyFunction} name={"50/50"} icon={logOut} />
-      <SigmaModeButton sigmaFunction={timeFreezeFunction} name={"Time Freeze"} icon={timer} />
+      <SigmaModeButton sigmaFunction={skipFunction} name={"Skip"} icon={logOut} enabled={true}/>
+      <SigmaModeButton sigmaFunction={immunityFunction} name={"Immmunity"} icon={shieldHalf} enabled={true}/>
+      <SigmaModeButton sigmaFunction={fiftyFiftyFunction} name={"50/50"} icon={invertMode} enabled={true}/>
+      <SigmaModeButton sigmaFunction={timeFreezeFunction} name={"Freeze"} icon={timer} enabled={true}/>
     </IonCardContent>
   </IonCard>;
 }
