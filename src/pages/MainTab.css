@@ -7,7 +7,7 @@
   z-index: 2;
 }
 
-ion-button:not(.button-round), ion-card {
+ion-button:not(.button-round), ion-card, .alert-wrapper.sc-ion-alert-md {
   border-radius: 16px;
   --border-radius: 16px;
 }
