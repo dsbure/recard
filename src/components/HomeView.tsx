@@ -14,7 +14,7 @@ interface IHomeView {
 }
 
 export function HomeView({setTab}: IHomeView) {
-  const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0 });
+  const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0, levelName: "" });
   const [progress, setProgress] = useState(0);
   const [totalProgress, setTotalProgress] = useState(0);
   const [expToNextLevel, setExpToNextLevel] = useState(100);
@@ -80,10 +80,10 @@ export function HomeView({setTab}: IHomeView) {
         <IonCardTitle id="avatar-name">{name}!</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-        <h2>Level {expData.currentLevel}</h2>
+        <h2>{EXPStorageService.getLevelName(expData.currentLevel)}</h2>
         <IonProgressBar value={progress} />
-        <IonChip>Total: {expData.currentEXP} XP</IonChip>
-        <IonChip>Next Level: {expToNextLevel} XP</IonChip>
+        <IonChip>Total: {expData.currentEXP} Aura</IonChip>
+        <IonChip>Next Level: {expToNextLevel} Aura</IonChip>
       </IonCardContent>
     </IonCard>
     <IonCard id="total-progress-container">

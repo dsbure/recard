@@ -74,7 +74,7 @@ const Results: React.FC = () => {
               <IonChip className="score" color="warning">
                 <IonIcon icon={star} />
                 <IonLabel>
-                  {exp}XP
+                  {exp} Aura
                 </IonLabel>
               </IonChip>
             </IonCardContent>
