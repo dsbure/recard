@@ -1,6 +1,6 @@
 export default interface ISigmaModes {
-	skip: boolean;
-	immunity: boolean;
-	fiftyFifty: boolean;
-	timeFreeze: boolean;
+	skip: number;
+	immunity: number;
+	fiftyFifty: number;
+	timeFreeze: number;
 }

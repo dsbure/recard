@@ -1,4 +1,4 @@
-import { createAnimation, Animation, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonLabel, IonModal, IonPage, IonProgressBar, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToast, IonToolbar, useIonRouter, useIonViewWillEnter, IonAlert, useIonAlert } from '@ionic/react';
+import { createAnimation, Animation, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonLabel, IonModal, IonPage, IonProgressBar, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonTitle, IonToast, IonToolbar, useIonRouter, useIonViewWillEnter, IonAlert, useIonAlert, useIonModal } from '@ionic/react';
 import './FlashcardPage.css';
 import { useEffect, useRef, useState } from 'react';
 import { Flashcard } from '../components/Flashcard';
@@ -10,6 +10,7 @@ import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/
 import FetchFlashcardData from '../services/FetchFlashcardData';
 import SigmaModes from '../components/SigmaModes';
 import ISigmaModes from '../interfaces/ISigmaModes';
+import { SigmaModePopup } from '../components/SigmaModePopup';
 
 
 const FlashcardPage: React.FC = () => {
@@ -34,6 +35,9 @@ const FlashcardPage: React.FC = () => {
   const [timeFreezeTimeStart, setTFTS] = useState(0);
 
   const [presentAlert] = useIonAlert();
+  const [presentModal, dismissModal] = useIonModal(SigmaModePopup, {
+    dismiss: (data: string) => dismissModal(data),
+  });
 
   const [toastOpen, setToastOpen] = useState(false);
   const [modal, setModal] = useState<HTMLIonModalElement | null>(null);
@@ -42,10 +46,10 @@ const FlashcardPage: React.FC = () => {
   const cardAnim = useRef<Animation | null>(null);
   const currentFlashcard = useRef<any>(null);
   const [availableSigmaModes, setAvailableSigmaModes] = useState<ISigmaModes>({
-    skip: false,
-    immunity: false,
-    fiftyFifty: false,
-    timeFreeze: false,
+    skip: 0,
+    immunity: 0,
+    fiftyFifty: 0,
+    timeFreeze: 0,
   });
 
   const router = useIonRouter();
@@ -73,10 +77,10 @@ const FlashcardPage: React.FC = () => {
     setCorrectedAnswer("");
     setNextUnlockStreak(0);
     setAvailableSigmaModes({
-      skip: false,
-      immunity: false,
-      fiftyFifty: false,
-      timeFreeze: false,
+      skip: 0,
+      immunity: 0,
+      fiftyFifty: 0,
+      timeFreeze: 0,
     });
     const data = JSON.parse(localStorage.getItem("currentFlashcard")!);
     setCQO(shuffleOrder(data.flashcards.length));
@@ -120,10 +124,12 @@ const FlashcardPage: React.FC = () => {
   };
 
   const handleNextFlashcard = async (newScore: number) => {
+    if (!isCorrect && hasImmunity) {
+      setHasImmunity(false);
+    }
     if (currentQuestionIndex + 1 < flashcardData.flashcards.length) {
       setProgress((currentQuestionIndex + 2) / (flashcardData.flashcards.length + 1));
       setCorrectedAnswer("");
-      setHasImmunity(false);
       if (timeFreeze) {
         setTimeFreeze(false);
         setStartTime((prev) =>
@@ -180,7 +186,7 @@ const FlashcardPage: React.FC = () => {
       : correctAnswer;
 
     const skippedSuffix = type === "skipped" ? " (skipped)" : "";
-
+    
     setCorrectedAnswer(correctedInContext || (formattedCorrectAnswer + skippedSuffix));
 
     setIsCorrect(correct);
@@ -192,72 +198,29 @@ const FlashcardPage: React.FC = () => {
       setMistakes((prevMistakes) => prevMistakes + 1);
       return;
     }
-    //if (type === "multipleChoice" || type === "trueFalse") //{
-    //  setTimeout(() => handleNextFlashcard(newScore), 2000);
-    //} else {
-    //setToastOpen(true); // ma'am ayna core
-    //}
     if (newUnlockStreak >= 4) {
       setNextUnlockStreak(0);
-      const unlockedAll = availableSigmaModes.fiftyFifty && availableSigmaModes.immunity && availableSigmaModes.skip && availableSigmaModes.timeFreeze;
-      if (unlockedAll) {
-        setToastOpen(true);
-        return;
-      }
-      presentAlert({
-        header: "Sigma Modes Available!",
-        subHeader: "Select a Sigma Mode to unlock.",
-        cssClass: "alert-sigma-modes",
+      presentModal({
+        id: "alert-sigma-modes",
         backdropDismiss: false,
-        inputs: [
-          {
-            label: 'Skip',
-            type: 'radio',
-            value: 'skip',
-            disabled: availableSigmaModes.skip,
-          },
-          {
-            label: 'Immunity',
-            type: 'radio',
-            value: 'immunity',
-            disabled: availableSigmaModes.immunity
-          },
-          {
-            label: '50/50',
-            type: 'radio',
-            value: 'fiftyFifty',
-            disabled: availableSigmaModes.fiftyFifty
-          },
-          {
-            label: 'Time Freeze',
-            type: 'radio',
-            value: 'timeFreeze',
-            disabled: availableSigmaModes.timeFreeze
-          },
-        ],
-        buttons: [{
-          text: 'Claim',
-          role: 'confirm',
-          handler: (value) => {
-            if (!value) return false;
-            switch (value) {
-              case "skip":
-                availableSigmaModes.skip = true;
-                break;
-              case "immunity":
-                availableSigmaModes.immunity = true;
-                break;
-              case "fiftyFifty":
-                availableSigmaModes.fiftyFifty = true;
-                break;
-              case "timeFreeze":
-                availableSigmaModes.timeFreeze = true;
-                break;
-            }
-            setToastOpen(true);
-          },
-
-        }],
+        onWillDismiss: (value) => {
+          if (!value.detail.data) return;
+          switch (value.detail.data) {
+            case "skip":
+              availableSigmaModes.skip += 1;
+              break;
+            case "immunity":
+              availableSigmaModes.immunity += 1;
+              break;
+            case "fiftyFifty":
+              availableSigmaModes.fiftyFifty += 1;
+              break;
+            case "timeFreeze":
+              availableSigmaModes.timeFreeze += 1;
+              break;
+          }
+          setToastOpen(true);
+        }
       });
     } else {
       setToastOpen(true);
@@ -266,20 +229,20 @@ const FlashcardPage: React.FC = () => {
 
   const skipFunction = () => {
     handleAnswerClick(true, flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.correct, "skipped");
-    availableSigmaModes.skip = false;
+    availableSigmaModes.skip--;
   };
   const immunityFunction = () => {
     setHasImmunity(true);
-    availableSigmaModes.immunity = false;
+    availableSigmaModes.immunity--;
   };
   const fiftyFiftyFunction = () => {
     currentFlashcard.current?.fiftyFifty();
-    availableSigmaModes.fiftyFifty = false;
+    availableSigmaModes.fiftyFifty--;
   };
   const timeFreezeFunction = () => {
     setTFTS(Date.now());
     setTimeFreeze(true);
-    availableSigmaModes.timeFreeze = false;
+    availableSigmaModes.timeFreeze--;
   };
   return (
     <IonPage>
@@ -356,7 +319,7 @@ const FlashcardPage: React.FC = () => {
                 : <></>)}
             </div>
           </div>
-          <SigmaModes className={!(availableSigmaModes.fiftyFifty || availableSigmaModes.immunity || availableSigmaModes.skip || availableSigmaModes.timeFreeze) ? "invisible" : ""} skipFunction={skipFunction} immunityFunction={immunityFunction} fiftyFiftyFunction={fiftyFiftyFunction} timeFreezeFunction={timeFreezeFunction} activeModes={availableSigmaModes} />
+          <SigmaModes className={(availableSigmaModes.fiftyFifty + availableSigmaModes.immunity + availableSigmaModes.skip + availableSigmaModes.timeFreeze) === 0 ? "invisible" : ""} skipFunction={skipFunction} immunityFunction={immunityFunction} fiftyFiftyFunction={fiftyFiftyFunction} timeFreezeFunction={timeFreezeFunction} activeModes={availableSigmaModes} />
         </div>
 
         <IonModal id="question-modal" ref={(e) => setModal(e)} isOpen={toastOpen} canDismiss={!toastOpen} handle={false} initialBreakpoint={1} breakpoints={[0, 1]} >

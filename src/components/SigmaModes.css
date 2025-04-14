@@ -20,12 +20,12 @@
 	--box-shadow: none;
 	--background: var(--ion-background-color-step-50);
 	--color: var(--ion-text-color);
-	--border-radius: 12px;
+	--border-radius: 8px;
 }
 .sigma-modes-button {
 	display: flex;
 	flex-direction: column;
-	padding: 4px;
+	padding: 8px;
 	flex: 1;
 	transition: 0.333s;
 }
@@ -50,4 +50,11 @@
 }
 .sigma-modes-header {
 	display: none;
+}
+.sigma-badge {
+	position: absolute;
+	left: 8px;
+	font-family: 'Space Mono', monospace;
+	--background: var(--ion-text-color-step-250);
+	--color: var(--ion-background-color-step-50);
 }

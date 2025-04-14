@@ -94,14 +94,11 @@ const MainTab: React.FC = () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
           if (!data) return;
-          const segmentButtons = data.map((category, index) => {
-
-            return <>
-              <IonSegmentButton {...(index === 0 ? {ref: popper.refs.setReference} : {})} key={`index-${index}`} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster" >
-                <IonLabel key={index}>{category.categoryName}</IonLabel>
-              </IonSegmentButton>
-            </>
-          });
+          const segmentButtons = data.map((category, index) => (
+            <IonSegmentButton {...(index === 0 ? {ref: popper.refs.setReference} : {})} key={`index-${index}`} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster">
+              <IonLabel>{category.categoryName}</IonLabel>
+            </IonSegmentButton>
+          ));
 
           setHeaderButtons(<>{segmentButtons}</>);
           setTimeout(async () => {
