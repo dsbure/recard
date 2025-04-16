@@ -23,7 +23,7 @@
 #flashcards > div {
 	width: 100%;
 }
-.timer, .streak {
+.additional-info {
   	font-family: "Space Mono", monospace;
   	transition: 0.333s;
 }
@@ -142,4 +142,19 @@
 	width: 100%;
 	grid-auto-rows: 1fr;
 	align-items: stretch;
+}
+#countdown {
+	--background: #0000;
+	--progress-background: var(--ion-text-color);
+	--progress-background: color-mix(in srgb, var(--ion-color-danger), var(--ion-text-color) var(--progress));
+}
+#countdown.frozen {
+	--background: #0000;
+	--progress-background: var(--ion-color-secondary);
+}
+#question-modal .minus-lives {
+	width: fit-content;
+	position: absolute;
+	right: 8px;
+	top: 8px;
 }

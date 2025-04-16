@@ -1,6 +1,6 @@
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonPage, IonPopover, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonPopover, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert, useIonRouter, useIonViewWillEnter } from '@ionic/react';
 import './MainTab.css';
-import { arrowBack, bug, flash, heart, home, person, trash } from 'ionicons/icons';
+import { arrowBack, bug, flash, heart, help, helpCircle, home, person, settings, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IFlashcardData } from '../interfaces/IFlashcardData'; import { IFlashcardCategory } from "../interfaces/IFlashcardCategory";
@@ -12,6 +12,7 @@ import StorageService from '../services/StorageService';
 import { TopicHeader } from '../components/TopicHeader';
 import { useThemeDetector } from '../hooks/useThemeDetector';
 import { usePopper } from '../hooks/Popper';
+import { IPlayerData } from '../interfaces/IPlayerData';
 
 const DebugButton: React.FC = () => {
   const [presentAlert] = useIonAlert();
@@ -48,7 +49,14 @@ const DebugButton: React.FC = () => {
     <IonIcon slot="icon-only" icon={bug}></IonIcon>
   </IonButton>
 }
+const HelpButton: React.FC = () => {
+  const [presentAlert] = useIonAlert();
 
+  return <IonButton
+    onClick={() => { }} shape="round">
+    <IonIcon slot="icon-only" icon={helpCircle}></IonIcon>
+  </IonButton>
+}
 
 const MainTab: React.FC = () => {
   const [headerButtons, setHeaderButtons] = useState(<>
@@ -61,21 +69,40 @@ const MainTab: React.FC = () => {
 
   const themeDetector = useThemeDetector();
   const [colorTheme, setColorTheme] = useState("light");
-  
+
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popper = usePopper({
     children: "Tap here to start your journey!",
     isOpen: popoverOpen,
     setIsOpen: setPopoverOpen
   });
+  const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0, levelName: "" });
+  const [name, setName] = useState("");
 
   useEffect(() => {
     setColorTheme(themeDetector);
   }, [themeDetector]);
 
+  useIonViewWillEnter(() => {
+    StorageService.getItem("playerData").then((e) => {
+      setName((e as IPlayerData).name);
+    });
+    const updateEXPData = async () => {
+      const expData = await EXPStorageService.getExperienceData();
+
+      setExpData(expData);
+    };
+    const unsubscribeEXPStorageService = EXPStorageService.subscribe(updateEXPData);
+
+    updateEXPData();
+    return () => {
+      unsubscribeEXPStorageService();
+    };
+  }, []);
+
   let pageViewLoaded = false;
   useEffect(() => {
-  
+
     FetchFlashcardData.getFlashcardData(false, false) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then((data: IFlashcardData) => {
@@ -89,16 +116,18 @@ const MainTab: React.FC = () => {
         pageViewLoaded = true;
       })
       .catch((error) => console.error('Load error:', error));
-      
+
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
           if (!data) return;
-          const segmentButtons = data.map((category, index) => (
-            <IonSegmentButton {...(index === 0 ? {ref: popper.refs.setReference} : {})} key={`index-${index}`} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster">
-              <IonLabel>{category.categoryName}</IonLabel>
+          const segmentButtons = data.map((category, index) => {
+            const offset = Math.round(((-Math.cos(index * Math.PI)) * 10) - 10);
+
+            return <IonSegmentButton {...(index === 0 ? { ref: popper.refs.setReference } : {})} key={`index-${index}`} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster" style={{ translate: `0 ${offset}px` }}>
+              <IonImg src={`./qtr/${index+1}.svg`}></IonImg>
             </IonSegmentButton>
-          ));
+          });
 
           setHeaderButtons(<>{segmentButtons}</>);
           setTimeout(async () => {
@@ -140,10 +169,13 @@ const MainTab: React.FC = () => {
         <IonToolbar>
           <IonButtons slot="end">
             <DebugButton />
+            <HelpButton />
             <IonChip
               onClick={() => { }}
-              className="avatar-toolbar"
+              id="avatar-toolbar"
             >
+              <IonImg src={`./levels/${expData.currentLevel}.gif`} />
+              <IonLabel>{name}</IonLabel>
               <IonAvatar>
                 <img alt="User" src="./avatar.svg" />
               </IonAvatar>
@@ -159,6 +191,18 @@ const MainTab: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
+      <IonPopover trigger="avatar-toolbar" triggerAction="click">
+        <IonContent class="settings-content">
+          <IonList>
+            <IonItem>
+              <IonLabel>Malay q ba</IonLabel>
+            </IonItem>
+            <IonItem>
+              <IonLabel>Also anong butngi q??</IonLabel>
+            </IonItem>
+          </IonList>
+        </IonContent>
+      </IonPopover>
       {popper.popover}
       <div className="tab-switcher-container">
         <IonSegment

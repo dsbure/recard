@@ -16,19 +16,18 @@ ion-modal {
 }
 ion-segment {
   display: flex;
-  background-color: var(--ion-toolbar-background);
-  border-radius: 1000px;
+  background-color: none;
+  border-radius: 8px;
   margin-top: 8px;
   height: fit-content;
   width: fit-content;
-  overflow-y: hidden;
+  overflow: visible;
   margin-inline: auto;
-  height: 48px;
-  min-height: 48px;
-  max-height: 48px;
+  height: 96px;
+  min-height: 96px;
+  max-height: 96px;
   max-width: 100vw;
   justify-content: start;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
 }
 ion-segment-content {
   height: fit-content;
@@ -39,16 +38,31 @@ ion-segment-button::part(native) {
   flex-grow: 1;
 }
 .segment-button-checked.md::part(native) {
-  color: var(--ion-color-primary-contrast);
+  color: var(--ion-text-color);
 }
 
 ion-segment-button.md::part(indicator-background) {
   --padding: 8px;
   border-radius: 1000px;
-  background-color: var(--ion-color-primary);
+  background-color: transparent !important;
   height: calc(48px - var(--padding));
   width: calc(100% - var(--padding));
   margin: calc(var(--padding) / 2);
+  background-image: url("./qtr/boat.svg");
+  background-size: 96px 96px;
+  z-index: 100;
+  animation-delay: 1s;
+  background-position: center;
+  translate: 0 10px
+}
+ion-segment-button  {
+  display: flex;
+  justify-content: stretch;
+}
+ion-segment-button ion-img {
+  width: 167%;
+  aspect-ratio: 1;
+  z-index: 1;
 }
 .loading-card {
   width: fit-content;
@@ -70,15 +84,26 @@ ion-segment-button.md::part(indicator-background) {
   height: 30px;
   width: fit-content;
 }
-.avatar-toolbar {
-  height: 32px;
-  width: 32px;
-  padding: 0;
+#avatar-toolbar {
+  height: 40px;
+  padding: 8px;
+  padding-inline: 4px;
+  display: flex;
+  gap: 6px;
+  border-radius: 1000px;
 }
-.avatar-toolbar ion-avatar {
+#avatar-toolbar ion-avatar {
   height: 32px;
   width: 32px;
   margin: 0;
+}
+#avatar-toolbar ion-img {
+  height: 32px;
+  width: 32px;
+  margin: 0;
+}
+#avatar-toolbar ion-label {
+  font-weight: 800;
 }
 :root {
   --avatar-ratio: 0.5;
@@ -176,4 +201,33 @@ ion-col, ion-row, ion-grid, ion-card {
 }
 .pop-over-container {
   z-index: 1000;
+}
+.avatar-content {
+  text-align: center;
+}
+.avatar-content ion-progress-bar {
+  border-radius: 999px;
+}
+.level-name {
+  font-weight: 800 !important;
+  font-size: 1.25em !important;
+  text-transform: uppercase;
+}
+#avatar-img {
+  width: 68px;
+  height: 68px;
+  border-radius: 999px;
+  margin: auto;
+  padding: 4px;
+  background-color: var(--ion-background-color-step-250);
+}
+.avatar-content ion-chip:first-of-type {
+  border-start-end-radius: 4px !important;
+  border-end-end-radius: 4px !important;
+  margin-inline-end: 1px;
+}
+.avatar-content ion-chip:last-of-type {
+  border-start-start-radius: 4px !important;
+  border-end-start-radius: 4px !important;
+  margin-inline-start: 1px;
 }

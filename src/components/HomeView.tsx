@@ -73,15 +73,18 @@ export function HomeView({setTab}: IHomeView) {
     };
   }, []);
 
-  return <div className="ion-padding">
+  return <div className="ion-padding animate__animated animate__fadeInUp animate__faster">
     <IonImg className="main-avatar ion-padding" src="./placeholder-avatar.svg" />
     <IonCard id="main-avatar-container">
       <IonCardHeader>
         <IonCardSubtitle>Welcome,</IonCardSubtitle>
         <IonCardTitle id="avatar-name">{name}!</IonCardTitle>
       </IonCardHeader>
-      <IonCardContent>
-        <h2>{EXPStorageService.getLevelName(expData.currentLevel)}</h2>
+      <IonCardContent className="avatar-content">
+        <div id="avatar-img" >
+          <IonImg src={`./levels/${expData.currentLevel}.gif`} />
+        </div>
+        <h1 className="level-name">{EXPStorageService.getLevelName(expData.currentLevel)}</h1>
         <IonProgressBar value={progress} />
         <IonChip>Total: {expData.currentEXP} Aura</IonChip>
         <IonChip>Next Level: {expToNextLevel} Aura</IonChip>

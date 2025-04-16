@@ -6,7 +6,7 @@ export interface IGemCardProps {
 }
 
 export function GemCard({ icon, gemName, quarter, disabled, setTab }: IGemCardProps) {
-  return (<IonCard className="gem-card">
+  return (<IonCard className="gem-card animate__animated animate__fadeInUp animate__faster">
     <IonButton expand="block" fill="clear" className="gem-card-button" onClick={setTab}>
       <IonCardHeader className="gem-card-container">
         <IonImg src={icon} style={{ 
