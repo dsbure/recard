@@ -64,6 +64,7 @@ export function HomeView({setTab}: IHomeView) {
 
     updateEXPData();
     updateTotalProgressData();
+    updateGemCards();
     return () => { 
       unsubscribeEXPStorageService();
       unsubscribeFetchFlashcardDataPD();

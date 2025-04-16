@@ -90,7 +90,14 @@
   --border-color-checked: transparent;
   --checkbox-background-checked: transparent;
 }
+.f-checkboxes .submit-checkboxes {
+  position: sticky;
+  bottom: 24px;
+  box-shadow: 0 24px 12px 32px var(--ion-background-color);
+}
 .f-checkboxes .choice {
+  min-height: 48px;
+  --padding-start: 48px;
   --background: var(--ion-background-color-step-150);
   --color: var(--ion-text-color-step-150);
 }
