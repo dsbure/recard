@@ -66,6 +66,7 @@ const MainTab: React.FC = () => {
   </>);
   const [pageView, setPageView] = useState(<></>);
   const [selectedSegment, setSelectedSegment] = useState<string>("home");
+  const [playerData, setPlayerData] = useState<IPlayerData>();
 
   const themeDetector = useThemeDetector();
   const [colorTheme, setColorTheme] = useState("light");
@@ -162,6 +163,12 @@ const MainTab: React.FC = () => {
       setPopoverOpen(false);
     }
   }, [selectedSegment]);
+  
+    useEffect(() => {
+      StorageService.getItem("playerData").then(e =>
+        setPlayerData(e)
+      );
+    }, []);
 
   return (
     <IonPage>
@@ -177,14 +184,15 @@ const MainTab: React.FC = () => {
               <IonImg src={`./levels/${expData.currentLevel}.gif`} />
               <IonLabel>{name}</IonLabel>
               <IonAvatar>
-                <img alt="User" src="./avatar.svg" />
+                <img alt="User" src=
+  {`./chars/a${playerData?.character}-profile.png`}  />
               </IonAvatar>
             </IonChip>
           </IonButtons>
           <IonTitle>
             <IonImg
               id="recall-logo"
-              src={`./recall-wordmark-${colorTheme}.svg`}
+              src={`./recall-wordmark-${colorTheme === "dark" ? "light" : "dark"}.svg`}
               alt="Recall"
             />
           </IonTitle>

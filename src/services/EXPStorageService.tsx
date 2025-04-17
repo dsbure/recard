@@ -8,7 +8,7 @@ export interface IEXPStorage {
 }
 
 const levelExperiences = [100, 200, 500, 1000, 2000, 3000, 5000, 8000, 10000];
-const titles = [
+export const titles = [
 	"Nooblet",
 	"Neuron Rookie",
 	"Quizling",
@@ -52,7 +52,7 @@ const EXPStorageService = {
 		this.subscribers.forEach((callback) => callback());
 	},
 
-	async getExperienceData() {
+	async getExperienceData(): Promise<IEXPStorage> {
 		return await StorageService.getItem("experienceData") || { currentLevel: 1, currentEXP: 0, levelEXP: 0, levelName: titles[0] + " 1" };
 	},
 

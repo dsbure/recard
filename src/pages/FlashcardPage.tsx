@@ -179,19 +179,19 @@ const FlashcardPage: React.FC = () => {
       });
     } else {
       const currentCategoryData: IFlashcardStorageCategory = await FlashcardStorageService.getCategoryData(flashcardData.categoryName);
-      const starProgress = (flashcardData.id === (currentCategoryData?.currentId || 0)) ?
-        (currentCategoryData?.starProgress || 0) + 1 >= flashcardData.repeatTotal ?
-          0 : (currentCategoryData?.starProgress || 0) + 1 :
-        currentCategoryData?.starProgress || 1;
+      const starProgress = (flashcardData.id === (currentCategoryData?.currentId ?? 0)) ?
+        (currentCategoryData?.starProgress ?? 0) + 1 >= flashcardData.repeatTotal ?
+          0 : (currentCategoryData?.starProgress ?? 0) + 1 :
+        currentCategoryData?.starProgress ?? 1;
 
-      const starTotal = (flashcardData.id === (currentCategoryData?.currentId || 0)) ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal;
+      const starTotal = (flashcardData.id === (currentCategoryData?.currentId ?? 0)) ? flashcardData.repeatTotal : currentCategoryData?.starTotal ?? flashcardData.repeatTotal;
 
       await FlashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
-        currentId: (currentCategoryData?.starProgress || 0) + 1 === flashcardData.repeatTotal ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId || 0) : currentCategoryData?.currentId || 0,
+        currentId: (currentCategoryData?.starProgress ?? 0) + 1 === flashcardData.repeatTotal ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId ??  0) : currentCategoryData?.currentId ??  0,
         starProgress: starProgress,
         starTotal: starTotal,
-        isComplete: (currentCategoryData?.currentId || 0) >= await FetchFlashcardData.getCategoryTotal(currentCategoryData.category) - 1 && starProgress >= starTotal,
+        isComplete: ((flashcardData.id === (currentCategoryData?.currentId ?? 0)) && (currentCategoryData?.currentId ?? 0) >= (await FetchFlashcardData.getCategoryTotal(currentCategoryData.category)) - 1) && starProgress >= starTotal,
       });
       setMistakes(0);
       const deltaTime = currentTime - startTime;

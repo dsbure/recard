@@ -1,8 +1,9 @@
-import { IonGrid, IonRow, IonCol } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonButton, IonIcon } from '@ionic/react';
 import { StoryFlashcard } from './StoryFlashcard';
 import './StorySnake.css';
 import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 import { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
+import { book } from 'ionicons/icons';
 
 export interface IStorySnakeProps {
   category: IFlashcardCategory;
@@ -12,17 +13,25 @@ export interface IStorySnakeProps {
 export function StorySnake({ category, categoryData }: IStorySnakeProps) {
   let storyFlashcards: any[] = [];
   category.topics.forEach((e, index) => {
-    storyFlashcards.push({ offset: ((-Math.cos(index * 0.5)) * 40) + 40, flashcard: e });
+    storyFlashcards.push({ offset: ((-Math.cos(index)) * 40) + 40, flashcard: e });
   });
-  
+
   return (<IonGrid className="storySnake">
     {storyFlashcards.map((fc, index) => {
       return <IonRow key={index}>
         <IonCol>
-          <StoryFlashcard offset={fc.offset} topic={fc.flashcard} locked={(categoryData?.currentId || 0) < index} progress={(categoryData?.currentId || 0) == index ? Math.max(((categoryData?.starProgress || 0) / (categoryData?.starTotal || 3)) * 100, 0.001) : 0} newTopic={(categoryData?.currentId || 0) == index}/>
+          <StoryFlashcard offset={fc.offset} topic={fc.flashcard} locked={(categoryData?.currentId || 0) < index} progress={(categoryData?.currentId || 0) == index ? Math.max(((categoryData?.starProgress || 0) / (categoryData?.starTotal || 3)) * 100, 0.001) : 0} newTopic={(categoryData?.currentId || 0) == index} />
         </IonCol>
       </IonRow>
     }
     )}
+    <IonRow>
+      <IonCol>
+        <IonButton routerLink={"/story/E" + category.categoryName[1]} className="view-story-button" shape="round" disabled={!categoryData?.isComplete}>
+          <IonIcon icon={book} slot="start" />
+          View Ending
+        </IonButton>
+      </IonCol>
+    </IonRow>
   </IonGrid>);
 }

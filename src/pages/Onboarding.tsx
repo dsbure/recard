@@ -121,22 +121,22 @@ const Onboarding: React.FC = () => {
 		</IonCardHeader>
 		<IonCardContent className="ocard">
 			<div id="character-select">
-				<CharacterSelectButton name="Zed" imageSrc="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.freepik.com%2Fpremium-psd%2Fletter-z_1056304-871.jpg&f=1&nofb=1&ipt=92461706be77c694fcecf9fbfd2731d0e9eace7058df8240939a5093ee2e34e8" desc="coolcoolcool" onClick={() => {
+				<CharacterSelectButton name="Ged" imageSrc="./chars/a1-c.png" desc="oo" onClick={() => {
 					setCharacter(ICharacters.Zed);
 					StorageService.setItem("onboarded", true).then(() => {
-						router.push("/mainTab");
+						router.push("/story/Q1");
 					});
 				}}/>
-				<CharacterSelectButton name="Anne" imageSrc="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fz%2Fletter-z-illustration-flashcard-44147707.jpg&f=1&nofb=1&ipt=bd7c93470e2c3a420b8f5d2d8d1de840f4d4a970389c99b3f52f663771c032fe" desc="yuhyuhyuh" onClick={() => {
+				<CharacterSelectButton name="Anne" imageSrc="./chars/a2-c.png" desc="opo" onClick={() => {
 					setCharacter(ICharacters.Anne);
 					StorageService.setItem("onboarded", true).then(() => {
-						router.push("/mainTab");
+						router.push("/story/Q1");
 					});
 				}}/>
-				<CharacterSelectButton name="O'Wound" imageSrc="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fc8.alamy.com%2Fcomp%2F2NY76FT%2Fletter-z-medicine-logo-design-concept-with-pile-symbol-2NY76FT.jpg&f=1&nofb=1&ipt=a737161d4e0c9fa56b36bb34b7538c4e900c6bb7ecd42bad6dc9635903e7eeed" desc="gauzegauzegauze" onClick={() => {
+				<CharacterSelectButton name="Sammy" imageSrc="./chars/a3-c.png" desc="yes" onClick={() => {
 					setCharacter(ICharacters.OWound);
 					StorageService.setItem("onboarded", true).then(() => {
-						router.push("/mainTab");
+						router.push("/story/Q1");
 					});
 				}}/>
 			</div>

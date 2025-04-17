@@ -3,7 +3,7 @@ export interface IPlayerData {
 	character: ICharacters
 }
 export enum ICharacters {
-	Zed = "Zed",
-	Anne = "Anne",
-	OWound = "O'Wound"
+	Zed = "1",
+	Anne = "2",
+	OWound = "3"
 }

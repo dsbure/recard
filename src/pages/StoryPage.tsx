@@ -1,7 +1,8 @@
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonImg, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonImg, IonPage, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
 import './StoryPage.css';
 import { useParams } from 'react-router';
 import { arrowBack, arrowForward } from 'ionicons/icons';
+import { useEffect, useState } from 'react';
 
 interface StoryPageParams {
   quarter: string;
@@ -9,9 +10,91 @@ interface StoryPageParams {
 
 const StoryPage: React.FC = () => {
   const { quarter } = useParams<StoryPageParams>();
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [nextVisible, setNextVisible] = useState(true);
+  const [showAlert] = useIonAlert();
+  const [setIndexFuncOverride, setSetIndexFuncOverride] = useState(14);
+  const [override, setOverride] = useState(false);
+  const router = useIonRouter();
+  // i hate this
+  useEffect(() => {
+    // special children
+    if (quarter === "Q1") {
+      if (currentIndex === 23) {
+        router.push("/mainTab", "back");
+      } else if (currentIndex === 10) {
+        setNextVisible(false);
+        setTimeout(() => {
+          showAlert({
+            header: 'Choose a chest to open!',
+            subHeader: 'Choose wisely',
+            backdropDismiss: false,
+            buttons: [
+              {
+                text: 'Choose the left chest',
+                handler: () => {
+                  setCurrentIndex(11);
+                },
+              },
+              {
+                text: 'Choose the middle chest',
+                handler: () => {
+                  setCurrentIndex(12);
+                },
+              },
+              {
+                text: 'Choose the right chest',
+                handler: () => {
+                  setCurrentIndex(13);
+                },
+              },
+            ],
+          })
+        }, 2000)
+      } else if (currentIndex >= 11 && currentIndex <= 13) {
+        setNextVisible(true);
+        setOverride(true);
+      } else {
+        setNextVisible(true);
+        setOverride(false);
+      }
+    } else if (quarter === "E1") {
+      if (currentIndex === 24) {
+        router.push("/mainTab", "back");
+      } 
+    } else if (quarter === "Q2") {
+      if (currentIndex === 24) {
+        router.push("/mainTab", "back");
+      } 
+    } else if (quarter === "E2") {
+      if (currentIndex === 24) {
+        router.push("/mainTab", "back");
+      } 
+    } else if (quarter === "Q3") {
+      if (currentIndex === 24) {
+        router.push("/mainTab", "back");
+      } 
+    } else if (quarter === "E3") {
+      if (currentIndex === 10) {
+        router.push("/mainTab", "back");
+      } 
+    } else if (quarter === "Q4") {
+      if (currentIndex === 10) {
+        router.push("/mainTab", "back");
+      } 
+    } else if (quarter === "E4") {
+      if (currentIndex === 17) {
+        router.push("/mainTab", "back");
+      } 
+    } else {
+      setNextVisible(true);
+      setOverride(false);
+    }
+
+  }, [quarter, currentIndex])
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader id="story-header">
         <IonToolbar>
           <IonButtons slot="start">
             <IonButton routerLink="/mainTab" routerDirection="back" shape="round">
@@ -21,26 +104,20 @@ const StoryPage: React.FC = () => {
           <IonTitle>Story: {quarter}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="story-content-container">
         <div className="story-content">
-          <IonCard className="story-image">
-            <IonImg
-              src="https://imgs.xkcd.com/comics/alternative_energy_revolution.jpg"
-            ></IonImg>
-          </IonCard>
-          <IonCard className="dialogue-box">
-            <IonCardHeader class="header">
-              <IonCardTitle class="name">
-                Jam "Zipknot" Jam
-              </IonCardTitle>
-              <IonButton expand="block" className="next-button">
-                <IonIcon slot="icon-only" icon={arrowForward}></IonIcon>
-              </IonButton>
-            </IonCardHeader>
-            <IonCardContent className="dialogue">
-              <div className="ion-padding">Lorem ipsum dolor sit down, mi amor. Consectetur adie piscing blitz, id daneo sam ad temporal incident ut labore et dolore magna aliqua. Ut enim ad minim veniam.</div>
-            </IonCardContent>
-          </IonCard>
+          <video autoPlay id="s-video" key={`v-${currentIndex}`}>
+            <source src={`./storyVid/${quarter}/${currentIndex}.mp4`} type="video/mp4" />
+          </video>
+          <IonButton expand="full" size="large" className={"next-button" + (nextVisible ? "" : " hide")} onClick={() => {
+            if (override) {
+              setCurrentIndex(setIndexFuncOverride);
+              return;
+            }
+            setCurrentIndex((prev) => prev + 1);
+          }}>
+            <IonIcon slot="icon-only" icon={arrowForward}></IonIcon>
+          </IonButton>
         </div>
       </IonContent>
     </IonPage>

@@ -6,6 +6,7 @@
 .match-type-side .choice {
   min-height: 6em;
   flex-grow: 1;
+  max-width: calc(((100vw - 40px - 16px) / 2) - 2px);
 }
 .match-type-side .choice:not(.correct) {
   --background: var(--ion-background-color-step-150);
@@ -24,4 +25,6 @@
   display: flex;
   flex-direction: row;
   gap: 2px;
+  max-width: 100%;
+  justify-items: stretch;
 }

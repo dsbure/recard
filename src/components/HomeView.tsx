@@ -8,6 +8,7 @@ import FlashcardStorageService from '../services/FlashcardStorageService';
 import StorageService from '../services/StorageService';
 import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 import { IPlayerData } from '../interfaces/IPlayerData';
+import BadgeService from '../services/BadgeService';
 
 interface IHomeView {
   setTab: (index: string) => void
@@ -15,10 +16,12 @@ interface IHomeView {
 
 export function HomeView({setTab}: IHomeView) {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0, levelName: "" });
+  const [playerData, setPlayerData] = useState<IPlayerData>();
   const [progress, setProgress] = useState(0);
   const [totalProgress, setTotalProgress] = useState(0);
   const [expToNextLevel, setExpToNextLevel] = useState(100);
   const [categories, setCategories] = useState(<></>);
+  const [badges, setBadges] = useState<{ elements: JSX.Element; length: number; }>();
   
   const [name, setName] = useState("");
 
@@ -36,6 +39,9 @@ export function HomeView({setTab}: IHomeView) {
       setExpData(expData);
       setProgress(progress);
       setExpToNextLevel(expToNextLevel);
+      BadgeService.getAllBadges().then(e => 
+        setBadges(e)
+      );
     };
     const updateTotalProgressData = async () => {
       const [totalFinished, totalTopics] = await Promise.all([
@@ -61,6 +67,7 @@ export function HomeView({setTab}: IHomeView) {
     const unsubscribeFetchFlashcardDataPD = FetchFlashcardData.subscribe(updateTotalProgressData);
     const unsubscribeFetchFlashcardDataGC = FetchFlashcardData.subscribe(updateGemCards);
     const unsubscribeFSSData = FlashcardStorageService.subscribe(updateTotalProgressData);
+    
 
     updateEXPData();
     updateTotalProgressData();
@@ -73,8 +80,14 @@ export function HomeView({setTab}: IHomeView) {
     };
   }, []);
 
+  useEffect(() => {
+    StorageService.getItem("playerData").then(e =>
+      setPlayerData(e)
+    );
+  }, []);
+
   return <div className="ion-padding animate__animated animate__fadeInUp animate__faster">
-    <IonImg className="main-avatar ion-padding" src="./placeholder-avatar.svg" />
+    <IonImg className="main-avatar ion-padding" src={`./chars/a${playerData?.character}.png`} />
     <IonCard id="main-avatar-container">
       <IonCardHeader>
         <IonCardSubtitle>Welcome,</IonCardSubtitle>
@@ -82,7 +95,7 @@ export function HomeView({setTab}: IHomeView) {
       </IonCardHeader>
       <IonCardContent className="avatar-content">
         <div id="avatar-img" >
-          <IonImg src={`./levels/${expData.currentLevel}.gif`} />
+          <IonImg src={`./levels/${Math.min(expData.currentLevel, 15)}.gif`} />
         </div>
         <h1 className="level-name">{EXPStorageService.getLevelName(expData.currentLevel)}</h1>
         <IonProgressBar value={progress} />
@@ -104,5 +117,14 @@ export function HomeView({setTab}: IHomeView) {
     <div className="gem-container">
       {categories}
     </div>
+    <IonCard className="badges">
+      <IonCardHeader>
+        <IonCardTitle>Badges</IonCardTitle>
+        <IonCardSubtitle>{badges?.length ?? 0} of 15</IonCardSubtitle>
+      </IonCardHeader>
+      <IonCardContent>
+        {badges?.elements}
+      </IonCardContent>
+    </IonCard>
   </div>;
 }
