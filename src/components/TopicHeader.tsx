@@ -11,7 +11,7 @@ export function TopicHeader(category: IFlashcardCategory) {
       <IonCardSubtitle>{category.categoryDesc}</IonCardSubtitle>
     </IonCardHeader>
   </IonCard>
-  <IonButton routerLink={"/story/" + category.categoryName} className="view-story-button" shape="round">
+  <IonButton routerLink={"/story/" + category.categoryName} className="view-story-button" shape="round" expand="block">
     <IonIcon icon={book} slot="start"/>
     View Story
   </IonButton>

@@ -2,6 +2,7 @@ import StorageService from "./StorageService";
 
 export interface IFlashcardStorageCategory {
 	category: string;
+	catIndex: number;
 	currentId: number;
 	starProgress: number;
 	starTotal: number;
@@ -34,6 +35,7 @@ const FlashcardStorageService = {
 		let currentData: IFlashcardStorage["flashcardData"] = await StorageService.getItem("flashcardData") || [];
 		if (currentData.length === 0) {
 			StorageService.setItem("flashcardData", [flashcardData]);
+			StorageService.setItem("unlockedIsles", 0);
 		} else {
 			let catRef = currentData.find(e => e.category === flashcardData.category);
 			if (catRef) {
@@ -42,11 +44,14 @@ const FlashcardStorageService = {
 				currentData.push(flashcardData);
 			}
 			StorageService.setItem("flashcardData", currentData);
+			if (flashcardData.catIndex >= currentData.length - 1 && flashcardData.isComplete) {
+				StorageService.setItem("unlockedIsles", flashcardData.catIndex++);
+			}
 		}
 		this.notifySubscribers();
 	},
 
-	async getCategoryData(name: string) {
+	async getCategoryData(name: string): Promise<IFlashcardStorageCategory> {
 		const currentData: IFlashcardStorage["flashcardData"] = await StorageService.getItem("flashcardData") || [];
 		let returnedCategory: IFlashcardStorageCategory | any = [];
 		for (const e of currentData) {
@@ -66,8 +71,14 @@ const FlashcardStorageService = {
 		return total;
 	},
 
+	async getUnlockedIsles() {
+		const isles = await StorageService.getItem("unlockedIsles") ?? 0;
+		return isles;
+	},
+
 	async clearData() {
 		StorageService.removeItem("flashcardData");
+		StorageService.removeItem("unlockedIsles");
 		this.notifySubscribers();
 	}
 };

@@ -1,6 +1,6 @@
 import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonPopover, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert, useIonRouter, useIonViewWillEnter } from '@ionic/react';
 import './MainTab.css';
-import { arrowBack, bug, flash, heart, help, helpCircle, home, person, settings, trash } from 'ionicons/icons';
+import { arrowBack, bug, flash, heart, help, helpCircle, home, lockClosed, person, settings, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IFlashcardData } from '../interfaces/IFlashcardData'; import { IFlashcardCategory } from "../interfaces/IFlashcardCategory";
@@ -80,6 +80,8 @@ const MainTab: React.FC = () => {
   const [expData, setExpData] = useState({ currentLevel: 1, currentEXP: 0, levelEXP: 0, levelName: "" });
   const [name, setName] = useState("");
 
+  const [availableIsles, setAvailableIsles] = useState<number>(0);
+
   useEffect(() => {
     setColorTheme(themeDetector);
   }, [themeDetector]);
@@ -102,22 +104,36 @@ const MainTab: React.FC = () => {
   }, []);
 
   let pageViewLoaded = false;
+  useLayoutEffect(() => {
+    const updateAvailableIsles = () => setTimeout(() => {
+      FlashcardStorageService.getUnlockedIsles().then((e) => {
+        setAvailableIsles(e);
+      })
+    }, 500);
+    const unsubscribe = FlashcardStorageService.subscribe(updateAvailableIsles);
+    updateAvailableIsles();
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  
   useEffect(() => {
-
     FetchFlashcardData.getFlashcardData(false, false) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
-      .then((data: IFlashcardData) => {
+      .then(async (data: IFlashcardData) => {
         if (!data.categories) return;
         const segmentViews = data.categories.map((category, index) => (
-          <IonSegmentContent key={index} id={`tab${category.index}`}>
-            <TopicView {...category} />
+          <IonSegmentContent key={index} id={`tab${category.index}`} >
+            <div className={index > availableIsles ? "view-disabled" : ""}>
+              <TopicView {...category} />
+            </div>
+            {index > availableIsles ? <IonIcon src={lockClosed} className="lock" /> : null}
           </IonSegmentContent>
         ));
         setPageView(<>{segmentViews}</>);
         pageViewLoaded = true;
-      })
-      .catch((error) => console.error('Load error:', error));
-
+    }).catch((error) => console.error('Load error:', error));
+    
     const updateFlashcardTabs = async () => {
       setTimeout(() => {
         StorageService.getItem("cachedCategoryData").then(async (data: IFlashcardCategory[]) => {
@@ -125,8 +141,15 @@ const MainTab: React.FC = () => {
           const segmentButtons = data.map((category, index) => {
             const offset = Math.round(((-Math.cos(index * Math.PI)) * 10) - 10);
 
-            return <IonSegmentButton {...(index === 0 ? { ref: popper.refs.setReference } : {})} key={`index-${index}`} value={category.index.toString()} contentId={`tab${category.index}`} className="animate__animated animate__fadeInLeft animate__faster" style={{ translate: `0 ${offset}px` }}>
-              <IonImg src={`./qtr/${index+1}.svg`}></IonImg>
+            return <IonSegmentButton
+              {...(index === 0 ? { ref: popper.refs.setReference } : {})}
+              key={`index-${index}`}
+              value={category.index.toString()}
+              contentId={`tab${category.index}`}
+              className={`segment animate__animated animate__fadeInLeft animate__faster ${index > availableIsles ? "locked" : null}`}
+              style={{ translate: `0 ${offset}px` }}
+            >
+              <IonImg src={`./qtr/${index + 1}.svg`}></IonImg>
             </IonSegmentButton>
           });
 
@@ -139,13 +162,15 @@ const MainTab: React.FC = () => {
               {
                 data.map((category, index) => {
                   return (
-                    <IonSegmentContent key={index} id={`tab${category.index}`}>
-                      <TopicHeader {...category} />
-                      <IonCard className="loading-card">
-                        <IonCardHeader>
-                          <IonSpinner name="dots"></IonSpinner>
-                        </IonCardHeader>
-                      </IonCard>
+                    <IonSegmentContent key={index} id={`tab${category.index}`} >
+                      <div className={index > availableIsles ? "view-disabled" : ""}>
+                        <TopicHeader {...category} />
+                        <IonCard className="loading-card">
+                          <IonCardHeader>
+                            <IonSpinner name="dots"></IonSpinner>
+                          </IonCardHeader>
+                        </IonCard>
+                      </div>
                     </IonSegmentContent>
                   );
                 })
@@ -153,22 +178,25 @@ const MainTab: React.FC = () => {
             </>);
           }
         });
-      }, 0);
+      }, 1);
     };
     const unsubscribe = FetchFlashcardData.subscribe(updateFlashcardTabs);
-    return () => { unsubscribe() };
-  }, []);
+    return () => {
+      unsubscribe();
+    };
+  }, [availableIsles]);
+
   useEffect(() => {
-    if (selectedSegment === "1") {
+    if (selectedSegment !== "home") {
       setPopoverOpen(false);
     }
   }, [selectedSegment]);
-  
-    useEffect(() => {
-      StorageService.getItem("playerData").then(e =>
-        setPlayerData(e)
-      );
-    }, []);
+
+  useEffect(() => {
+    StorageService.getItem("playerData").then(e =>
+      setPlayerData(e)
+    );
+  }, []);
 
   return (
     <IonPage>
@@ -185,7 +213,7 @@ const MainTab: React.FC = () => {
               <IonLabel>{name}</IonLabel>
               <IonAvatar>
                 <img alt="User" src=
-  {`./chars/a${playerData?.character}-profile.png`}  />
+                  {`./chars/a${playerData?.character}-profile.png`} />
               </IonAvatar>
             </IonChip>
           </IonButtons>

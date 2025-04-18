@@ -27,7 +27,7 @@ export function StorySnake({ category, categoryData }: IStorySnakeProps) {
     )}
     <IonRow>
       <IonCol>
-        <IonButton routerLink={"/story/E" + category.categoryName[1]} className="view-story-button" shape="round" disabled={!categoryData?.isComplete}>
+        <IonButton style={{ marginLeft: `${((-Math.cos(category.topics.length)) * 40) + 40}px`}} routerLink={"/story/E" + category.categoryName[1]} className="view-story-button" shape="round" disabled={!categoryData?.isComplete}>
           <IonIcon icon={book} slot="start" />
           View Ending
         </IonButton>

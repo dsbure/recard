@@ -3,7 +3,7 @@ import './FlashcardPage.css';
 import { useEffect, useRef, useState } from 'react';
 import { Flashcard } from '../components/Flashcard';
 import { useHistory } from 'react-router';
-import { arrowBack, checkmark, checkmarkCircle, close, closeCircle, flame, heart, heartDislike, iceCream, snow, timer } from 'ionicons/icons';
+import { arrowBack, arrowForward, checkmark, checkmarkCircle, close, closeCircle, flame, heart, heartDislike, iceCream, snow, timer } from 'ionicons/icons';
 import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import StorageService from '../services/StorageService';
 import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
@@ -11,6 +11,7 @@ import FetchFlashcardData from '../services/FetchFlashcardData';
 import SigmaModes from '../components/SigmaModes';
 import ISigmaModes from '../interfaces/ISigmaModes';
 import { SigmaModePopup } from '../components/SigmaModePopup';
+import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 
 
 const FlashcardPage: React.FC = () => {
@@ -127,7 +128,7 @@ const FlashcardPage: React.FC = () => {
       const timeDeath = 1 - (((Date.now() - startTimeRef.current) * 0.0001) - 0.12);
       if (!tfRef.current) setTimeTillDeath(timeDeath);
 
-      setTimeOut(timeDeath < 0);
+      if (!tfRef.current) setTimeOut(timeDeath < 0);
     }, 33);
     return () => {
       clearInterval(interval);
@@ -179,19 +180,28 @@ const FlashcardPage: React.FC = () => {
       });
     } else {
       const currentCategoryData: IFlashcardStorageCategory = await FlashcardStorageService.getCategoryData(flashcardData.categoryName);
-      const starProgress = (flashcardData.id === (currentCategoryData?.currentId ?? 0)) ?
-        (currentCategoryData?.starProgress ?? 0) + 1 >= flashcardData.repeatTotal ?
-          0 : (currentCategoryData?.starProgress ?? 0) + 1 :
+      const isLatestFlashcard = flashcardData.id === (currentCategoryData?.currentId ?? 0);
+      const incrementedStarProgress = (currentCategoryData?.starProgress ?? 0) + 1;
+      const incrementedId = Math.max(flashcardData.id + 1, currentCategoryData?.currentId ?? 0);
+      const isEqualOrGreaterThanTotal = (currentCategoryData?.currentId ?? 0) >= (await FetchFlashcardData.getCategoryTotal(currentCategoryData.category)) - 1;
+
+      const starProgress = isLatestFlashcard ?
+        incrementedStarProgress >= flashcardData.repeatTotal ?
+          0 : incrementedStarProgress :
         currentCategoryData?.starProgress ?? 1;
 
-      const starTotal = (flashcardData.id === (currentCategoryData?.currentId ?? 0)) ? flashcardData.repeatTotal : currentCategoryData?.starTotal ?? flashcardData.repeatTotal;
+      const starTotal = isLatestFlashcard ? flashcardData.repeatTotal : currentCategoryData?.starTotal ?? flashcardData.repeatTotal;
+
+      const catIndex = (await StorageService.getItem("cachedCategoryData") as IFlashcardCategory[]).find(e => e.categoryName == flashcardData.categoryName)?.index ?? 1;
+
 
       await FlashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
-        currentId: (currentCategoryData?.starProgress ?? 0) + 1 === flashcardData.repeatTotal ? Math.max(flashcardData.id + 1, currentCategoryData?.currentId ??  0) : currentCategoryData?.currentId ??  0,
+        catIndex: catIndex,
+        currentId: incrementedStarProgress >= flashcardData.repeatTotal ? incrementedId : currentCategoryData?.currentId ?? 0,
         starProgress: starProgress,
         starTotal: starTotal,
-        isComplete: ((flashcardData.id === (currentCategoryData?.currentId ?? 0)) && (currentCategoryData?.currentId ?? 0) >= (await FetchFlashcardData.getCategoryTotal(currentCategoryData.category)) - 1) && starProgress >= starTotal,
+        isComplete: (isLatestFlashcard && isEqualOrGreaterThanTotal && incrementedStarProgress >= starTotal) || currentCategoryData?.isComplete,
       });
       setMistakes(0);
       const deltaTime = currentTime - startTime;
@@ -291,7 +301,14 @@ const FlashcardPage: React.FC = () => {
             </IonButton>
           </IonButtons>
           <IonTitle>
-          {flashcardData.topicName}</IonTitle>
+            {flashcardData.topicName}
+          </IonTitle>
+          <IonButtons slot="end">
+            <IonButton
+              onClick={() => { handleNextFlashcard(10); }} shape="round" color="danger" fill="solid">
+              <IonIcon slot="icon-only" icon={arrowForward}></IonIcon>
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="flashcard-page">

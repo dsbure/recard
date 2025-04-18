@@ -1563,12 +1563,8 @@
               "type": "multipleChoice",
               "interaction": {
                 "multipleChoices": [
-                  "3.14",
                   "1",
-                  "760",
-                  "d/dx ln 76",
-                  "0.76",
-                  "7.6"
+                  "760"
                 ],
                 "correct": "1"
               }
@@ -1578,31 +1574,12 @@
               "type": "multipleChoice",
               "interaction": {
                 "multipleChoices": [
-                  "P1V1 = P2V2",
+                  "P1V1 = P2V2 b",
                   "V1T1 = V2T2 ",
                   "V1/T1 = V2/T2",
                   "P1/T1 = P2/T2"
                 ],
-                "correct": "P1V1 = P2V2"
-              }
-            },
-            {
-              "question": "match the mga bagay",
-              "type": "matchType",
-              "interaction": {
-                "correct": "",
-                "matchTypeSideA": [
-                  "ako",
-                  "si stephen",
-                  "mr. bureros",
-                  "ung taga ganymede"
-                ],
-                "matchTypeSideB": [
-                  "siya",
-                  "si kuya gauss",
-                  "mr. gaussian blur",
-                  "ung taga gauss"
-                ]
+                "correct": "P1V1 = P2V2 b"
               }
             }
           ]

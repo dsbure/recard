@@ -7,8 +7,23 @@ export interface IEXPStorage {
 	levelName: string;
 }
 
-const levelExperiences = [100, 200, 500, 1000, 2000, 3000, 5000, 8000, 10000];
-export const titles = [
+const levelExperiences = [
+	50, // 2
+	100, // 3
+	150, // 4
+	250, // 5
+	400, // 6
+	500, // 7
+	700, // 8
+	850, // 9
+	1000, // 10
+	1100, // 11
+	1250, // 12
+	1500, // 13
+	1750, // 14
+	2000, // 15
+];
+const titles = [
 	"Nooblet",
 	"Neuron Rookie",
 	"Quizling",

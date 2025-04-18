@@ -39,6 +39,7 @@ const Results: React.FC = () => {
     const currentCategoryData: IFlashcardStorageCategory = await FlashcardStorageService.getCategoryData(flashcardData.categoryName);
     await FlashcardStorageService.setCategoryData({
       category: flashcardData.categoryName,
+      catIndex: currentCategoryData?.catIndex ?? 0,
       currentId: await FetchFlashcardData.getCategoryTotal(currentCategoryData.category) - 1,
       starProgress: 3,
       starTotal: flashcardData.id === currentCategoryData?.currentId || 0 ? flashcardData.repeatTotal : currentCategoryData?.starTotal || flashcardData.repeatTotal,

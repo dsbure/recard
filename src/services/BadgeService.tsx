@@ -1,24 +1,5 @@
+import { IonRippleEffect } from "@ionic/react";
 import EXPStorageService from "./EXPStorageService";
-
-export const titles = [
-	"Nooblet",
-	"Neuron Rookie",
-	"Quizling",
-	"Trivia Tinkerer",
-	"Periodic Puzzler",
-	"Atomic Thinker",
-	"Science Sniper",
-	"Brainwave Surfer",
-	"Osmotic Omega",
-	"Neurosync Beta",
-	"Alphacortex",
-	"Sigma Prime",
-	"Gigamewtrix",
-	"Ultra Quizmancer",
-	"Astral Cerebrum",
-	"Brainnotrot Ascended"
-];
-
 interface IBadgeData {
 	name: string,
 	imgSrc: string
@@ -47,16 +28,17 @@ const BadgeService = {
 		const currentBadges: IBadgeData[] = []
 		for (let i = 1; i <= Math.min(expData.currentLevel, 15); i++) {
 			currentBadges.push({
-				name: EXPStorageService.getLevelName(i),
+				name: EXPStorageService.getLevelName(i).replace(` ${i}`, ""),
 				imgSrc: `./levels/${Math.min(i, 15)}.gif`
 			});
 		}
 		const badgeElements = <>
 			{currentBadges.map((e, i) => {
 				return (
-					<div key={i} className="badge">
+					<div key={i} className="badge ion-activatable ripple-parent">
+						<IonRippleEffect></IonRippleEffect>
 						<img src={e.imgSrc} />
-						<p>{e.name}</p>
+						{e.name}
 					</div>)
 			})}
 		</>

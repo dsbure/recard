@@ -57,6 +57,20 @@ ion-segment-button ion-img {
   scale: 2;
   z-index: 1;
 }
+.segment.locked {
+  opacity: 0.5;
+  filter: saturate(0.5) blur(2px);
+  pointer-events: none;
+}
+.view-disabled {
+  pointer-events: none;
+  position: absolute;
+}
+.lock {
+  width: 128px;
+  height: 128px;
+  z-index: 11;
+}
 .loading-card {
   width: fit-content;
   margin: auto;
@@ -153,12 +167,15 @@ ion-col, ion-row, ion-grid, ion-card {
   background-color: var(--ion-background-color-step-150);
   justify-items: center;
   flex: 1;
+  margin: 0;
 }
 .gem-container {
   max-width: min(576px, calc(100vw - 20px));
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin-inline: auto;
+  gap: 10px;
+  padding-inline: 10px;
 }
 @media (max-width: 992px) {
   .gem-container {
@@ -180,9 +197,8 @@ ion-col, ion-row, ion-grid, ion-card {
   grid-template-columns: 100%;
 }
 .gem-card-container ion-img {
-  width: 32px;
-  height: 32px;
-  fill: red;
+  width: 64px;
+  height: 64px;
 }
 .gem-card-container ion-card-title {
   max-width: calc(100% + 20px);
@@ -243,10 +259,18 @@ ion-col, ion-row, ion-grid, ion-card {
   max-width: 84px;
   text-align: center;
   height: fit-content;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  font-weight: 800;
+  gap: 4px;
+  font-size: smaller;
 }
 .badges ion-card-content {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  justify-content: space-evenly;
+  user-select: none;
 }
