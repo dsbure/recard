@@ -1,4 +1,4 @@
-import { useFloating, autoUpdate, arrow, offset, useTransitionStyles, OpenChangeReason, FloatingArrow } from '@floating-ui/react';
+import { useFloating, autoUpdate, arrow, offset, useTransitionStyles, OpenChangeReason, FloatingArrow, shift } from '@floating-ui/react';
 import { } from '@ionic/react';
 import { Ref, useMemo, useRef, useState } from 'react';
 
@@ -20,15 +20,16 @@ export function usePopper({ children, isOpen, setIsOpen }: IPopperProps) {
 			arrow({
 				element: arrowRef,
 			}),
-			offset(10)
+			offset(10),
+			shift()
 		],
 	});
 	const { isMounted, styles } = useTransitionStyles(context);
 
 	const popover = isMounted ? <div className="pop-over-container" style={styles}>
 			<Popover refs={refs} styles={floatingStyles}>
-			  Tap here to start your journey!
-			  <FloatingArrow ref={arrowRef} context={context} tipRadius={2} height={8}/>
+				{children}
+				<FloatingArrow ref={arrowRef} context={context} tipRadius={2} height={8}/>
 			</Popover>
 		  </div> : <></>
 	return (useMemo(() => {

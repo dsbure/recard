@@ -73,7 +73,7 @@ const MainTab: React.FC = () => {
 
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popper = usePopper({
-    children: "Tap here to start your journey!",
+    children: "Tap here to embark on your journey!",
     isOpen: popoverOpen,
     setIsOpen: setPopoverOpen
   });
@@ -142,7 +142,7 @@ const MainTab: React.FC = () => {
             const offset = Math.round(((-Math.cos(index * Math.PI)) * 10) - 10);
 
             return <IonSegmentButton
-              {...(index === 0 ? { ref: popper.refs.setReference } : {})}
+              {...(index === availableIsles ? { ref: popper.refs.setReference } : {})}
               key={`index-${index}`}
               value={category.index.toString()}
               contentId={`tab${category.index}`}
