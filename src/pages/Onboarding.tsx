@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import './MainTab.css';
 import StorageService from '../services/StorageService';
 import { ICharacters, IPlayerData } from '../interfaces/IPlayerData';
+import { useThemeDetector } from '../hooks/useThemeDetector';
 
 
 
@@ -67,13 +68,14 @@ function CharacterSelectButton({ name, imageSrc, desc, onClick }: ICSButton) {
 	);
 }
 const Onboarding: React.FC = () => {
+	const theme = useThemeDetector();
 	const welcome = <>
 		<IonIcon icon="./favicon.svg" className="recall-oicon animate__animated animate__backInRight animate__slow" />
 		<IonCardHeader>
 			<IonCardTitle>
 				Welcome to
 				<br />
-				<IonImg src={`./recall-wordmark-ambi.svg`} alt="recall" className="animate__animated animate__backInDown" id="recall-onboarding" />
+				<IonImg src={`./recall-wordmark-${theme}.svg`} alt="recall" className="animate__animated animate__backInDown" id="recall-onboarding" />
 			</IonCardTitle>
 			<IonCardSubtitle className="animate__animated animate__backInDown">[witty_tagline]</IonCardSubtitle>
 		</IonCardHeader>
@@ -94,13 +96,19 @@ const Onboarding: React.FC = () => {
 			<IonCardTitle>
 				What's your name?
 			</IonCardTitle>
-			<IonCardSubtitle>kimi no na wa</IonCardSubtitle>
+			<IonCardSubtitle>The island awaits… but first, who are you?</IonCardSubtitle>
 		</IonCardHeader>
 		<IonCardContent className="ocard">
 			<IonInput label="Name" labelPlacement="floating" fill="outline" placeholder="Enter your name" ref={input} clearInput={true} onIonInput={() => {
 				setName(input.current?.value?.toString() ?? "");
 			}}></IonInput>
-			<IonButton className="obutton" id="osubmit" expand="block" onClick={() => setCurrentPage(2)}>
+			<IonButton className="obutton" id="osubmit" expand="block" onClick={() => {
+				if (input.current?.value?.toString() == "" || input.current?.value?.toString() == undefined) {
+					input.current?.setFocus();
+					return;
+				}
+				setCurrentPage(2)
+			}}>
 				<IonIcon icon={arrowForward} slot="start" />
 				Continue
 			</IonButton>
@@ -117,23 +125,23 @@ const Onboarding: React.FC = () => {
 			<IonCardTitle>
 				Choose your character
 			</IonCardTitle>
-			<IonCardSubtitle>okay</IonCardSubtitle>
+			<IonCardSubtitle>Meet your island counterpart and embark on a mission to save the Island World!</IonCardSubtitle>
 		</IonCardHeader>
 		<IonCardContent className="ocard">
 			<div id="character-select">
-				<CharacterSelectButton name="Ged" imageSrc="./chars/a1-c.png" desc="oo" onClick={() => {
+				<CharacterSelectButton name="Rizz" imageSrc="./chars/a1-c.png" desc="Chill and confident. Always has a plan—probably." onClick={() => {
 					setCharacter(ICharacters.Zed);
 					StorageService.setItem("onboarded", true).then(() => {
 						router.push("/story/Q1");
 					});
 				}}/>
-				<CharacterSelectButton name="Anne" imageSrc="./chars/a2-c.png" desc="opo" onClick={() => {
+				<CharacterSelectButton name="Lirili" imageSrc="./chars/a2-c.png" desc="Lively and curious. Talks fast, thinks faster." onClick={() => {
 					setCharacter(ICharacters.Anne);
 					StorageService.setItem("onboarded", true).then(() => {
 						router.push("/story/Q1");
 					});
 				}}/>
-				<CharacterSelectButton name="Sammy" imageSrc="./chars/a3-c.png" desc="yes" onClick={() => {
+				<CharacterSelectButton name="Trippi" imageSrc="./chars/a3-c.png" desc="Calm and quirky. Goes with the flow." onClick={() => {
 					setCharacter(ICharacters.OWound);
 					StorageService.setItem("onboarded", true).then(() => {
 						router.push("/story/Q1");

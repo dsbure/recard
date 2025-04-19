@@ -23,7 +23,6 @@
 	display: flex;
 	width: 100%;
 	justify-items: stretch;
-	flex-wrap: wrap;
 	gap: 8px;
 }
 #character-select .obutton {
@@ -34,6 +33,7 @@
 	--padding-start: 8px;
 	--padding-end: 8px;
 	flex: 1;
+	width: 33.3333333%;
 }
 .ch-inner {
 	display: flex;

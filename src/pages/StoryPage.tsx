@@ -1,7 +1,7 @@
 import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonImg, IonPage, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
 import './StoryPage.css';
 import { useParams } from 'react-router';
-import { arrowBack, arrowForward } from 'ionicons/icons';
+import { arrowBack, arrowForward, arrowForwardCircle } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 
 interface StoryPageParams {
@@ -116,7 +116,7 @@ const StoryPage: React.FC = () => {
             }
             setCurrentIndex((prev) => prev + 1);
           }}>
-            <IonIcon slot="icon-only" icon={arrowForward}></IonIcon>
+            <IonIcon slot="icon-only" icon={arrowForwardCircle}></IonIcon>
           </IonButton>
         </div>
       </IonContent>
