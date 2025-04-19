@@ -142,7 +142,7 @@ const MainTab: React.FC = () => {
             const offset = Math.round(((-Math.cos(index * Math.PI)) * 10) - 10);
 
             return <IonSegmentButton
-              {...(index === availableIsles ? { ref: popper.refs.setReference } : {})}
+              {...(index === availableIsles || (availableIsles >= data.length && index === data.length - 1) ? { ref: popper.refs.setReference } : {})}
               key={`index-${index}`}
               value={category.index.toString()}
               contentId={`tab${category.index}`}
