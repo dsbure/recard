@@ -120,7 +120,12 @@
 }
 .question-header .type {
   font-weight: 1000;
-}/*
+}
+.question ion-card-title {
+  font-weight: 1000;
+  font-size: 1.75em
+}
+/*
 @media (min-width: 992px) {
   .choice-container.f-multipleChoice ion-col {
     flex-direction: row;

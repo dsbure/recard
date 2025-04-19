@@ -99,8 +99,10 @@ export function HomeView({setTab}: IHomeView) {
         </div>
         <h1 className="level-name">{EXPStorageService.getLevelName(expData.currentLevel)}</h1>
         <IonProgressBar value={progress} />
-        <IonChip>Total: {expData.currentEXP} Aura</IonChip>
-        <IonChip>Next Level: {expToNextLevel} Aura</IonChip>
+        <div className="level-info">
+          <IonChip>Total: {expData.currentEXP} Aura</IonChip>
+          <IonChip>Next Level: {expToNextLevel} Aura</IonChip>
+        </div>
       </IonCardContent>
     </IonCard>
     <IonCard id="total-progress-container">

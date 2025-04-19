@@ -38,9 +38,13 @@ ion-segment-button::part(native) {
   border-radius: 1000px;
   background-color: transparent !important;
   flex-grow: 1;
+  transition: 0.333s;
+  border-bottom: 0 solid transparent;
 }
 .segment-button-checked.md::part(native) {
   color: var(--ion-text-color);
+  --bg: color-mix(in srgb, var(--ion-color-primary), var(--ion-background-color) 12.5%);
+  background-color: var(--bg) !important;
 }
 
 ion-segment-button.md::part(indicator-background) {
@@ -203,6 +207,15 @@ ion-col, ion-row, ion-grid, ion-card {
 .gem-card-container ion-card-title {
   max-width: calc(100% + 20px);
 }
+.level-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.level-info ion-chip {
+  height: 100%;
+}
 .pop-over {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
   padding: 12px;
@@ -221,6 +234,8 @@ ion-col, ion-row, ion-grid, ion-card {
 }
 .avatar-content ion-progress-bar {
   border-radius: 999px;
+  --background: var(--ion-background-color);
+  height: 16px;
 }
 .level-name {
   font-weight: 800 !important;

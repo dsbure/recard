@@ -13,6 +13,10 @@ import ISigmaModes from '../interfaces/ISigmaModes';
 import { SigmaModePopup } from '../components/SigmaModePopup';
 import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
 
+// eheh
+function easeIn01(x: number): number {
+  return Math.pow(Math.max(x, 0), 2);
+}
 
 const FlashcardPage: React.FC = () => {
   const [progress, setProgress] = useState(0);
@@ -125,7 +129,7 @@ const FlashcardPage: React.FC = () => {
   useEffect(() => {
     // https://stackoverflow.com/a/59861536
     const interval = setInterval(() => {
-      const timeDeath = 1 - (((Date.now() - startTimeRef.current) * 0.0001) - 0.12);
+      const timeDeath = 1 - (((Date.now() - startTimeRef.current) * 0.000075) - 0.12);
       if (!tfRef.current) setTimeTillDeath(timeDeath);
 
       if (!tfRef.current) setTimeOut(timeDeath < 0);
@@ -293,7 +297,13 @@ const FlashcardPage: React.FC = () => {
       <div className={"immunity " +
         (hasImmunity ? "enabled" : null)}></div>
       <IonHeader id="flashcard-header">
-        <IonProgressBar value={timeTillDeath - 0.08} id="countdown" className={timeFreeze ? "frozen" : ""} style={{ "--progress": (Math.min(Math.round(timeTillDeath * 100), 100) + "%") }} />
+        <IonProgressBar 
+          value={easeIn01(timeTillDeath - 0.08)} 
+          id="countdown" 
+          className={timeFreeze ? "frozen" : ""} 
+          style={{ 
+            "--progress":Math.min(Math.round(easeIn01(timeTillDeath) * 100), 100) + "%"
+          }} />
         <IonToolbar>
           <IonButtons slot="start">
             <IonButton routerLink="/mainTab" routerDirection="back" shape="round">
