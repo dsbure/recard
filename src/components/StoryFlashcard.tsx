@@ -4,6 +4,8 @@ import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import './StoryFlashcard.css';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { usePopper } from '../hooks/Popper';
+import { useEffect, useState } from 'react';
 
 export interface IStoryFlashcardProps {
   offset: number
@@ -15,6 +17,13 @@ export interface IStoryFlashcardProps {
 
 export function StoryFlashcard({ offset, topic, locked, progress, newTopic }: IStoryFlashcardProps) {
   const router = useIonRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const popper = usePopper({ 
+    children: "START", 
+    isOpen: isOpen, 
+    setIsOpen: setIsOpen,
+    autoAlign: false,
+  });
   const handleButtonHover = () => {
     localStorage.setItem("currentFlashcard", JSON.stringify(topic));
     router.push("/flashcard");
@@ -26,11 +35,16 @@ export function StoryFlashcard({ offset, topic, locked, progress, newTopic }: IS
       className={"storyFlashcard" + (newTopic ? " new" : "")} 
       shape="round" 
       size="large"
+      ref={popper.refs.setReference}
     >
-      <IonIcon slot="icon-only" icon={newTopic ? star : locked ? lockClosed : checkmarkCircle}></IonIcon>
+      <IonIcon slot="icon-only" icon={newTopic ? star : (locked ? lockClosed : checkmarkCircle)}></IonIcon>
     </IonButton>
   );
-  return (
+  useEffect(() => {
+    setIsOpen(newTopic);
+  }, [newTopic]);
+  return <>
+    {popper.popover}
     <IonChip className="storyFlashcardContainer" style={{ marginLeft: `${offset}px`}} disabled={locked} onMouseDown={() => handleButtonHover()}>
       <div style={{ width: "66px" }}>
         {!locked ? <CircularProgressbarWithChildren
@@ -48,5 +62,6 @@ export function StoryFlashcard({ offset, topic, locked, progress, newTopic }: IS
         }
       </div>
       <IonLabel>{topic.topicName}</IonLabel>
-    </IonChip>);
+    </IonChip>
+    </>;
 }

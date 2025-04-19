@@ -47,9 +47,19 @@
 	--color: var(--ion-text-color);
 	filter: drop-shadow(0px 0px 8px var(--ion-background-color));
 	--box-shadow: none;
-	
 }
 .next-button.hide {
 	opacity: 0;
+	pointer-events: none;
+}
+#main-content .pop-over {
+	text-align: center;
+	padding: 8px;
+	font-weight: 1000;
+	text-shadow: 0 2px 0 var(--ion-background-color-step-600);
+	font-size: 1.5em;
+}
+.view-disabled .pop-over {
+	opacity: 0 !important;
 	pointer-events: none;
 }

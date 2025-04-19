@@ -6,19 +6,21 @@ export interface IPopperProps {
 	children: React.ReactNode,
 	isOpen: boolean,
 	setIsOpen: (open: boolean, event?: Event | undefined, reason?: OpenChangeReason | undefined) => void,
+	autoAlign?: boolean
 }
 const Popover: React.FC<{ refs: any, styles: any, children: React.ReactNode }> = ({ children, refs, styles }) => <div className="pop-over" ref={refs.setFloating} style={styles}>{children}</div>
 
 // isthis a ho;ok>?>???
-export function usePopper({ children, isOpen, setIsOpen }: IPopperProps) {
+export function usePopper({ children, isOpen, setIsOpen, autoAlign = true }: IPopperProps) {
 	const arrowRef = useRef(null);
 	const { refs, floatingStyles, context } = useFloating({
 		whileElementsMounted: autoUpdate,
 		open: isOpen,
 		onOpenChange: setIsOpen,
+		
 		middleware: [
 			offset(10),
-			shift(),
+			autoAlign ? shift() : null,
 			arrow({
 				element: arrowRef,
 			})
