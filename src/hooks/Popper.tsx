@@ -17,11 +17,11 @@ export function usePopper({ children, isOpen, setIsOpen }: IPopperProps) {
 		open: isOpen,
 		onOpenChange: setIsOpen,
 		middleware: [
+			offset(10),
 			shift(),
 			arrow({
 				element: arrowRef,
-			}),
-			offset(10)
+			})
 		],
 	});
 	const { isMounted, styles } = useTransitionStyles(context);
