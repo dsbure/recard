@@ -1,4 +1,4 @@
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonPopover, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToolbar, useIonAlert, useIonRouter, useIonViewWillEnter } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonPopover, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonSpinner, IonTitle, IonToggle, IonToolbar, ToggleCustomEvent, useIonAlert, useIonRouter, useIonViewWillEnter } from '@ionic/react';
 import './MainTab.css';
 import { arrowBack, bug, flash, heart, help, helpCircle, home, lockClosed, person, settings, trash } from 'ionicons/icons';
 import { TopicView } from '../components/TopicView';
@@ -20,8 +20,8 @@ const DebugButton: React.FC = () => {
   return <IonButton
     onClick={() => {
       presentAlert({
-        header: 'Clear Data',
-        message: 'Are you sure you want to clear data? (or clear cached data to fix errors)',
+        header: 'Advanced Options',
+        message: 'Here you can clear all your data (IRREVERSIBLE) or clear cached data to fix errors.',
         buttons: [
           {
             text: 'Cancel',
@@ -45,8 +45,8 @@ const DebugButton: React.FC = () => {
           }
         ]
       })
-    }} shape="round">
-    <IonIcon slot="icon-only" icon={bug}></IonIcon>
+    }} expand='block' size='default'>
+    Advanced Options
   </IonButton>
 }
 const HelpButton: React.FC = () => {
@@ -82,11 +82,17 @@ const MainTab: React.FC = () => {
 
   const [availableIsles, setAvailableIsles] = useState<number>(0);
 
+  const mutedRef = useRef<HTMLIonToggleElement>(null);
+  const [muted, setMuted] = useState(false);
+
   useEffect(() => {
     setColorTheme(themeDetector);
   }, [themeDetector]);
 
   useIonViewWillEnter(() => {
+    StorageService.getItem("muted").then((e) => {
+      setMuted(e);
+    });
     StorageService.getItem("playerData").then((e) => {
       setName((e as IPlayerData).name);
     });
@@ -198,13 +204,17 @@ const MainTab: React.FC = () => {
     );
   }, []);
 
+  const handleMuteToggle = (e: ToggleCustomEvent<{ checked: boolean }>) => {
+    StorageService.setItem("muted", !e.detail.checked);
+    setMuted(!e.detail.checked);
+  }
+
   return (
     <IonPage>
       <video src="./homepage.mp4" id="homepage-bg" autoPlay muted loop></video>
       <IonHeader id="main-header">
         <IonToolbar>
           <IonButtons slot="end">
-            <DebugButton />
             <HelpButton />
             <IonChip
               onClick={() => { }}
@@ -232,10 +242,19 @@ const MainTab: React.FC = () => {
         <IonContent class="settings-content">
           <IonList>
             <IonItem>
-              <IonLabel>Malay q ba</IonLabel>
+              <IonToggle 
+                enableOnOffLabels={true}
+                ref={mutedRef}
+                onIonChange={(e) => {
+                  handleMuteToggle(e);
+                }}
+                checked={!muted}
+              >
+                Sound {muted ? "Off" : "On"}
+              </IonToggle>
             </IonItem>
             <IonItem>
-              <IonLabel>Also anong butngi q??</IonLabel>
+              <DebugButton />
             </IonItem>
           </IonList>
         </IonContent>

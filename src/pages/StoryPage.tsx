@@ -8,6 +8,10 @@ interface StoryPageParams {
   quarter: string;
 }
 
+const storyNames: Record<string, string> = {
+  Q0: "Where Force Meets Fate: Dilawika"
+};
+
 const StoryPage: React.FC = () => {
   const { quarter } = useParams<StoryPageParams>();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -15,13 +19,16 @@ const StoryPage: React.FC = () => {
   const [showAlert] = useIonAlert();
   const [setIndexFuncOverride, setSetIndexFuncOverride] = useState(14);
   const [override, setOverride] = useState(false);
+  const [clickToContinue, setClickToContinue] = useState(false);
   const router = useIonRouter();
   // i hate this
   useEffect(() => {
     // special children
-    if (quarter === "Q1") {
+    if (quarter === "Q0") {
       if (currentIndex === 23) {
         router.push("/mainTab", "back");
+        setNextVisible(true);
+        setOverride(false);
       } else if (currentIndex === 10) {
         setNextVisible(false);
         setTimeout(() => {
@@ -52,38 +59,53 @@ const StoryPage: React.FC = () => {
           })
         }, 2000)
       } else if (currentIndex >= 11 && currentIndex <= 13) {
+        setSetIndexFuncOverride(14);
         setNextVisible(true);
         setOverride(true);
       } else {
         setNextVisible(true);
         setOverride(false);
       }
+    } else if (quarter === "Q1") {
+      if (currentIndex === 20) {
+        router.push("/mainTab", "back");
+      } 
     } else if (quarter === "E1") {
-      if (currentIndex === 24) {
+      if (currentIndex === 5) {
         router.push("/mainTab", "back");
       } 
     } else if (quarter === "Q2") {
-      if (currentIndex === 24) {
+      if (currentIndex === 13) {
         router.push("/mainTab", "back");
       } 
     } else if (quarter === "E2") {
-      if (currentIndex === 24) {
+      if (currentIndex === 5) {
         router.push("/mainTab", "back");
       } 
     } else if (quarter === "Q3") {
-      if (currentIndex === 24) {
+      if (currentIndex === 22) {
         router.push("/mainTab", "back");
-      } 
+        setNextVisible(true);
+        setOverride(false);
+        setClickToContinue(false);
+      } else if ([9, 11, 13].includes(currentIndex)) {
+        setNextVisible(false);
+        setClickToContinue(true);
+      } else {
+        setClickToContinue(false);
+        setNextVisible(true);
+        setOverride(false);
+      }
     } else if (quarter === "E3") {
-      if (currentIndex === 10) {
+      if (currentIndex === 2) {
         router.push("/mainTab", "back");
       } 
     } else if (quarter === "Q4") {
-      if (currentIndex === 10) {
+      if (currentIndex === 8) {
         router.push("/mainTab", "back");
       } 
     } else if (quarter === "E4") {
-      if (currentIndex === 17) {
+      if (currentIndex === 18) {
         router.push("/mainTab", "back");
       } 
     } else {
@@ -101,12 +123,20 @@ const StoryPage: React.FC = () => {
               <IonIcon slot="icon-only" icon={arrowBack}></IonIcon>
             </IonButton>
           </IonButtons>
-          <IonTitle>Story: {quarter}</IonTitle>
+          <IonTitle id="story-title">{storyNames[quarter] ?? `Story: ${quarter}`}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="story-content-container">
         <div className="story-content">
-          <video autoPlay id="s-video" key={`v-${currentIndex}`}>
+          <video autoPlay id="s-video" key={`v-${currentIndex}`}
+          onClick={() => {
+            if (!clickToContinue) return;
+            if (override) {
+              setCurrentIndex(setIndexFuncOverride);
+              return;
+            }
+            setCurrentIndex((prev) => prev + 1);
+          }}>
             <source src={`./storyVid/${quarter}/${currentIndex}.mp4`} type="video/mp4" />
           </video>
           <IonButton expand="full" size="large" className={"next-button" + (nextVisible ? "" : " hide")} onClick={() => {

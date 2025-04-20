@@ -36,7 +36,7 @@ export function SigmaModePopup({ dismiss }: { dismiss: (data?: string) => void }
             <IonIcon icon={invertMode} className="select-sigma-icon"/>
             <IonCardHeader>
               <IonCardTitle>50/50</IonCardTitle>
-              <IonCardSubtitle>Removes half of the incorrect choices.</IonCardSubtitle>
+              <IonCardSubtitle>Removes half of the incorrect choices. (Multiple Choice only)</IonCardSubtitle>
             </IonCardHeader>
           </IonCard>
         </IonButton>

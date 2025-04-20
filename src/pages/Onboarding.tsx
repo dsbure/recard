@@ -77,7 +77,7 @@ const Onboarding: React.FC = () => {
 				<br />
 				<IonImg src={`./recall-wordmark-${theme}.svg`} alt="recall" className="animate__animated animate__backInDown" id="recall-onboarding" />
 			</IonCardTitle>
-			<IonCardSubtitle className="animate__animated animate__backInDown">[witty_tagline]</IonCardSubtitle>
+			<IonCardSubtitle className="animate__animated animate__backInDown">Let learning light the way.</IonCardSubtitle>
 		</IonCardHeader>
 		<IonCardContent className="ocard">
 			<IonButton className="obutton animate__animated animate__backInUp animate__slower" size="large" onClick={() => setCurrentPage(1)}>
@@ -132,19 +132,19 @@ const Onboarding: React.FC = () => {
 				<CharacterSelectButton name="Rizz" imageSrc="./chars/a1-c.png" desc="Chill and confident. Always has a plan—probably." onClick={() => {
 					setCharacter(ICharacters.Zed);
 					StorageService.setItem("onboarded", true).then(() => {
-						router.push("/story/Q1");
+						router.push("/story/Q0");
 					});
 				}}/>
 				<CharacterSelectButton name="Lirili" imageSrc="./chars/a2-c.png" desc="Lively and curious. Talks fast, thinks faster." onClick={() => {
 					setCharacter(ICharacters.Anne);
 					StorageService.setItem("onboarded", true).then(() => {
-						router.push("/story/Q1");
+						router.push("/story/Q0");
 					});
 				}}/>
 				<CharacterSelectButton name="Trippi" imageSrc="./chars/a3-c.png" desc="Calm and quirky. Goes with the flow." onClick={() => {
 					setCharacter(ICharacters.OWound);
 					StorageService.setItem("onboarded", true).then(() => {
-						router.push("/story/Q1");
+						router.push("/story/Q0");
 					});
 				}}/>
 			</div>
