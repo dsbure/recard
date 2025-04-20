@@ -93,6 +93,24 @@ ion-segment-button ion-img {
   --ion-text-color-rgb: var(--ion-background-color-rgb);
   --ion-text-color: var(--ion-background-color);
 }
+#help-modal {
+  --height: 80%;
+  --border-radius: 16px;
+  padding: 20px;
+  --box-shadow: 0 6px 16px 4px #0004;
+}
+#help-close {
+  position: sticky;
+  bottom: 0;
+}
+#help-modal-inner {
+  text-align: justify;
+}
+#help-modal-inner hr {
+  background: var(--ion-text-color-step-550);
+  height: 4px;
+  border-radius: 1000px;
+}
 #results-header, #onboarding-header {
   box-shadow: none;
   --ion-toolbar-background: transparent

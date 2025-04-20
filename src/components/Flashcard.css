@@ -93,7 +93,7 @@
 .f-checkboxes .submit-checkboxes {
   position: sticky;
   bottom: 24px;
-  box-shadow: 0 24px 12px 32px var(--ion-background-color);
+  box-shadow: 0 0 12px 0 var(--ion-background-color);
 }
 .f-checkboxes .choice {
   min-height: 48px;
