@@ -93,7 +93,7 @@ ion-segment-button ion-img {
   --ion-text-color-rgb: var(--ion-background-color-rgb);
   --ion-text-color: var(--ion-background-color);
 }
-#flashcard-header, #results-header, #onboarding-header {
+#results-header, #onboarding-header {
   box-shadow: none;
   --ion-toolbar-background: transparent
 }
@@ -215,6 +215,11 @@ ion-col, ion-row, ion-grid, ion-card {
 }
 .level-info ion-chip {
   height: 100%;
+}
+#homepage-bg, #flashcard-bg {
+  position: absolute;
+  width: 110vw;
+  bottom: 0;
 }
 .pop-over {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;

@@ -200,6 +200,7 @@ const MainTab: React.FC = () => {
 
   return (
     <IonPage>
+      <video src="./homepage.mp4" id="homepage-bg" autoPlay muted loop></video>
       <IonHeader id="main-header">
         <IonToolbar>
           <IonButtons slot="end">

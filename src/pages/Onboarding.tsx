@@ -174,7 +174,7 @@ const Onboarding: React.FC = () => {
 	return (
 		<IonPage>
 			<IonContent fullscreen>
-				<div className="centered-container">
+				<div className="centered-container" id="onboarding-page" style={{ backgroundImage: `url(./onboarding.png)` }}>
 					<OBCard cardContent={pageContent} />
 				</div>
 			</IonContent>

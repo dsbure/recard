@@ -12,6 +12,7 @@ import SigmaModes from '../components/SigmaModes';
 import ISigmaModes from '../interfaces/ISigmaModes';
 import { SigmaModePopup } from '../components/SigmaModePopup';
 import { IFlashcardCategory } from '../interfaces/IFlashcardCategory';
+import { Howl } from "howler";
 
 // eheh
 function easeIn01(x: number): number {
@@ -66,6 +67,8 @@ const FlashcardPage: React.FC = () => {
 
   const [flashcardData, setFlashcardData] = useState<IFlashcardTopic>(JSON.parse(localStorage.getItem("currentFlashcard")!));
 
+  const [audio, setAudio] = useState<Howl | undefined>();
+
   const shuffleOrder = (items: number) => {
     const order = [];
     for (let i = 0; i < items; i++) {
@@ -107,6 +110,18 @@ const FlashcardPage: React.FC = () => {
     setHasImmunity(false);
     setTimeFreeze(false);
     setTimeout(() => setProgress((currentQuestionIndex + 1) / (data.flashcards.length + 1)), 0);
+
+    StorageService.getItem("muted").then((muted) => {
+      if (muted === undefined) StorageService.setItem("muted", false);
+      
+      const audio = new Howl({
+		  	src: [`/audio/${data.categoryName}.mp3`],
+		  	volume: (muted ?? false) ? 0 : 0.5,
+		  	loop: true,
+		  });
+		  audio.play();
+      setAudio(audio);
+    })
   });
 
   useEffect(() => {
@@ -198,7 +213,6 @@ const FlashcardPage: React.FC = () => {
 
       const catIndex = (await StorageService.getItem("cachedCategoryData") as IFlashcardCategory[]).find(e => e.categoryName == flashcardData.categoryName)?.index ?? 1;
 
-
       await FlashcardStorageService.setCategoryData({
         category: flashcardData.categoryName,
         catIndex: catIndex,
@@ -212,6 +226,7 @@ const FlashcardPage: React.FC = () => {
       localStorage.setItem("flashcardScore", newScore.toString());
       localStorage.setItem("rawTime", deltaTime.toString());
       localStorage.setItem("formattedTime", formattedTime);
+      if (audio !== undefined) audio.stop();
       router.push("/results");
     }
   };
@@ -294,19 +309,22 @@ const FlashcardPage: React.FC = () => {
   };
   return (
     <IonPage>
+      <video src={`./bg/${flashcardData.categoryName}.mp4`} id="flashcard-bg" autoPlay muted loop></video>
       <div className={"immunity " +
         (hasImmunity ? "enabled" : null)}></div>
       <IonHeader id="flashcard-header">
-        <IonProgressBar 
-          value={easeIn01(timeTillDeath - 0.08)} 
-          id="countdown" 
-          className={timeFreeze ? "frozen" : ""} 
-          style={{ 
-            "--progress":Math.min(Math.round(easeIn01(timeTillDeath) * 100), 100) + "%"
+        <IonProgressBar
+          value={easeIn01(timeTillDeath - 0.08)}
+          id="countdown"
+          className={timeFreeze ? "frozen" : ""}
+          style={{
+            "--progress": Math.min(Math.round(easeIn01(timeTillDeath) * 100), 100) + "%"
           }} />
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton routerLink="/mainTab" routerDirection="back" shape="round">
+            <IonButton routerLink="/mainTab" routerDirection="back" shape="round" onClick={() => {
+              if (audio !== undefined) audio.stop();
+            }}>
               <IonIcon slot="icon-only" icon={arrowBack}></IonIcon>
             </IonButton>
           </IonButtons>

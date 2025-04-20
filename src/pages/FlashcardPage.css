@@ -106,6 +106,20 @@
 .sm-unlocked-desc {
 	color: var(--ion-text-color-step-200);
 }
+.flashcard-page {
+	--background: transparent;
+	filter: drop-shadow(0 0 8px var(--ion-background-color-step-150));
+}
+.flashcard-header {
+	background-color: var(--ion-background-color);
+	padding-block: 12px !important;
+	max-width: min(calc(100vw - 50px), calc(576px - 25px));
+	border-radius: 16px;
+}
+#flashcard-header {
+	--ion-toolbar-background: linear-gradient(to top, transparent, var(--ion-background-color));
+	box-shadow: none;
+}
 .select-sigma {
 	--padding-start: 0;
 	--padding-end: 0;

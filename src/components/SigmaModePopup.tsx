@@ -1,14 +1,16 @@
 import { IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardSubtitle, IonButton, IonImg, IonPage, IonText } from '@ionic/react';
-import { invertMode, logOut, shieldHalf, timer } from 'ionicons/icons';
+import { flash, invertMode, logOut, shieldHalf, timer } from 'ionicons/icons';
 import { useRef } from 'react';
 
 export function SigmaModePopup({ dismiss }: { dismiss: (data?: string) => void }) {
   const ref = useRef<HTMLIonInputElement>(null);
   return (
     <div className="alert-sigma-modes">
-      <h1 className="sm-unlocked">Sigma Modes Available!</h1>
+      <h1 className="sm-unlocked">
+        YOU'RE ON FIRE!
+      </h1>
       <IonText className="sm-unlocked-desc">
-        Choose a Sigma Mode to Unlock.
+        4 correct answers in a row — unlock your Sigma Mode and keep the streak alive! 🚀
       </IonText>
       <div className="select-container ion-padding-top">
         <IonButton className="select-sigma" onClick={() => dismiss("skip")}>

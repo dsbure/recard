@@ -25,6 +25,10 @@
 	justify-items: stretch;
 	gap: 8px;
 }
+#onboarding-page {
+	background-position: bottom center;
+	background-size: cover;
+}
 #character-select .obutton {
 	--border-radius: 16px !important;
 	--background: var(--ion-background-color-step-100);

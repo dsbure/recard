@@ -18,6 +18,7 @@
 	width: fit-content;
 	display: grid;
 	grid-template-columns: auto auto;
+	--background: var(--ion-background-color-step-100);
 }
 .storyFlashcardContainer[disabled="false"] ion-label {
 	padding-left: 8px;

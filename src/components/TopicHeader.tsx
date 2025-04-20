@@ -6,7 +6,7 @@ export function TopicHeader(category: IFlashcardCategory) {
   return (<>
   <IonCard className="topicHeader">
     <IonCardHeader>
-      <IonCardTitle>{category.categoryName}</IonCardTitle>
+      <IonCardTitle>{category.categoryName.replace("Q", "L")}</IonCardTitle>
       <div className="header-separator"/>
       <IonCardSubtitle>{category.categoryDesc}</IonCardSubtitle>
     </IonCardHeader>
