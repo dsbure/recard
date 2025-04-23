@@ -10,4 +10,5 @@ export interface IFlashcardInteraction {
   images?: string[];
 
   correct: string | string[];
+  explanation?: string;
 }

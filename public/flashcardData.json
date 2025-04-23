@@ -26,7 +26,8 @@
                   "Mexico",
                   "Phillipines"
                 ],
-                "correct": "Australia"
+                "correct": "Australia",
+                "explanation": "Australia is not located on the Pacific Ring of Fire, which is known for its high volcanic and earthquake activity. Japan, Mexico, and the Philippines are all located along this ring."
               }
             },
             {
@@ -34,7 +35,8 @@
               "type": "trueFalse",
               "interaction": {
                 "correct": "true",
-                "trueFalse": ""
+                "trueFalse": "",
+                "explanation": "Stephen is known for his skills and abilities. This statement is true."
               }
             },
             {
@@ -52,7 +54,8 @@
                 "correct": [
                   "David",
                   "Abi"
-                ]
+                ],
+                "explanation": "skill issue guys"
               }
             },
             {
@@ -63,7 +66,8 @@
                 "multipleChoices": [
                   "real",
                   "haha"
-                ]
+                ],
+                "explanation": "The word 'totoo' means 'real' in Filipino. It is often used to emphasize the truthfulness of a statement."
               }
             },
             {
@@ -80,7 +84,8 @@
                 "correct": [
                   "kuya gauss",
                   "ako"
-                ]
+                ],
+                "explanation": "The pogis are the ones who are handsome or attractive. In this case, 'kuya gauss' and 'ako' (me) are considered pogis."
               }
             },
             {
@@ -88,7 +93,8 @@
               "type": "identification",
               "interaction": {
                 "identification": "",
-                "correct": "5"
+                "correct": "5",
+                "explanation": "2 + 3 = 5"
               }
             },
             {
@@ -99,7 +105,8 @@
                   "siya🥰",
                   "si kuya"
                 ],
-                "identification": ""
+                "identification": "",
+                "explanation": "miss q na siya"
               }
             },
             {
@@ -112,7 +119,8 @@
                   "Indian",
                   "Pacific"
                 ],
-                "correct": "Pacific"
+                "correct": "Pacific",
+                "explanation": "The Pacific Ocean is known for the Ring of Fire, which is a horseshoe-shaped area in the Pacific Ocean basin that is characterized by high volcanic and earthquake activity."
               }
             },
             {
@@ -128,7 +136,8 @@
                   "princess",
                   "mahal",
                   "my girl"
-                ]
+                ],
+                "explanation": "The best CS (Computer Science) is subjective and can vary from person to person. However, 'love' and 'princess' are often used as terms of endearment."
               }
             },
             {

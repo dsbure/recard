@@ -106,7 +106,7 @@ ion-segment-button ion-img {
 #help-modal-inner {
   text-align: justify;
 }
-#help-modal-inner hr {
+#help-modal-inner hr, .explanation-hr {
   background: var(--ion-text-color-step-550);
   height: 4px;
   border-radius: 1000px;

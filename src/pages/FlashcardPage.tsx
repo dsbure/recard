@@ -3,7 +3,7 @@ import './FlashcardPage.css';
 import { useEffect, useRef, useState } from 'react';
 import { Flashcard } from '../components/Flashcard';
 import { useHistory } from 'react-router';
-import { arrowBack, arrowForward, checkmark, checkmarkCircle, close, closeCircle, flame, heart, heartDislike, iceCream, snow, timer } from 'ionicons/icons';
+import { arrowBack, arrowForward, book, checkmark, checkmarkCircle, close, closeCircle, flame, heart, heartDislike, iceCream, snow, timer } from 'ionicons/icons';
 import { IFlashcardTopic } from '../interfaces/IFlashcardTopic';
 import StorageService from '../services/StorageService';
 import FlashcardStorageService, { IFlashcardStorageCategory } from '../services/FlashcardStorageService';
@@ -113,13 +113,13 @@ const FlashcardPage: React.FC = () => {
 
     StorageService.getItem("muted").then((muted) => {
       if (muted === undefined) StorageService.setItem("muted", false);
-      
+
       const audio = new Howl({
-		  	src: [`/audio/${data.categoryName}.mp3`],
-		  	volume: (muted ?? false) ? 0 : 0.5,
-		  	loop: true,
-		  });
-		  audio.play();
+        src: [`/audio/${data.categoryName}.mp3`],
+        volume: (muted ?? false) ? 0 : 0.5,
+        loop: true,
+      });
+      audio.play();
       setAudio(audio);
     })
   });
@@ -423,6 +423,15 @@ const FlashcardPage: React.FC = () => {
                 <IonIcon icon={checkmarkCircle} />
                 <IonLabel>Correct answer:</IonLabel>
               </IonChip> {correctedAnswer}</> : null}
+
+              {flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.explanation ?
+                <><hr className="explanation-hr" />
+                  <div id="explanation">
+                    <IonChip color="secondary">
+                      <IonIcon icon={book} />
+                      <IonLabel>Explanation:</IonLabel>
+                    </IonChip> {flashcardData.flashcards[currentQuestionOrder[currentQuestionIndex]].interaction.explanation}
+                  </div></> : null}
 
               <IonButton expand="block" onClick={() => {
                 modal?.dismiss();
