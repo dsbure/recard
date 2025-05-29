@@ -70,21 +70,32 @@ function CharacterSelectButton({ name, imageSrc, desc, onClick }: ICSButton) {
 const Onboarding: React.FC = () => {
 	const theme = useThemeDetector();
 	const welcome = <>
-		<IonIcon icon="./favicon.svg" className="recall-oicon animate__animated animate__backInRight animate__slow" />
 		<IonCardHeader>
 			<IonCardTitle>
 				Welcome to
 				<br />
-				<IonImg src={`./recall-wordmark-${theme}.svg`} alt="recall" className="animate__animated animate__backInDown" id="recall-onboarding" />
+				<IonImg src={`./recall-wordmark-${theme}.svg`} alt="recall" className="animate__animated animate__fadeIn" id="recall-onboarding" />
 			</IonCardTitle>
-			<IonCardSubtitle className="animate__animated animate__backInDown">Let learning light the way.</IonCardSubtitle>
+			<IonCardSubtitle className="animate__animated animate__backInDown" id="onboarding-title">
+				<h2>Let learning light the way.</h2>
+			</IonCardSubtitle>
 		</IonCardHeader>
 		<IonCardContent className="ocard">
 			<IonButton className="obutton animate__animated animate__backInUp animate__slower" size="large" onClick={() => setCurrentPage(1)}>
 				<IonIcon icon={arrowForward} slot="start" />
 				Continue
 			</IonButton>
+			<IonIcon icon="./favicon.svg" className="recall-oicon animate__animated animate__backInRight animate__slow" />
 		</IonCardContent>
+		<div id="topic-notice" className="animate__animated animate__fadeInUp animate__slow">
+			<h5>This adventure covers the following topics:</h5>
+			<div>
+				<IonChip>Force</IonChip>
+				<IonChip>Heat and Energy</IonChip>
+				<IonChip>Earthquakes and Ecosystems</IonChip>
+				<IonChip>Motion</IonChip>
+			</div>
+		</div>
 	</>
 	const input = useRef<HTMLIonInputElement>(null);
 	const [name, setName] = useState("");
@@ -134,19 +145,19 @@ const Onboarding: React.FC = () => {
 					StorageService.setItem("onboarded", true).then(() => {
 						router.push("/story/Q0");
 					});
-				}}/>
+				}} />
 				<CharacterSelectButton name="Lirili" imageSrc="./chars/a2-c.png" desc="Lively and curious. Talks fast, thinks faster." onClick={() => {
 					setCharacter(ICharacters.Anne);
 					StorageService.setItem("onboarded", true).then(() => {
 						router.push("/story/Q0");
 					});
-				}}/>
+				}} />
 				<CharacterSelectButton name="Trippi" imageSrc="./chars/a3-c.png" desc="Calm and quirky. Goes with the flow." onClick={() => {
 					setCharacter(ICharacters.OWound);
 					StorageService.setItem("onboarded", true).then(() => {
 						router.push("/story/Q0");
 					});
-				}}/>
+				}} />
 			</div>
 		</IonCardContent>
 	</>

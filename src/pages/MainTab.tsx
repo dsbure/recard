@@ -263,7 +263,7 @@ const MainTab: React.FC = () => {
   }, []);
   
   useEffect(() => {
-    FetchFlashcardData.getFlashcardData(false, import.meta.env.VITE_IN_DEVELOPMENT) //import.meta.env.VITE_IN_DEVELOPMENT
+    FetchFlashcardData.getFlashcardData(false, false) //import.meta.env.VITE_IN_DEVELOPMENT
       // really complicated for no reason whatsoever
       .then(async (data: IFlashcardData) => {
         if (!data.categories) return;

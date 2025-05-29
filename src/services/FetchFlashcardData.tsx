@@ -106,6 +106,8 @@ const FetchFlashcardData = {
     categories.sort((a, b) => a!.index - b!.index);
 
     console.log("Fetched data from Firestore");
+    console.log(categories);
+    
     return { categories };
   },
 
