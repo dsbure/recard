@@ -331,12 +331,6 @@ const FlashcardPage: React.FC = () => {
           <IonTitle>
             {flashcardData.topicName}
           </IonTitle>
-          <IonButtons slot="end">
-            <IonButton
-              onClick={() => { handleNextFlashcard(10); }} shape="round" color="danger" fill="solid">
-              <IonIcon slot="icon-only" icon={arrowForward}></IonIcon>
-            </IonButton>
-          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="flashcard-page">

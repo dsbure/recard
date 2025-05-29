@@ -87,7 +87,6 @@ const Results: React.FC = () => {
             </IonCardHeader>
             <IonCardContent>
               <IonButton expand="block" routerLink="/mainTab" routerDirection="back">Return to Home</IonButton>
-              <IonButton expand="block" routerLink="/mainTab" routerDirection="back" onClick={debug_unlockAll} color="warning">[DEBUG] Unlock All in this Category</IonButton>
             </IonCardContent>
           </IonCard>
         </div>
